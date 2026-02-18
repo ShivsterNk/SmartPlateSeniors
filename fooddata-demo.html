@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FoodData Central Explorer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0f0a;
+      --surface: #141710;
+      --card: #1a1e14;
+      --border: #2a2f22;
+      --accent: #b5e550;
+      --accent-dim: #8ab83a;
+      --text: #e8ead4;
+      --text-muted: #6b7060;
+      --text-soft: #a8ab98;
+      --red: #e05c4b;
+      --tag-bg: #1f2419;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      animation: fadeDown 0.6s ease both;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+
+    header span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    /* Search section */
+    .search-section {
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .search-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .search-input {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      padding: 0.85rem 1.2rem;
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .search-input::placeholder { color: var(--text-muted); }
+
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(181,229,80,0.1);
+    }
+
+    .btn {
+      background: var(--accent);
+      color: #0d0f0a;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 0.85rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      white-space: nowrap;
+    }
+
+    .btn:hover { background: #c8f560; }
+    .btn:active { transform: scale(0.98); }
+    .btn:disabled { background: var(--border); color: var(--text-muted); cursor: not-allowed; }
+
+    /* Status / error */
+    .status {
+      margin-top: 1.2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      min-height: 1.2rem;
+    }
+
+    .status.error { color: var(--red); }
+
+    /* Results grid */
+    .results-section {
+      margin-top: 2.5rem;
+    }
+
+    .results-header {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .results-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .result-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      animation: fadeUp 0.3s ease both;
+    }
+
+    .result-card:hover {
+      border-color: var(--accent);
+      background: #1e231a;
+    }
+
+    .result-card .food-name {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .result-card .food-meta {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--text-soft);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .arrow {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      transition: color 0.15s, transform 0.15s;
+    }
+
+    .result-card:hover .arrow {
+      color: var(--accent);
+      transform: translateX(2px);
+    }
+
+    /* Detail panel */
+    .detail-panel {
+      margin-top: 2.5rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    .detail-header {
+      padding: 1.5rem 1.75rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .detail-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .detail-id {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+    }
+
+    .close-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .close-btn:hover { border-color: var(--red); color: var(--red); }
+
+    .detail-body {
+      padding: 1.5rem 1.75rem;
+    }
+
+    .nutrients-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .nutrients-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .nutrient-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+    }
+
+    .nutrient-name {
+      font-size: 0.75rem;
+      color: var(--text-soft);
+      margin-bottom: 0.3rem;
+    }
+
+    .nutrient-value {
+      font-family: 'DM Mono', monospace;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    .nutrient-unit {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-left: 0.2rem;
+    }
+
+    /* Loading spinner */
+    .spinner {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+
+    .hidden { display: none !important; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Placeholder empty state */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      line-height: 1.8;
+    }
+
+    .empty-state .big {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: var(--border);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>FoodData Central</h1>
+  <span>USDA API Explorer</span>
+</header>
+
+<main>
+  <div class="search-section">
+    <label class="search-label" for="query">Search foods</label>
+    <div class="search-row">
+      <input class="search-input" id="query" type="text" placeholder="e.g. cheddar cheese, brown rice, avocado…" autocomplete="off" />
+      <button class="btn" id="searchBtn" onclick="doSearch()">Search</button>
+    </div>
+    <div class="status" id="status"></div>
+  </div>
+
+  <div class="results-section" id="resultsSection">
+    <div class="empty-state">
+      <span class="big">🥦</span>
+      Search for any food above to explore its nutritional data.
+    </div>
+  </div>
+
+  <div id="detailPanel" class="hidden"></div>
+</main>
+
+<script>
+  const API_KEY = '9Ad1863uKUtIb1uApTibWQywMGwmNEBDHRs7Tx28';
+  const BASE    = 'https://api.nal.usda.gov/fdc/v1';
+
+  const statusEl  = document.getElementById('status');
+  const resultsEl = document.getElementById('resultsSection');
+  const detailEl  = document.getElementById('detailPanel');
+  const searchBtn = document.getElementById('searchBtn');
+  const queryEl   = document.getElementById('query');
+
+  queryEl.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+
+  function setStatus(msg, isError = false) {
+    statusEl.innerHTML = msg;
+    statusEl.className = 'status' + (isError ? ' error' : '');
+  }
+
+  async function doSearch() {
+    const q = queryEl.value.trim();
+    if (!q) { setStatus('Please enter a search term.', true); return; }
+
+    searchBtn.disabled = true;
+    detailEl.className = 'hidden';
+    setStatus('<span class="spinner"></span> Searching…');
+
+    try {
+      const res = await fetch(`${BASE}/foods/search?api_key=${API_KEY}&query=${encodeURIComponent(q)}&pageSize=10`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+
+      const foods = data.foods || [];
+      if (!foods.length) {
+        setStatus('No results found.', true);
+        resultsEl.innerHTML = '';
+        return;
+      }
+
+      setStatus(`${data.totalHits.toLocaleString()} results — showing top ${foods.length}`);
+      renderResults(foods);
+    } catch (err) {
+      setStatus('Error: ' + err.message, true);
+    } finally {
+      searchBtn.disabled = false;
+    }
+  }
+
+  function renderResults(foods) {
+    const header = `<div class="results-header">${foods.length} foods</div>`;
+    const cards = foods.map((f, i) => `
+      <div class="result-card" style="animation-delay:${i * 0.04}s" onclick="loadDetail(${f.fdcId})">
+        <span class="food-name">${escHtml(f.description)}</span>
+        <div class="food-meta">
+          ${f.dataType ? `<span class="tag">${escHtml(f.dataType)}</span>` : ''}
+          <span class="arrow">→</span>
+        </div>
+      </div>
+    `).join('');
+
+    resultsEl.innerHTML = header + `<div class="results-grid">${cards}</div>`;
+  }
+
+  async function loadDetail(fdcId) {
+    detailEl.className = 'hidden';
+    setStatus('<span class="spinner"></span> Loading details…');
+
+    try {
+      const res = await fetch(`${BASE}/food/${fdcId}?api_key=${API_KEY}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const food = await res.json();
+      setStatus('');
+      renderDetail(food);
+    } catch (err) {
+      setStatus('Error loading food: ' + err.message, true);
+    }
+  }
+
+  function renderDetail(food) {
+    const nutrients = (food.foodNutrients || [])
+      .filter(n => n.amount !== undefined && n.nutrient)
+      .slice(0, 24);
+
+    const nutrientCards = nutrients.map(n => `
+      <div class="nutrient-item">
+        <div class="nutrient-name">${escHtml(n.nutrient.name)}</div>
+        <div class="nutrient-value">
+          ${formatNum(n.amount)}<span class="nutrient-unit">${escHtml(n.nutrient.unitName || '')}</span>
+        </div>
+      </div>
+    `).join('');
+
+    detailEl.innerHTML = `
+      <div class="detail-header">
+        <div>
+          <div class="detail-title">${escHtml(food.description)}</div>
+          <div class="detail-id">FDC ID: ${food.fdcId} · ${escHtml(food.dataType || '')}</div>
+        </div>
+        <button class="close-btn" onclick="closeDetail()" title="Close">✕</button>
+      </div>
+      <div class="detail-body">
+        <div class="nutrients-title">Nutrients per 100g</div>
+        <div class="nutrients-grid">${nutrientCards || '<span style="color:var(--text-muted);font-size:0.85rem">No nutrient data available.</span>'}</div>
+      </div>
+    `;
+
+    detailEl.className = 'detail-panel';
+    detailEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function closeDetail() {
+    detailEl.className = 'hidden';
+  }
+
+  function escHtml(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function formatNum(n) {
+    if (n === null || n === undefined) return '—';
+    return Number(n) % 1 === 0 ? Number(n).toFixed(0) : Number(n).toFixed(2);
+  }
+</script>
+</body>
+</html>
