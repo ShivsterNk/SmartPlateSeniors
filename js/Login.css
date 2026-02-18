@@ -1,0 +1,99 @@
+/* General Setup */
+body {
+    background-color: #FEFAE0;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #000000;
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: #283618;
+    color: white;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+/* Login Form Layout */
+.login-container {
+    max-width: 900px; /* Desktop width constraint */
+    margin: 0 auto;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+}
+
+/* Forgot Password Link */
+.forgot-link {
+    text-align: right;
+    margin-bottom: 40px;
+}
+
+.forgot-link a {
+    color: #000;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* Button Styling */
+.login-btn {
+    background-color: #283618;
+    color: white;
+    width: 60%;
+    padding: 20px;
+    border: none;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+/* Bottom Text Styling */
+.signup-redirect p {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.signup-redirect a {
+    color: #000;
+    text-decoration: none;
+}

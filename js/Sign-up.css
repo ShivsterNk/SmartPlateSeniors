@@ -1,0 +1,99 @@
+/* Core Styles */
+body {
+    background-color: #FEFAE0; /* Your cream color */
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #283618; /* Your dark green color */
+}
+
+/* Navbar: Matches the dark green bar in your image */
+.navbar {
+    background-color: #283618;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Main Content: Centers the form on the desktop screen */
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.form-card {
+    width: 100%;
+    max-width: 800px; /* Prevents the form from becoming too wide on desktop */
+    text-align: center;
+}
+
+.sub-header {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.main-header {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+/* Input Styles */
+.input-box {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-box label {
+    display: block;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    background-color: white;
+    box-sizing: border-box; /* Important for keeping padding inside the width */
+}
+
+/* Button Styles: Matches the large green button in your image */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.submit-button {
+    background-color: #283618;
+    color: white;
+    border: none;
+    padding: 15px 60px;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 80%; /* Makes it large like your design */
+}
+
+.submit-button:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
