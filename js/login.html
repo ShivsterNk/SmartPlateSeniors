@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Plate - Login</title>
-    <link rel="stylesheet" href="Login.css">
+    <link rel="stylesheet" href="../js/login.css">
 </head>
 <body>
 
@@ -13,7 +13,7 @@
     <nav class="nav-links">
         <a href="Home.html">Home</a>
         <a href="Plan.html">Plan</a>
-        <a href="Login.html">Sign In</a>
+        <a href="login.php">Sign In</a>
         <a href="Pre-Meals.html">Pre-Meals</a>
     </nav>
 </header>
@@ -22,15 +22,33 @@
     <div class="form-card">
         <h1 class="header-title">Login</h1>
 
-        <form>
+        <!-- Show error if any -->
+        <?php if (!empty($error)): ?>
+        <div class="error-message">
+            <?php echo htmlspecialchars($error); ?>
+        </div>
+        <?php endif; ?>
+
+        <form method="post" action="login.php">
             <div class="input-group">
                 <label>Email Address</label>
-                <input type="email" placeholder="Type your Email Address">
+                <input
+                        type="email"
+                        name="email"
+                        placeholder="Type your Email Address"
+                        value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>"
+                        required
+                >
             </div>
 
             <div class="input-group">
                 <label>Password</label>
-                <input type="password" placeholder="Type your password">
+                <input
+                        type="password"
+                        name="password"
+                        placeholder="Type your password"
+                        required
+                >
             </div>
 
             <div class="forgot-pwd">
@@ -42,7 +60,7 @@
 
         <div class="footer-links">
             <p>Don't have a login?</p>
-            <a href="Sign-up.html">Sign up here</a>
+            <a href="signup.php">Sign up here</a>
         </div>
     </div>
 </main>
