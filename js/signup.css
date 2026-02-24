@@ -1,0 +1,105 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #FEFAE0; /* Your cream color */
+    color: #283618; /* Your dark green color */
+    min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #283618;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+/* Desktop Centering */
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+}
+
+/* The White Box Container */
+.form-card {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 550px; /* Constrains size for desktop */
+    text-align: center;
+}
+
+.header-title {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+/* Form Styling */
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+/* Button Styling */
+.action-btn {
+    background-color: #283618;
+    color: white;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Footer Link Styling */
+.footer-links {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.footer-links a {
+    color: #283618;
+    font-weight: bold;
+    text-decoration: underline;
+}
