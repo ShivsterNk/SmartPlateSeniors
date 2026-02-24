@@ -26,6 +26,52 @@ header {
     color:#fffaf3;
 }
 
+/*NAVBAR SECTION */
+.navbar {
+    background-color: #283618;
+    color: #fffaf3;
+    position: relative;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    position: relative;
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #fffaf3;
+    text-decoration: none;
+}
+
+/*RIGHT-SIDE LINKS*/
+.nav-right {
+    display: flex;
+    gap: 10px;
+    z-index: 1001;
+}
+
+.nav-right a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.hamburger {
+    display: none;
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+
 nav a {
     color: white;
     margin: 0 15px;
@@ -37,10 +83,109 @@ section {
     margin: 2em 0;
 }
 
+.split-layout {
+    display: flex;
+    width: 100%;
+    padding: 40px 0;
+}
+
+.container {
+    width: 100%;
+    margin: 40px auto;
+}
+
+/*HERO SECTION */
+.hero-bg {
+    position: relative;
+    height: 100vh;
+    background: url('./Images/healthyplatter.jpg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.hero-overlay {
+    background-color: rgba(0,0,0,0.5);
+    padding: 40px 20px;
+    border-radius: 10px;
+    max-width: 600px;
+}
+
+.hero-overlay h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero-overlay p {
+    font-size: 1.2rem;
+}
+
+/*FEW MEALS PAGE */
+.meals {
+    margin: 40px auto;
+}
+
+.meals h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.meal-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.meal-card {
+    flex: 1;
+    text-align: center;
+}
+
+.meal-card img {
+    width: 100%;
+    max-width: 250px;
+    border-radius: 10px;
+}
+
 footer {
     background-color: #283618;
     color: white;
     text-align: center;
     padding: 1em;
     margin-top: auto;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-right {
+        position: absolute;
+        top: 100%;
+        left: 0;
+
+        width: 100%;
+        background-color: #283618;
+
+        flex-direction: column;
+        align-items: center;
+
+        display: none;
+        padding: 15px 0;
+    }
+
+    .nav-right a {
+        padding: 10px 0;
+        font-size: 1.2rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-right.show {
+        display: flex;
+    }
 }
