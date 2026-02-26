@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Plate - Nutrition Explorer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="nutrition-explorer.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">Smart Plate</div>
+    <nav class="nav-links">
+      <a href="Home.html">Home</a>
+      <a href="Plan.html">Plan</a>
+      <a href="login.html">Sign In</a>
+      <a href="Pre-Meals.html">Pre-Meals</a>
+    </nav>
+  </header>
+
+  <main class="main-container">
+
+    <div class="page-hero">
+      <h1 class="page-title">Nutrition Explorer</h1>
+      <p class="page-subtitle">Search over 300,000 foods powered by the USDA FoodData Central database.</p>
+    </div>
+
+    <div class="search-card">
+      <label class="search-label" for="query">Food Search</label>
+      <div class="search-row">
+        <input class="search-input" id="query" type="text" placeholder="e.g. avocado, brown rice, cheddar cheese…" autocomplete="off" />
+        <button class="action-btn" id="searchBtn" onclick="doSearch()">Search</button>
+      </div>
+      <p class="status" id="status"></p>
+    </div>
+
+    <div id="resultsSection"></div>
+    <div id="detailPanel"></div>
+
+  </main>
+
+  <script src="nutrition-explorer.js"></script>
+</body>
+</html>
