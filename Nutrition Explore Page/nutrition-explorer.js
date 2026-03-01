@@ -1,4 +1,3 @@
-const API_KEY = '9Ad1863uKUtIb1uApTibWQywMGwmNEBDHRs7Tx28';
 const BASE = 'https://api.nal.usda.gov/fdc/v1';
 
 const queryEl     = document.getElementById('query');
