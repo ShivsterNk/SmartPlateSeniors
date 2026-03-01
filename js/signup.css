@@ -103,3 +103,20 @@ body {
     font-weight: bold;
     text-decoration: underline;
 }
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
