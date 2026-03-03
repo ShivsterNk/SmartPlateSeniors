@@ -68,7 +68,7 @@ figure {
     object-fit: cover; 
 }
 
-.card-container {
+.slider-wrapper {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     gap: 20px; 
@@ -76,7 +76,7 @@ figure {
     margin: auto; 
 }
 
-.card {
+.card-container {
     background: white; 
     padding: 15px; 
     border-radius: 10px; 
@@ -91,5 +91,4 @@ figure {
     border-radius: 8px; 
 
 }
-
 
