@@ -10,7 +10,7 @@
 Thumbs.db
 
 # API Keys and Secrets
-config/api-keys.php
+apiKey/api-keys.php
 config/*.local.php
 *.key
 secrets.json
