@@ -222,10 +222,10 @@ session_start();
         <div class="logo">Smart Plate</div>
         <nav class="nav-links">
             <!-- nav bar -->
-            <a href="/index.php">Home</a>
+            <a href="/PHP/index.php">Home</a>
             <a href="features.php" class="active">Features</a>
             <a href="login.php">Sign In</a>
-            <a href="../Pre-Meals.html">Pre-Meals</a>
+            <a href="readymeals.php">Pre-Meals</a>
         </nav>
     </div>
 </header>
@@ -263,7 +263,7 @@ session_start();
                     <li>Compare food options</li>
                 </ul>
 
-                <a href="../Nutrition Explore Page/nutrition-explorer.html" class="btn-primary-custom mt-2">
+                <a href="../Nutrition Explore Page/nutrition-explorer.php" class="btn-primary-custom mt-2">
                     Open Nutrition Explorer
                 </a>
             </div>
@@ -287,7 +287,7 @@ session_start();
                     <li>Great starting point for users</li>
                 </ul>
 
-                <a href="../Pre-Meals.html" class="btn-primary-custom mt-2">
+                <a href="readymeals.php" class="btn-primary-custom mt-2">
                     Browse Ready Meals
                 </a>
             </div>

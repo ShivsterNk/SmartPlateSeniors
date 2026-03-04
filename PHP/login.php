@@ -41,10 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <header class="navbar">
     <div class="logo">Smart Plate</div>
     <nav class="nav-links">
-        <a href="/index.php">Home</a>
+        <a href="/PHP/index.php">Home</a>
         <a href="features.php" class="active">Features</a>
         <a href="login.php">Sign In</a>
-        <a href="../Pre-Meals.html">Pre-Meals</a>
+        <a href="readymeals.php">Pre-Meals</a>
     </nav>
 </header>
 
