@@ -41,6 +41,9 @@
 
   </main>
 
+  <script>
+      const API_KEY = '<?php require_once __DIR__ . "/../config/api-keys.php"; echo FDC_API_KEY; ?>';
+  </script>
   <script src="nutrition-explorer.js"></script>
 </body>
 </html>
