@@ -7,6 +7,10 @@ nav {
     font-size: 1.5em; 
     text-align: right;
     font-family: Arial, sans-serif; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
 }
 
 .nav-links {
@@ -43,10 +47,25 @@ h5 {
 }
 
 a {
-    color: gray; 
+    color: black; 
     text-align: center; 
     font-family: Arial, sans-serif;
-    font-size: 1.2em;
+    font-size: 1.2em; 
+}
+
+.food {
+    color: black; 
+    text-align: center; 
+    font-family: Arial, sans-serif;
+    font-size: 1.2em; 
+}
+
+.card a {
+    font-size: 0.8em; 
+    display: block; 
+    text-align: center; 
+    font-family: Arial, sans-serif;
+    color: black;
 }
 
 div {
