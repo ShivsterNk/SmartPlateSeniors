@@ -83,12 +83,6 @@ section {
     margin: 2em 0;
 }
 
-.split-layout {
-    display: flex;
-    width: 100%;
-    padding: 40px 0;
-}
-
 .container {
     width: 100%;
     margin: 40px auto;
@@ -97,7 +91,7 @@ section {
 /*HERO SECTION */
 .hero-bg {
     position: relative;
-    height: 100vh;
+    height: 80vh;
     background: url('./Images/healthyplatter.jpg') no-repeat center center/cover;
     display: flex;
     justify-content: center;
@@ -120,6 +114,43 @@ section {
 
 .hero-overlay p {
     font-size: 1.2rem;
+}
+
+.hero-overlay a.homebtn {
+    display: inline-block;
+    background-color: green;
+    color: white;
+    width: 200px;
+    padding: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px;
+}
+
+.hero-overlay a.homebtn:hover {
+    background-color: antiquewhite;
+    color: green;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.hero-buttons .homebtn {
+    flex: 1 1 200px;
+    max-width: 220px;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
 }
 
 /*FEW MEALS PAGE */

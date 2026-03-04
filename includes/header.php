@@ -19,7 +19,7 @@
                     <a href="plan.php">Plan</a>
                     <a href="signin.php">Sign In</a>
                     <a href="features">Features</a>
-                    <a href="premeals.php">Pre-Meals</a>
+                    <a href="readymeals.php">Pre-Meals</a>
                 </nav>
             </div>
         </header>
