@@ -6,7 +6,7 @@ let position = 0;
 mealPhotos.src = Image[index]; 
 
 leftButton.addEventListener("click", moveLeft); 
-rightButton.addEventListener("click", moveRight); 
+rightButton.addEventListener("click", moveRight);  
 
 function moveRight() {
     position += 900; 
