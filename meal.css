@@ -121,3 +121,10 @@ figure {
 
 }
 
+.slider {
+    transition: transform 0.4s ease; 
+}
+
+.slide-wrapper {
+    overflow: hidden; 
+}
