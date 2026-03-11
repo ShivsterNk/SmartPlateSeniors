@@ -45,7 +45,7 @@ p {
     font-size: 1.2em;
 }
 
-.card-container {
+.meal-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     gap: 20px; 
