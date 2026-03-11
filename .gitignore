@@ -1,0 +1,16 @@
+# IntelliJ
+.idea/
+*.iml
+
+# Environment files
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# API Keys and Secrets
+config/api-keys.php
+config/*.local.php
+*.key
+secrets.json
