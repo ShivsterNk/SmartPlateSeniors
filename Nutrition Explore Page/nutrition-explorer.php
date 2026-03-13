@@ -13,10 +13,10 @@
   <header class="navbar">
     <div class="logo">Smart Plate</div>
     <nav class="nav-links">
-      <a href="Home.html">Home</a>
-      <a href="Plan.html">Plan</a>
-      <a href="login.html">Sign In</a>
-      <a href="Pre-Meals.html">Pre-Meals</a>
+        <a href="/PHP/index.php">Home</a>
+        <a href="features.php" class="active">Features</a>
+        <a href="login.php">Sign In</a>
+        <a href="../Pre-Meals.html">Pre-Meals</a>
     </nav>
   </header>
 
@@ -42,7 +42,7 @@
   </main>
 
   <script>
-      const API_KEY = '<?php require_once __DIR__ . "/../config/api-keys.php"; echo FDC_API_KEY; ?>';
+      const API_KEY = '<?php require_once __DIR__ . "/../apiKey/api-keys.php"; echo FDC_API_KEY; ?>';
   </script>
   <script src="nutrition-explorer.js"></script>
 </body>

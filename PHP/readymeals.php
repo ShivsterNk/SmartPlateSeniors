@@ -1,6 +1,6 @@
 <?php
 //index.php
-include('includes/header.php');
+include('../includes/header.php');
 ?>
 
 <main>
@@ -11,17 +11,24 @@ include('includes/header.php');
 
             <div class="meal-row">
                 <div class="meal-card">
-				    <img src="./assets/Images/medterrbowl.jpg" alt="Chicken Bowl">
-                    <p>Mediterranean Chicken Bowl</p>
+				    <img src="../assets/Images/medterrbowl.jpg" alt="Chicken Bowl">
+                    <h5 class="card-title">Mediterranean Chicken Bowl</h5>
+                    <a href="#" class="btn btn-primary">See Ingredients</a>
                 </div>
                 <div class="meal-card">
-				    <img src="./assets/Images/healthypasta.jpg" alt="Healthy Pasta">
-                    <p>Chicken Pasta</p>
+				    <img src="../assets/Images/healthypasta.jpg" alt="Healthy Pasta">
+                    <h5 class="card-title">Chicken Pasta</h5>
+                    <a href="#" class="btn btn-primary">See Ingredients</a>
                 </div>
                 <div class="meal-card">
-				    <img src="./assets/Images/fruitbowl.jpg" alt="Fruit Bowl">
-                    <p>Fruit Salad</p>
+				    <img src="../assets/Images/fruitbowl.jpg" alt="Fruit Bowl">
+                    <h5 class="card-title">Fruit Salad</h5>
+                    <a href="#" class="btn btn-primary">See Ingredients</a>
                 </div>
+
+
+
+
             </div>
         </div>
     </section>
@@ -47,5 +54,5 @@ include('includes/header.php');
 
 <?php
 //index.php
-include('includes/footer.php');
+include('../includes/footer.php');
 ?>

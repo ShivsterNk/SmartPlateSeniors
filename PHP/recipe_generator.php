@@ -93,10 +93,10 @@ session_start();
         </div>
 
         <nav class="nav-links">
-            <a href="Home.php">Home</a>
-            <a href="Plan.php">Plan</a>
+            <a href="/PHP/index.php">Home</a>
+            <a href="features.php" class="active">Features</a>
             <a href="login.php">Sign In</a>
-            <a href="Pre-Meals.php">Pre-Meals</a>
+            <a href="readymeals.php">Pre-Meals</a>
         </nav>
 
     </div>
