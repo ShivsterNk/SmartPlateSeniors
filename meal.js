@@ -1,19 +1,15 @@
-const leftButton = document.querySelector(".leftButton"); 
-const rightButton = document.querySelector(".rightButton"); 
-const slider = document.querySelector(".slider"); 
+const leftButton = document.querySelector(".leftButton");
+const rightButton = document.querySelector(".rightButton");
+const slider = document.querySelector("#slider");
 
-let position = 0; 
-mealPhotos.src = Image[index]; 
 
-leftButton.addEventListener("click", moveLeft); 
-rightButton.addEventListener("click", moveRight);  
+leftButton.addEventListener("click", () => {
+    slider.scrollLeft -= 300;
+});
 
-function moveRight() {
-    position += 900; 
-    slider.style.transform = "translateX(-" + position + "px)"; 
-}
 
-function moveLeft() {
-    position -= 900;
-    slider.style.transform = "translateX(-" + position + "px)";
-}
+rightButton.addEventListener("click", () => {
+    slider.scrollLeft += 300;
+});
+
+
