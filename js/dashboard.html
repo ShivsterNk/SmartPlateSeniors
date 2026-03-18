@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartPlate - Dashboard</title>
+    <link rel="stylesheet" href="Dashboard.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">Smart Plate</div>
+    <nav class="nav-links">
+        <a href="Home.html">Home</a>
+        <a href="Plan.html">Plan</a>
+        <a href="login.php">Sign In</a>
+        <a href="Pre-Meals.html">Pre-Meals</a>
+        <a href="Dashboard.html">Dashboard</a>
+    </nav>
+</header>
+
+<main class="dashboard-wrapper">
+    <section class="welcome-section">
+        <div class="welcome-text">
+            <h1>Welcome Back</h1>
+            <p>See a quick overview of your SmartPlate dashboard.</p>
+        </div>
+        <div class="profile-pill">
+            <span>Profile</span>
+            <div class="profile-avatar"></div>
+        </div>
+    </section>
+
+    <div class="dashboard-card">
+        <div class="card-header">
+            <h2>Your daily dashboard</h2>
+            <span class="date-pill">Today's date: March 18, 2026</span>
+        </div>
+
+        <div class="stats-container">
+            <div class="calorie-circle">
+                <div class="inner-circle">
+                    <strong>1,860</strong>
+                    <span>kcal</span>
+                </div>
+            </div>
+
+            <div class="macros">
+                <div class="macro-item"><span>Carbs</span><strong>166 g</strong></div>
+                <div class="macro-item"><span>Protein</span><strong>98 g</strong></div>
+                <div class="macro-item"><span>Fat</span><strong>48 g</strong></div>
+            </div>
+
+            <div class="target-pill">Daily target: 1,860 kcal</div>
+        </div>
+
+        <h3 class="meals-title">Today's meals</h3>
+        <div class="meals-grid">
+            <div class="meal-card">
+                <img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?q=80&w=400&auto=format&fit=crop"
+                     alt="Pancakes"
+                     onerror="this.src='https://via.placeholder.com/400x150?text=Pancakes'">
+                <div class="meal-info">
+                    <h4>Breakfast</h4>
+                    <p>Buttermilk Pancakes <span>480 kcal</span></p>
+                </div>
+            </div>
+
+            <div class="meal-card">
+                <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400" alt="Lunch">
+                <div class="meal-info">
+                    <h4>Lunch</h4>
+                    <p>Chicken Pasta <span>610 kcal</span></p>
+                </div>
+            </div>
+            <div class="meal-card">
+                <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400" alt="Dinner">
+                <div class="meal-info">
+                    <h4>Dinner</h4>
+                    <p>Salmon Power Bowl <span>590 kcal</span></p>
+                </div>
+            </div>
+            <div class="meal-card">
+                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400" alt="Snack">
+                <div class="meal-info">
+                    <h4>Snack</h4>
+                    <p>Fruit Salad <span>180 kcal</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
