@@ -1,95 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartPlate - Dashboard</title>
-    <link rel="stylesheet" href="Dashboard.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartPlate Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css" />
 </head>
 <body>
 
-<header class="navbar">
-    <div class="logo">Smart Plate</div>
-    <nav class="nav-links">
-        <a href="Home.html">Home</a>
-        <a href="Plan.html">Plan</a>
-        <a href="login.php">Sign In</a>
-        <a href="Pre-Meals.html">Pre-Meals</a>
-        <a href="Dashboard.html">Dashboard</a>
-    </nav>
-</header>
+<!-- ══════════════════════════════
+     NAV
+══════════════════════════════ -->
+<nav>
+    <!-- Logo / sidebar toggle -->
+    <a class="nav-logo" id="navLogo" href="#" title="Toggle sidebar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+             stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
+            <path d="M9 21V12h6v9"/>
+        </svg>
+        SmartPlate
+    </a>
 
-<main class="dashboard-wrapper">
-    <section class="welcome-section">
-        <div class="welcome-text">
-            <h1>Welcome Back</h1>
-            <p>See a quick overview of your SmartPlate dashboard.</p>
-        </div>
-        <div class="profile-pill">
-            <span>Profile</span>
-            <div class="profile-avatar"></div>
-        </div>
-    </section>
+    <!-- Nav links -->
+    <ul class="nav-links">
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#" class="active">Explore</a></li>
+        <li><a href="#">Favorites</a></li>
+    </ul>
 
-    <div class="dashboard-card">
-        <div class="card-header">
-            <h2>Your daily dashboard</h2>
-            <span class="date-pill">Today's date: March 18, 2026</span>
-        </div>
+    <!-- Right: profile button only (no bell) -->
+    <div class="nav-right">
+        <button class="nav-profile-btn" id="navProfileBtn" aria-label="Open profile menu">
+            <div class="avatar">A</div>
+            <span class="nav-username">Alex</span>
+            <span class="nav-chevron">▾</span>
+        </button>
+    </div>
+</nav>
 
-        <div class="stats-container">
-            <div class="calorie-circle">
-                <div class="inner-circle">
-                    <strong>1,860</strong>
-                    <span>kcal</span>
-                </div>
-            </div>
-
-            <div class="macros">
-                <div class="macro-item"><span>Carbs</span><strong>166 g</strong></div>
-                <div class="macro-item"><span>Protein</span><strong>98 g</strong></div>
-                <div class="macro-item"><span>Fat</span><strong>48 g</strong></div>
-            </div>
-
-            <div class="target-pill">Daily target: 1,860 kcal</div>
-        </div>
-
-        <h3 class="meals-title">Today's meals</h3>
-        <div class="meals-grid">
-            <div class="meal-card">
-                <img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?q=80&w=400&auto=format&fit=crop"
-                     alt="Pancakes"
-                     onerror="this.src='https://via.placeholder.com/400x150?text=Pancakes'">
-                <div class="meal-info">
-                    <h4>Breakfast</h4>
-                    <p>Buttermilk Pancakes <span>480 kcal</span></p>
-                </div>
-            </div>
-
-            <div class="meal-card">
-                <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400" alt="Lunch">
-                <div class="meal-info">
-                    <h4>Lunch</h4>
-                    <p>Chicken Pasta <span>610 kcal</span></p>
-                </div>
-            </div>
-            <div class="meal-card">
-                <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400" alt="Dinner">
-                <div class="meal-info">
-                    <h4>Dinner</h4>
-                    <p>Salmon Power Bowl <span>590 kcal</span></p>
-                </div>
-            </div>
-            <div class="meal-card">
-                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400" alt="Snack">
-                <div class="meal-info">
-                    <h4>Snack</h4>
-                    <p>Fruit Salad <span>180 kcal</span></p>
-                </div>
-            </div>
+<!-- ══════════════════════════════
+     PROFILE DROPDOWN
+══════════════════════════════ -->
+<div class="profile-dropdown" id="profileDropdown" role="menu">
+    <div class="pd-header">
+        <div class="pd-avatar">A</div>
+        <div>
+            <div class="pd-name">Alex Johnson</div>
+            <div class="pd-email">alex@example.com</div>
         </div>
     </div>
-</main>
+    <div class="pd-body">
+        <a class="pd-item" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+            </svg>
+            Edit Profile
+        </a>
+        <a class="pd-item" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 11l3 3L22 4"/>
+                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+            </svg>
+            Dietary Preferences
+        </a>
+        <a class="pd-item" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/>
+                <circle cx="12" cy="12" r="10"/>
+            </svg>
+            Settings
+        </a>
+        <div class="pd-divider"></div>
+        <a class="pd-item danger" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18.36 6.64a9 9 0 11-12.73 0"/>
+                <line x1="12" y1="2" x2="12" y2="12"/>
+            </svg>
+            Log Out
+        </a>
+    </div>
+</div>
 
+<!-- Overlay closes profile dropdown on outside click -->
+<div class="overlay" id="overlay"></div>
+
+<!-- ══════════════════════════════
+     APP LAYOUT
+══════════════════════════════ -->
+<div class="app-layout">
+
+    <!-- ── SIDEBAR ── -->
+    <aside id="sidebar">
+        <a class="sidebar-item" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+            </svg>
+            Profile
+        </a>
+        <a class="sidebar-item active" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            Custom Meal Plans
+        </a>
+        <a class="sidebar-item" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 01-8 0"/>
+            </svg>
+            Shopping List Generator
+        </a>
+
+        <div class="sidebar-spacer"></div>
+
+        <a class="logout-row" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18.36 6.64a9 9 0 11-12.73 0"/>
+                <line x1="12" y1="2" x2="12" y2="12"/>
+            </svg>
+            Log Out
+        </a>
+    </aside>
+
+    <!-- ── MAIN ── -->
+    <main id="mainContent">
+        <div class="main-col">
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>Welcome Back, Alex!</h1>
+                <p>See a quick overview of your SmartPlate dashboard.</p>
+            </div>
+
+            <!-- Today's Nutrition -->
+            <div class="card nutrition-card">
+                <div class="nutrition-header">
+                    <span class="card-title" style="margin:0">Today's Nutrition</span>
+                    <div class="nutrition-date">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        April 24, 2024 ›
+                    </div>
+                </div>
+
+                <div class="nutrition-body" id="nutritionBody">
+                    <!-- Donut chart -->
+                    <div class="donut-wrap">
+                        <svg viewBox="0 0 140 140">
+                            <circle cx="70" cy="70" r="55" fill="none" stroke="#edf3eb" stroke-width="16"/>
+                            <circle cx="70" cy="70" r="55" fill="none" stroke="#4a7c4a" stroke-width="16"
+                                    stroke-dasharray="138 207.4" stroke-dashoffset="86.35" stroke-linecap="round"/>
+                            <circle cx="70" cy="70" r="55" fill="none" stroke="#a8c5a0" stroke-width="16"
+                                    stroke-dasharray="86 259.4" stroke-dashoffset="-51.65" stroke-linecap="round"/>
+                            <circle cx="70" cy="70" r="55" fill="none" stroke="#d8e8d4" stroke-width="16"
+                                    stroke-dasharray="42 303.4" stroke-dashoffset="-137.65" stroke-linecap="round"/>
+                        </svg>
+                        <div class="donut-center">
+                            <div class="donut-kcal">1,860</div>
+                            <div class="donut-unit">kcal</div>
+                        </div>
+                    </div>
+
+                    <!-- Macros -->
+                    <div class="macros">
+                        <div class="macro-row">
+                            <div class="macro-label"><span>Carbs</span><span>166 g</span></div>
+                            <div class="bar-track"><div class="bar-fill" style="width:70%;background:#4a7c4a"></div></div>
+                        </div>
+                        <div class="macro-row">
+                            <div class="macro-label"><span>Protein</span><span>98 g</span></div>
+                            <div class="bar-track"><div class="bar-fill" style="width:50%;background:#a8c5a0"></div></div>
+                        </div>
+                        <div class="macro-row">
+                            <div class="macro-label"><span>Fat</span><span>48 g</span></div>
+                            <div class="bar-track"><div class="bar-fill" style="width:35%;background:#d8e8d4"></div></div>
+                        </div>
+                        <div class="daily-target">Daily target: 1,860 kcal</div>
+                    </div>
+
+                    <!-- Weekly bar chart -->
+                    <div style="position:relative; padding-left:28px;">
+                        <div style="position:absolute;left:0;top:0;display:flex;flex-direction:column;
+                        justify-content:space-between;height:108px;font-size:0.65rem;
+                        color:var(--text-light);text-align:right;width:24px;">
+                            <span>2.4k</span><span>2.0k</span><span>1.8k</span><span>1.5k</span><span>1.2k</span>
+                        </div>
+                        <div class="bar-chart">
+                            <div class="bc-col"><div class="bc-bar" style="height:55%"></div><div class="bc-label">Mon</div></div>
+                            <div class="bc-col"><div class="bc-bar" style="height:65%"></div><div class="bc-label">Tue</div></div>
+                            <div class="bc-col"><div class="bc-bar" style="height:50%"></div><div class="bc-label">Wed</div></div>
+                            <div class="bc-col"><div class="bc-bar today" style="height:78%"></div><div class="bc-label">Thu</div></div>
+                            <div class="bc-col"><div class="bc-bar" style="height:70%"></div><div class="bc-label">Fri</div></div>
+                            <div class="bc-col"><div class="bc-bar" style="height:72%"></div><div class="bc-label">Sat</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Collapse toggle -->
+                <div class="nutrition-expand" id="nutritionExpand">
+                    <button class="expand-btn" id="expandBtn" aria-label="Toggle nutrition details">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Today's Meals -->
+            <div class="card">
+                <div class="meals-header">
+                    <div class="meals-title-group">
+                        <span class="card-title" style="margin:0">Today's Meals</span>
+                    </div>
+                    <div class="calendar-nav">
+                        <button class="cal-btn">‹</button>
+                        <div class="cal-month">April 2024</div>
+                        <div class="cal-days">
+                            <span class="cal-day">Mon</span>
+                            <span class="cal-day">Tue</span>
+                            <span class="cal-day">Wed</span>
+                            <span class="cal-day">Thu</span>
+                            <span class="cal-day">Fri</span>
+                        </div>
+                        <button class="cal-btn">›</button>
+                    </div>
+                </div>
+
+                <div class="meal-cards-scroll">
+                    <div class="meal-card">
+                        <div class="meal-img">🥞</div>
+                        <div class="meal-info">
+                            <div class="meal-type">Breakfast</div>
+                            <div class="meal-name">Buttermilk Pancakes</div>
+                            <div class="meal-kcal">480 kcal</div>
+                        </div>
+                    </div>
+                    <div class="meal-card">
+                        <div class="meal-img">🍝</div>
+                        <div class="meal-info">
+                            <div class="meal-type">Lunch</div>
+                            <div class="meal-name">Chicken Pasta</div>
+                            <div class="meal-kcal">610 kcal</div>
+                        </div>
+                    </div>
+                    <div class="meal-card">
+                        <div class="meal-img">🐟</div>
+                        <div class="meal-info">
+                            <div class="meal-type">Dinner</div>
+                            <div class="meal-name">Salmon Power Bowl</div>
+                            <div class="meal-kcal">590 kcal</div>
+                        </div>
+                    </div>
+                    <div class="meal-card">
+                        <div class="meal-img">🍎</div>
+                        <div class="meal-info">
+                            <div class="meal-type">Snack</div>
+                            <div class="meal-name">Fruit</div>
+                            <div class="meal-kcal">180 kcal</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.main-col -->
+
+        <!-- ── RIGHT COLUMN ── -->
+        <div class="right-col">
+
+            <!-- Profile card -->
+            <div class="card profile-card">
+                <div class="card-title">Profile</div>
+                <div class="profile-info">
+                    <div class="profile-avatar">A</div>
+                    <div>
+                        <div class="profile-name">Alex Johnson</div>
+                        <div class="profile-email">alex@example.com</div>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <a class="profile-action" href="#">Edit Profile <span class="chev">›</span></a>
+                    <a class="profile-action" href="#">Dietary Preferences <span class="chev">›</span></a>
+                </div>
+            </div>
+
+            <!-- Favorites -->
+            <div class="card favorites-card">
+                <div class="card-title">Favorites</div>
+                <div class="fav-list">
+                    <div class="fav-item">
+                        <div class="fav-img">🥑</div>
+                        <div>
+                            <div class="fav-name">Avocado Toast</div>
+                            <div class="fav-kcal">320 kcal</div>
+                        </div>
+                        <button class="heart-btn" aria-label="Remove from favorites">♥</button>
+                    </div>
+                    <div class="fav-item">
+                        <div class="fav-img">🍗</div>
+                        <div>
+                            <div class="fav-name">Chicken Stir-Fry</div>
+                            <div class="fav-kcal">450 kcal</div>
+                        </div>
+                        <button class="heart-btn" aria-label="Remove from favorites">♥</button>
+                    </div>
+                </div>
+                <button class="view-all-btn">View All ›</button>
+            </div>
+
+        </div><!-- /.right-col -->
+    </main>
+
+</div><!-- /.app-layout -->
+
+<script src="dashboard.js"></script>
 </body>
 </html>
