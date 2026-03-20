@@ -1,5 +1,6 @@
 <?php
 session_start();
+$isLoggedIn = isset($_SESSION['user_id']) ? 'true' : 'false';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,24 +16,8 @@ session_start();
             font-family: Arial, sans-serif;
         }
 
-        /* NAVBAR BACKGROUND */
-        .navbar-custom {
-            background-color: #283618;
-            width: 100%;
-        }
+        .navbar-custom { background-color: #283618; width: 100%; }
 
-        /* CONTAINER THAT HOLDS LOGO + LINKS */
-        .nav-container {
-            width: 100%;
-            max-width: 1350px;   /* Controls how wide everything spreads */
-            margin: 0 auto;
-            padding: 18px 25px;   /* Padding matches your screenshot */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* LOGO */
         .logo {
             color: white;
             font-size: 1.8rem;
@@ -40,45 +25,104 @@ session_start();
             letter-spacing: 0.5px;
         }
 
-        /* NAV LINKS */
-        .nav-links {
-            display: flex;
-            gap: 40px;  /* EXACT spacing between Home, Plan, Sign In, Pre-Meals */
-        }
-
+        .nav-links { display: flex; gap: 40px; }
         .nav-links a {
             color: white;
             font-weight: 600;
             text-decoration: none;
             font-size: 1rem;
         }
+        .nav-links a:hover, .nav-links a.active { text-decoration: underline; }
 
-        .nav-links a:hover,
-        .nav-links a.active {
-            text-decoration: underline;
-        }
-
-
-        /* BUTTON STYLE */
         .btn-primary {
             background-color: #283618 !important;
             border-color: #283618 !important;
         }
-
         .btn-primary:hover {
             background-color: #1f2a12 !important;
             border-color: #1f2a12 !important;
         }
-
         .btn-outline-primary {
             color: #283618 !important;
             border-color: #283618 !important;
         }
-
         .btn-outline-primary:hover {
             background-color: #283618 !important;
             color: #fff !important;
         }
+
+        /* ── Favorite button ── */
+        .btn-fav {
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            color: #ccc;
+            transition: color 0.2s, transform 0.15s;
+            padding: 0;
+            line-height: 1;
+        }
+        .btn-fav:hover { transform: scale(1.2); }
+        .btn-fav.saved { color: #e63946; }
+
+        /* ── Login prompt modal ── */
+        .login-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-modal-overlay.show { display: flex; }
+        .login-modal-box {
+            background: #fff;
+            border-radius: 14px;
+            padding: 36px 32px;
+            max-width: 380px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        }
+        .login-modal-box .modal-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+        .login-modal-box h5 {
+            color: #283618;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .login-modal-box p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        .modal-btn-login {
+            display: block;
+            width: 100%;
+            background-color: #283618;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: background 0.2s;
+        }
+        .modal-btn-login:hover { background-color: #1f2a12; color: #fff; }
+        .modal-btn-cancel {
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .modal-btn-cancel:hover { color: #555; }
     </style>
 </head>
 
@@ -87,20 +131,26 @@ session_start();
 <!-- NAVBAR -->
 <header class="navbar-custom">
     <div class="container d-flex justify-content-between align-items-center py-3">
-
-        <div class="logo">
-            Smart Plate
-        </div>
-
+        <div class="logo">Smart Plate</div>
         <nav class="nav-links">
             <a href="/PHP/index.php">Home</a>
             <a href="features.php" class="active">Features</a>
             <a href="login.php">Sign In</a>
             <a href="readymeals.php">Pre-Meals</a>
         </nav>
-
     </div>
 </header>
+
+<!-- LOGIN PROMPT MODAL -->
+<div class="login-modal-overlay" id="loginModal">
+    <div class="login-modal-box">
+        <div class="modal-icon">🔒</div>
+        <h5>Sign in to Save Recipes</h5>
+        <p>Create a free account or sign in to save your favorite recipes and access them anytime.</p>
+        <a href="login.php" class="modal-btn-login">Sign In</a>
+        <button class="modal-btn-cancel" id="modalCancel">Maybe later</button>
+    </div>
+</div>
 
 <!-- PAGE CONTENT -->
 <div class="container my-5">
@@ -117,7 +167,6 @@ session_start();
                     <input type="text" class="form-control" id="ingredient"
                            placeholder="e.g. beef, chicken, salmon" required>
                 </div>
-
                 <button type="submit" class="btn btn-primary w-100">
                     Generate Recipes
                 </button>
@@ -131,17 +180,16 @@ session_start();
     </div>
 
     <div id="error" class="alert alert-danger d-none"></div>
-
     <div id="results" class="row g-3"></div>
 </div>
 
-<!-- axios library (must be before your JS file) -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- Pass session status to JS -->
+<script>
+    const IS_LOGGED_IN = <?= $isLoggedIn ?>;
+</script>
 
-<!-- your JS file (path from recipe_generator.php to js folder) -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="../js/recipe_generator.js"></script>
 
-</body>
-</html>
 </body>
 </html>
