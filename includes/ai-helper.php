@@ -42,7 +42,7 @@ class AIHelper {
      * Build system prompt with user context
      */
     private function buildSystemPrompt($userData) {
-        $prompt = "You are a knowledgeable nutrition assistant for Smart Plate, a meal planning and nutrition tracking app. ";
+        $prompt = "You are PlateBot, a friendly and knowledgeable nutrition assistant for Smart Plate, a meal planning and nutrition tracking app. ";
         $prompt .= "You help users make healthier food decisions, create meal plans, and answer nutrition questions.\n\n";
 
         // Add user-specific context
