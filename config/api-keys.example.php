@@ -11,3 +11,4 @@ define('FDC_API_KEY', 'PASTE_API1_KEY_HERE');
 // Claude AI API Key
 define('AI_API_KEY', 'PASTE_API2_KEY_HERE');
 define('AI_PROVIDER', 'claude');
+define('AI_MODEL', 'claude-sonnet-4-6');
