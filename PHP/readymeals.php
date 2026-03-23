@@ -1,33 +1,48 @@
 <?php
 //index.php
 include('../includes/header.php');
+
+//connects to Database to find and load up all the meals present
+require_once '../includes/config.php';
+$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+
+if ($conn->connect_error) {
+    die("Connection Failed: " . $conn->connect_error);
+}
+
+// Fetch all of the ready meals
+$meals = [];
+$result = $conn->query("SELECT * FROM ready_meals");
+
+if ($result) {
+    while ($row = $result->fetch_assoc()) {
+        $meals[] = $row;
+    }
+}
+
+// Close the connection
+$conn->close();
 ?>
 
 <main>
 
-<section class="meals">
-        <div class="container meals">
-            <h2>Check out some of our ready-to-eat meals!</h2>
-
-            <div class="meal-row">
-                <div class="meal-card">
-				    <img src="../assets/Images/medterrbowl.jpg" alt="Chicken Bowl">
-                    <h5 class="card-title">Mediterranean Chicken Bowl</h5>
-                    <a href="#" class="btn btn-primary">See Ingredients</a>
-                </div>
-                <div class="meal-card">
-				    <img src="../assets/Images/healthypasta.jpg" alt="Healthy Pasta">
-                    <h5 class="card-title">Chicken Pasta</h5>
-                    <a href="#" class="btn btn-primary">See Ingredients</a>
-                </div>
-                <div class="meal-card">
-				    <img src="../assets/Images/fruitbowl.jpg" alt="Fruit Bowl">
-                    <h5 class="card-title">Fruit Salad</h5>
-                    <a href="#" class="btn btn-primary">See Ingredients</a>
-                </div>
-
-
-
+    <section class="meals">
+        <h1>Smart Meals</h1>
+        <h2>Check out some of our curated meals!</h2>
+        <div class="meal-grid">
+            <?php 
+            if (!empty($meals)) {
+                foreach ($meals as $meal) {
+                    echo "<div class='meal-item'>";
+                    echo "<img src='../ImagesSmartPlate/{$meal['meal_image']}' alt='{$meal['meal_name']}'>";
+                    echo "<h3>{$meal['meal_name']}</h3>";
+                    echo "</div>";
+                }
+            }
+            else {
+                echo "<p>No ready meals found.</p>";
+            }
+            ?>
 
             </div>
         </div>
