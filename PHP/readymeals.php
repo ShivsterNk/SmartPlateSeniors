@@ -30,7 +30,7 @@ $conn->close();
         <h1>Smart Meals</h1>
         <h2>Check out some of our curated meals!</h2>
         <div class="meal-grid">
-            <?php 
+            <?php
             if (!empty($meals)) {
                 foreach ($meals as $meal) {
                     echo "<div class='meal-item'>";
