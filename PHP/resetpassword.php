@@ -36,46 +36,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Reset</title>
-    <!-- match the login page CSS path -->
-    <link rel="stylesheet" href="../login.css">
+    <title>Reset Password</title>
+    <link rel="stylesheet" href="../js/resetpassword.css">
 </head>
 <body>
 
+<header class="navbar">
+    <div class="logo">Smart Plate</div>
+    <nav class="nav-links">
+        <a href="/PHP/index.php">Home</a>
+        <a href="features.php" class="active">Features</a>
+        <a href="login.php">Sign In</a>
+        <a href="readymeals.php">Pre-Meals</a>
+    </nav>
+</header>
+
 <main class="main-container">
     <div class="form-card">
-        <h1 class="header-title">Password Reset</h1>
+        <h1 class="header-title">Reset Password</h1>
 
-        <?php if (!empty($message)): ?>
-            <div class="<?php echo $isSuccess ? 'success-message' : 'error-message'; ?>">
-                <?php echo $message; ?>
+        <!-- SHOW MESSAGE IF EXISTS -->
+        <?php if ($message !== ''): ?>
+            <div
+                    style="
+                            background-color: <?= $isSuccess ? '#d4edda' : '#f8d7da' ?>;
+                            padding: 15px;
+                            border-radius: 5px;
+                            color: <?= $isSuccess ? '#155724' : '#721c24' ?>;
+                            margin-bottom: 20px;
+                            "
+            >
+                <?= $message ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- ONLY SHOW FORM IF NOT SUCCESS -->
+        <?php if (!$isSuccess): ?>
+            <form action="resetpassword.php" method="POST">
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <button type="submit" class="action-btn">Send Reset Link</button>
+            </form>
+        <?php else: ?>
+            <div style="text-align:center; margin-top:20px;">
+                <a href="login.php" class="action-btn"
+                   style="display:inline-block; text-decoration:none; width:auto; padding:10px 20px; font-size:18px;">
+                    Return to Login
+                </a>
             </div>
         <?php endif; ?>
 
         <?php if (!$isSuccess): ?>
-            <form method="post" action="resetpassword.php">
-                <div class="input-group">
-                    <label for="email">Enter your account email</label>
-                    <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="Type your email address"
-                            required
-                    >
-                </div>
-
-                <button type="submit" class="action-btn">Send Reset</button>
-            </form>
+            <div class="footer-links">
+                <a href="login.php">Back to Login</a>
+            </div>
         <?php endif; ?>
-
-        <br>
-        <a href="login.php" class="action-btn secondary-btn">Return to Login</a>
     </div>
 </main>
 

@@ -1,0 +1,337 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: cornsilk;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+header {
+    background-color: #283618;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 10px;
+    text-align: center;
+    color:#fffaf3;
+}
+
+/*NAVBAR SECTION */
+.navbar {
+    background-color: #283618;
+    color: #fffaf3;
+    position: relative;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    position: relative;
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #fffaf3;
+    text-decoration: none;
+}
+
+/*RIGHT-SIDE LINKS*/
+.nav-right {
+    display: flex;
+    gap: 10px;
+    z-index: 1001;
+}
+
+.nav-right a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.hamburger {
+    display: none;
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+section {
+    text-align: center;
+    margin: 2em 0;
+}
+
+.container {
+    width: 100%;
+    margin: 40px auto;
+}
+
+/*HERO SECTION */
+.hero-bg {
+    position: relative;
+    height: 80vh;
+    background: url('./Images/healthyplatter.jpg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.hero-overlay {
+    background-color: rgba(0,0,0,0.5);
+    padding: 40px 20px;
+    border-radius: 10px;
+    max-width: 600px;
+}
+
+.hero-overlay h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero-overlay p {
+    font-size: 1.2rem;
+}
+
+.hero-overlay a.homebtn {
+    display: inline-block;
+    background-color: green;
+    color: white;
+    width: 200px;
+    padding: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px;
+}
+
+.hero-overlay a.homebtn:hover {
+    background-color: antiquewhite;
+    color: green;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.hero-buttons .homebtn {
+    flex: 1 1 200px;
+    max-width: 220px;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+}
+
+/*READY MEALS PAGE */
+.meals {
+    margin: 40px auto;
+}
+
+.meals h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.meal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colums per row */
+    gap: 30px;
+    justify-items: center;
+}
+
+.meal-item {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.meal-item img {
+    width: 100%;
+    height: 230px;
+    border-radius: 10px;
+    display: block;
+}
+
+.meal-item h3 {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+/* Form Container Box */
+/* LOGIN FORM PAGE */
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+}
+
+.form-card {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 550px;
+    text-align: center;
+}
+
+.header-title {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+/* Inputs and Buttons */
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+.forgot-pwd {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.forgot-pwd a {
+    color: #283618;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.action-btn {
+    background-color: #283618;
+    color: white;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.footer-links {
+    margin-top: 20px;
+}
+
+.footer-links a {
+    color: #283618;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
+
+/* FOOTER SECTION */
+
+footer {
+    background-color: #283618;
+    color: white;
+    text-align: center;
+    padding: 1em;
+    margin-top: auto;
+}
+
+@media (max-width: 900px) {
+    .meal-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colums per row */
+    }
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-right {
+        position: absolute;
+        top: 100%;
+        left: 0;
+
+        width: 100%;
+        background-color: #283618;
+
+        flex-direction: column;
+        align-items: center;
+
+        display: none;
+        padding: 15px 0;
+    }
+
+    .nav-right a {
+        padding: 10px 0;
+        font-size: 1.2rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-right.show {
+        display: flex;
+    }
+}
+
+@media (max-width: 600px) {
+    .meal-grid {
+        grid-template-columns: 1fr; /* 2 colums per row */
+    }
+}

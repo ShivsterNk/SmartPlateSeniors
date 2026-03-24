@@ -1,4 +1,7 @@
 <?php
+//index.php
+include('../includes/header.php');
+
 session_start();
 require_once __DIR__ . '/../includes/db.php';
 
@@ -28,25 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Plate - Login</title>
-    <link rel="stylesheet" href="../js/login.css">
-</head>
-<body>
-
-<header class="navbar">
-    <div class="logo">Smart Plate</div>
-    <nav class="nav-links">
-        <a href="Home.html">Home</a>
-        <a href="Plan.html">Plan</a>
-        <a href="login.php">Sign In</a>
-        <a href="Pre-Meals.html">Pre-Meals</a>
-    </nav>
-</header>
 
 <main class="main-container">
     <div class="form-card">
@@ -63,22 +47,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="input-group">
                 <label>Email Address</label>
                 <input
-                    type="email"
-                    name="email"
-                    placeholder="Type your Email Address"
-                    value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>"
-                    required
+                        type="email"
+                        name="email"
+                        placeholder="Type your Email Address"
+                        value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>"
+                        required
                 >
             </div>
 
             <div class="input-group">
                 <label>Password</label>
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Type your password"
-                    required
-                >
+
+                <div class="password-wrapper">
+                    <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Type your password"
+                            required
+                    >
+
+                    <!-- EYE ICON -->
+                    <svg id="togglePassword" class="eye-icon" xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24" fill="none" stroke="#283618" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                </div>
             </div>
 
             <div class="forgot-pwd">
@@ -95,5 +91,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </main>
 
-</body>
-</html>
+<!-- PASSWORD TOGGLE -->
+<script>
+    function toggleVisibility() {
+        const field = document.getElementById("password");
+        const icon  = document.getElementById("togglePassword");
+
+        if (field.type === "password") {
+            field.type = "text";
+            icon.style.opacity = "0.5";  // dim when showing
+        } else {
+            field.type = "password";
+            icon.style.opacity = "1";
+        }
+    }
+
+    document.getElementById("togglePassword").onclick = toggleVisibility;
+</script>
+
+<?php
+//index.php
+include('../includes/footer.php');
+?>

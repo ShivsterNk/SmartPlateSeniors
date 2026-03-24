@@ -59,10 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <header class="navbar">
     <div class="logo">Smart Plate</div>
     <nav class="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Plan</a>
+        <a href="/PHP/index.php">Home</a>
+        <a href="features.php" class="active">Features</a>
         <a href="login.php">Sign In</a>
-        <a href="#">Pre-Meals</a>
+        <a href="readymeals.php">Pre-Meals</a>
     </nav>
 </header>
 
@@ -78,7 +78,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </p>
         <?php endif; ?>
 
-
         <form method="POST">
 
             <div class="input-group">
@@ -91,18 +90,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="email" id="email" name="email" placeholder="Enter your email" required>
             </div>
 
+            <!-- PASSWORD -->
             <div class="input-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Create a password" required>
+                <div class="password-wrapper">
+                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+
+                    <!-- eye icon -->
+                    <svg id="togglePassword" class="eye-icon" xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24" fill="none" stroke="#283618" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                </div>
             </div>
 
+            <!-- CONFIRM PASSWORD -->
             <div class="input-group">
                 <label for="confirm_password">Confirm Password</label>
-                <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter your password" required>
+                <div class="password-wrapper">
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter your password" required>
+
+                    <!-- eye icon -->
+                    <svg id="toggleConfirm" class="eye-icon" xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24" fill="none" stroke="#283618" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                </div>
             </div>
 
             <button type="submit" class="action-btn">Create Account</button>
-
         </form>
 
         <div class="footer-links">
@@ -111,6 +131,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     </div>
 </div>
+
+<!-- JavaScript for toggling visibility -->
+<script>
+    function toggleVisibility(inputID, iconID) {
+        const field = document.getElementById(inputID);
+        const icon  = document.getElementById(iconID);
+
+        if (field.type === "password") {
+            field.type = "text";
+            icon.style.opacity = "0.5";
+        } else {
+            field.type = "password";
+            icon.style.opacity = "1";
+        }
+    }
+
+    document.getElementById("togglePassword").onclick = function() {
+        toggleVisibility("password", "togglePassword");
+    };
+
+    document.getElementById("toggleConfirm").onclick = function() {
+        toggleVisibility("confirm_password", "toggleConfirm");
+    };
+</script>
 
 </body>
 </html>
