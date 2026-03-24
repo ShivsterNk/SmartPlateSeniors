@@ -3,7 +3,7 @@
 include('../includes/header.php');
 
 //connects to Database to find and load up all the meals present
-require_once '../includes/config.php';
+require_once '../config/config.php';
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 
 if ($conn->connect_error) {

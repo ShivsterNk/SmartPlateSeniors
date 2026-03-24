@@ -1,3 +1,21 @@
+/* ================= VARIABLES ================= */
+:root {
+    --nav-h: 70px;
+    --green-dark: #283618;
+    --green-light: #a7c957;
+    --green-bg: #edf3eb;
+    --green-pale: #dcedc8;
+    --white: #fffaf3;
+
+    --text-dark: #1e2d1e;
+    --text-mid: #4a5a4a;
+    --text-light: #7a8a7a;
+
+    --radius: 12px;
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+/* ================= BASE ================= */
 html, body {
     height: 100%;
     margin: 0;
@@ -14,68 +32,7 @@ body {
 
 main {
     flex: 1;
-}
-
-header {
-    background-color: #283618;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding-top: 10px;
-    text-align: center;
-    color:#fffaf3;
-}
-
-/*NAVBAR SECTION */
-.navbar {
-    background-color: #283618;
-    color: #fffaf3;
-    position: relative;
-    z-index: 1000;
-}
-
-.nav-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    position: relative;
-}
-
-.logo {
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: #fffaf3;
-    text-decoration: none;
-}
-
-/*RIGHT-SIDE LINKS*/
-.nav-right {
-    display: flex;
-    gap: 10px;
-    z-index: 1001;
-}
-
-.nav-right a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.hamburger {
-    display: none;
-    font-size: 1.8rem;
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-}
-
-
-nav a {
-    color: white;
-    margin: 0 15px;
-    text-decoration: none;
+    margin-top: var(--nav-h);
 }
 
 section {
@@ -88,7 +45,148 @@ section {
     margin: 40px auto;
 }
 
-/*HERO SECTION */
+/* ================= NAVBAR ================= */
+.navbar {
+    background-color: var(--green-dark);
+    color: var(--white);
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    height: var(--nav-h);
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 50px;   /* adjust if needed */
+    width: auto;
+    display: block;
+}
+
+/* RIGHT-SIDE LINKS + PROFILE */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 20px 10px;
+    border-radius: 4px;
+    transition: background 0.2s;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+/* PROFILE BUTTON */
+.nav-profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 24px;
+    padding: 4px 10px;
+    cursor: pointer;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--green-dark);
+}
+
+.nav-username {
+    color: white;
+    font-size: 0.88rem;
+}
+
+/* PROFILE DROPDOWN */
+.profile-dropdown {
+    position: absolute;
+    top: var(--nav-h);
+    right: 0;
+    width: 240px;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.profile-dropdown.open {
+    display: flex;
+}
+
+.pd-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--text-dark);
+}
+
+.pd-item:hover {
+    background-color: var(--green-bg);
+}
+
+/* HAMBURGER */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    transition: 0.3s;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translateY(8px);
+}
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translateY(-8px);
+}
+
+/* ================= HERO ================= */
 .hero-bg {
     position: relative;
     height: 80vh;
@@ -125,7 +223,6 @@ section {
     font-size: 1rem;
     font-weight: bold;
     border-radius: 5px;
-    text-align: center;
     text-decoration: none;
     margin: 5px;
 }
@@ -143,54 +240,7 @@ section {
     margin-top: 20px;
 }
 
-.hero-buttons .homebtn {
-    flex: 1 1 200px;
-    max-width: 220px;
-    justify-content: center;
-    align-items: center;
-    padding: 12px 20px;
-    text-align: center;
-    text-decoration: none;
-}
-
-/*READY MEALS PAGE */
-.meals {
-    margin: 40px auto;
-}
-
-.meals h2 {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.meal-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colums per row */
-    gap: 30px;
-    justify-items: center;
-}
-
-.meal-item {
-    width: 100%;
-    max-width: 300px;
-    text-align: center;
-}
-
-.meal-item img {
-    width: 100%;
-    height: 230px;
-    border-radius: 10px;
-    display: block;
-}
-
-.meal-item h3 {
-    margin-top: 10px;
-    font-size: 1.1rem;
-    text-align: center;
-}
-
-/* Form Container Box */
-/* LOGIN FORM PAGE */
+/* ================= LOGIN FORM ================= */
 .main-container {
     display: flex;
     justify-content: center;
@@ -213,7 +263,6 @@ section {
     margin-bottom: 30px;
 }
 
-/* Inputs and Buttons */
 .input-group {
     text-align: left;
     margin-bottom: 20px;
@@ -256,15 +305,6 @@ section {
     cursor: pointer;
 }
 
-.footer-links {
-    margin-top: 20px;
-}
-
-.footer-links a {
-    color: #283618;
-    font-weight: bold;
-    text-decoration: underline;
-}
 .password-wrapper {
     position: relative;
     width: 100%;
@@ -278,60 +318,96 @@ section {
     width: 22px;
     height: 22px;
     cursor: pointer;
-    opacity: 1;
-    transition: opacity 0.2s ease;
 }
 
-/* FOOTER SECTION */
+/* ================= READY MEALS ================= */
+.meals {
+    margin: 40px auto;
+}
 
+.meals h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.meal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    justify-items: center;
+}
+
+.meal-item {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.meal-item img {
+    width: 100%;
+    height: 230px;
+    border-radius: 10px;
+    display: block;
+}
+
+.meal-item h3 {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+/* ================= FOOTER ================= */
 footer {
-    background-color: #283618;
+    background-color: var(--green-dark);
     color: white;
     text-align: center;
     padding: 1em;
     margin-top: auto;
 }
 
+/* ================= MEDIA QUERIES ================= */
 @media (max-width: 900px) {
     .meal-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 colums per row */
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 768px) {
     .hamburger {
-        display: block;
+        display: flex;
     }
 
     .nav-right {
         position: absolute;
-        top: 100%;
+        top: calc(var(--nav-h) + 10px);
         left: 0;
-
         width: 100%;
-        background-color: #283618;
-
+        background-color: var(--green-dark);
         flex-direction: column;
         align-items: center;
-
         display: none;
-        padding: 15px 0;
+        padding: 20px 0;
     }
 
-    .nav-right a {
-        padding: 10px 0;
-        font-size: 1.2rem;
+    .nav-right.active {
+        display: flex;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
         width: 100%;
         text-align: center;
     }
 
-    .nav-right.show {
-        display: flex;
+    .nav-links a {
+        width: 100%;
+        padding: 20px 10px;
     }
 }
 
 @media (max-width: 600px) {
     .meal-grid {
-        grid-template-columns: 1fr; /* 2 colums per row */
+        grid-template-columns: 1fr;
     }
 }
