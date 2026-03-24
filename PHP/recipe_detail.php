@@ -131,10 +131,10 @@ for ($i = 1; $i <= 20; $i++) {
     <div class="logo">Smart Plate</div>
 
     <nav class="nav-links d-flex">
-        <a href="../index.php">Home</a>
-        <a href="../PHP/Plan.php">Plan</a>
-        <a href="../PHP/login.php">Sign In</a>
-        <a href="../PHP/Pre-Meals.php">Pre-Meals</a>
+        <a href="/PHP/index.php">Home</a>
+        <a href="features.php" class="active">Features</a>
+        <a href="login.php">Sign In</a>
+        <a href="readymeals.php">Pre-Meals</a>
         <a href="recipe_generator.php" class="active">Recipe Details</a>
     </nav>
 </header>
