@@ -9,7 +9,7 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Smart Plate</title>
-<link rel="stylesheet" href="/SeniorProject/assets/spstyle.css">
+<link rel="stylesheet" href="/SmartPlateSeniors/assets/spstyle.css">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -22,11 +22,11 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
 
         <div class="nav-right" id="navRight">
             <div class="nav-links">
-                <a href="/SeniorProject/PHP/index.php">Home</a>
-                <a href="/SeniorProject/PHP/features.php">Features</a>
+                <a href="/SmartPlateSeniors/PHP/index.php">Home</a>
+                <a href="/SmartPlateSeniors/PHP/features.php">Features</a>
                 <?php if(!$isLoggedIn): ?>
-                    <a href="/SeniorProject/PHP/login.php">Login</a>
-                    <a href="/SeniorProject/PHP/signup.php">Sign Up</a>
+                    <a href="/SmartPlateSeniors/PHP/login.php">Login</a>
+                    <a href="/SmartPlateSeniors/PHP/signup.php">Sign Up</a>
                 <?php endif; ?>
             </div>
 
