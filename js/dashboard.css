@@ -42,17 +42,11 @@ nav {
     z-index: 200;
 }
 .nav-logo {
-    display: flex; align-items: center; gap: 10px;
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.25rem;
-    color: var(--white);
-    text-decoration: none;
-    margin-right: auto;
-    cursor: pointer;
-    user-select: none;
-    border-radius: 8px;
-    padding: 4px 8px;
-    transition: background 0.2s;
+    .logo-img {
+        height: 36px;
+        width: auto;
+        display: block;
+    }
 }
 .nav-logo:hover { background: rgba(255,255,255,0.08); }
 .nav-logo svg { width: 28px; height: 28px; flex-shrink: 0; }

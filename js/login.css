@@ -23,9 +23,14 @@ body {
 }
 
 .logo {
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 40px;   /* adjust if needed */
+    width: auto;
+    display: block;
 }
 
 .nav-links a {
