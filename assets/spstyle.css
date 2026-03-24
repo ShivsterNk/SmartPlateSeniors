@@ -334,4 +334,255 @@ footer {
     .meal-grid {
         grid-template-columns: 1fr; /* 2 colums per row */
     }
+
+}
+/* ══════════════════════════════
+   ADD THESE STYLES TO THE BOTTOM
+   OF YOUR EXISTING spstyle.css
+══════════════════════════════ */
+
+/* ── HERO UPDATES ── */
+.hero-bg {
+    height: 75vh !important;
+    background: url('./Images/healthyplatter.jpg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+.hero-overlay {
+    background: rgba(40, 54, 24, 0.72);
+    padding: 48px 40px;
+    border-radius: 16px;
+    max-width: 620px;
+    backdrop-filter: blur(2px);
+}
+
+.hero-overlay h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.hero-overlay p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.7;
+    margin-bottom: 8px;
+}
+
+.hero-overlay a.homebtn {
+    display: inline-block;
+    background: white;
+    color: #283618;
+    width: auto;
+    padding: 12px 28px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px;
+    transition: all 0.2s;
+}
+
+.hero-overlay a.homebtn:hover {
+    background: #edf3eb;
+    color: #283618;
+    transform: translateY(-2px);
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+
+/* ── Section shared styles ── */
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #283618;
+    margin-bottom: 8px;
+}
+.section-sub {
+    color: #6b7060;
+    font-size: 1rem;
+    margin-bottom: 36px;
+}
+
+/* ── HOW IT WORKS ── */
+.how-it-works {
+    background: #FEFAE0;
+    padding: 60px 24px;
+    text-align: center;
+    margin: 0 !important;
+}
+
+.steps-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+.step-card {
+    background: white;
+    border-radius: 14px;
+    padding: 32px 24px;
+    flex: 1;
+    min-width: 200px;
+    max-width: 240px;
+    box-shadow: 0 2px 12px rgba(40,54,24,0.08);
+    border-top: 4px solid #283618;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.step-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(40,54,24,0.12);
+}
+
+.step-num {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #283618;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.step-icon {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+    margin-top: 8px;
+}
+
+.step-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #283618;
+    margin-bottom: 8px;
+}
+
+.step-card p {
+    font-size: 0.88rem;
+    color: #6b7060;
+    line-height: 1.6;
+}
+
+.step-divider {
+    font-size: 1.8rem;
+    color: #d8e8d4;
+    flex-shrink: 0;
+}
+
+/* ── FEATURES CTA ── */
+.features-cta {
+    background: #edf3eb;
+    padding: 56px 24px;
+    text-align: center;
+    margin: 0 !important;
+    border-top: 1px solid #d8e8d4;
+    border-bottom: 1px solid #d8e8d4;
+}
+
+.features-cta-inner {
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.features-cta h2 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #283618;
+    margin-bottom: 10px;
+}
+
+.features-cta p {
+    color: #6b7060;
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.cta-btn {
+    display: inline-block;
+    background: #283618;
+    color: white;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 13px 32px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+}
+.cta-btn:hover {
+    background: #1f2a12;
+    transform: translateY(-2px);
+    color: white;
+}
+
+/* ── SIGN UP CTA ── */
+.signup-cta {
+    background: #283618;
+    padding: 60px 24px;
+    text-align: center;
+    margin: 0 !important;
+}
+
+.signup-cta h2 {
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.signup-cta p {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+}
+
+.signup-btn {
+    display: inline-block;
+    background: white;
+    color: #283618;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 13px 32px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+}
+.signup-btn:hover {
+    background: #edf3eb;
+    transform: translateY(-2px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .steps-row { flex-direction: column; align-items: center; }
+    .step-divider { transform: rotate(90deg); }
+    .step-card { max-width: 100%; width: 100%; }
+    .section-title { font-size: 1.5rem; }
+    .features-cta h2, .signup-cta h2 { font-size: 1.4rem; }
 }
