@@ -198,6 +198,11 @@ $isLoggedIn = isset($_SESSION['user_id']) ? 'true' : 'false';
             background: none; border: none; color: #999;
             font-size: 0.85rem; cursor: pointer; text-decoration: underline;
         }
+        .logo-img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
 
         /* ANIMATIONS */
         @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
@@ -206,15 +211,17 @@ $isLoggedIn = isset($_SESSION['user_id']) ? 'true' : 'false';
 </head>
 <body>
 
+
 <!-- NAVBAR -->
 <header class="navbar-custom">
     <div class="container d-flex justify-content-between align-items-center py-3">
-        <div class="logo">Smart Plate</div>
+        <div class="logo">
+            <img src="../js/New Smartplate logo.png" alt="SmartPlate Logo" class="logo-img">
+        </div>
         <nav class="nav-links">
             <a href="/PHP/index.php">Home</a>
             <a href="features.php">Features</a>
             <a href="login.php">Sign In</a>
-            <a href="readymeals.php">Pre-Meals</a>
         </nav>
     </div>
 </header>

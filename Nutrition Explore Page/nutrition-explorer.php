@@ -12,12 +12,14 @@
 
 <!-- NAVBAR -->
 <header class="navbar">
-    <div class="logo">Smart Plate</div>
+    <div class="logo">
+        <img src="../js/New Smartplate logo.png" alt="SmartPlate Logo" class="logo-img">
+    </div>
     <nav class="nav-links">
-        <a href="/PHP/index.php">Home</a>
-        <a href="features.php" class="active">Features</a>
-        <a href="login.php">Sign In</a>
-        <a href="../Pre-Meals.html">Pre-Meals</a>
+        <a href="/SmartPlateSeniors/PHP/index.php">Home</a>
+        <a href="/SmartPlateSeniors/PHP/features.php" class="active">Features</a>
+        <a href="/SmartPlateSeniors/PHP/login.php">Sign In</a>
+
     </nav>
 </header>
 

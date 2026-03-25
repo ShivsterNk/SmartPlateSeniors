@@ -526,3 +526,8 @@ body {
     .detail-panel-header { padding: 18px 20px; }
     .detail-panel-body { padding: 20px; }
 }
+.logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}

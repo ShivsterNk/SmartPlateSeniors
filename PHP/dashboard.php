@@ -33,7 +33,6 @@ $email   = htmlspecialchars($userData['email']);
 $initial = strtoupper(mb_substr($userData['name'], 0, 1));
 
 // ── Fetch dietary preferences from survey table ──
-// Wrapped in try/catch so the page loads even if the table doesn't exist yet
 $dietaryPrefs = [];
 try {
     $stmtSurvey = $pdo->prepare("
@@ -63,10 +62,8 @@ try {
 } catch (PDOException $e) {
     $favorites = [];
 }
-$displayMonth = date('F Y');
 
 // ── Fetch recent foods ───────────────────────
-// Gracefully handles case where table doesn't exist yet
 $recentFoods = [];
 try {
     $stmtRecent = $pdo->prepare("
@@ -81,6 +78,10 @@ try {
 } catch (PDOException $e) {
     $recentFoods = [];
 }
+
+// ── Fix: define display dates here ──────────
+$displayDate  = date('F j, Y');
+$displayMonth = date('F Y');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -103,7 +104,7 @@ try {
     </a>
     <ul class="nav-links">
         <li><a href="dashboard.php" class="active">Dashboard</a></li>
-        <li><a href="explore.php">Explore</a></li>
+        <li><a href="../Nutrition Explore Page/nutrition-explorer.php">Explore</a></li>
         <li><a href="favorites.php">Favorites</a></li>
     </ul>
     <div class="nav-right">
@@ -127,8 +128,8 @@ try {
                         <span style="background:var(--green-mid); color:#fff;
                          font-size:0.68rem; font-weight:600;
                          padding:2px 8px; border-radius:20px;">
-              <?= htmlspecialchars($pref['preference_name']) ?>
-            </span>
+                            <?= htmlspecialchars($pref['preference_name']) ?>
+                        </span>
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
@@ -200,7 +201,7 @@ try {
                 <p>See a quick overview of your SmartPlate dashboard.</p>
             </div>
 
-            <!-- Nutrition card — dashes until daily_meals table is ready -->
+            <!-- Nutrition card -->
             <div class="card nutrition-card">
                 <div class="nutrition-header">
                     <span class="card-title" style="margin:0">Today's Nutrition</span>
@@ -210,8 +211,7 @@ try {
                             <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
                             <line x1="3" y1="10" x2="21" y2="10"/>
                         </svg>
-                        <?= $displayDate  = date('F j, Y');   // ← add this
-                        $displayMonth = date('F Y');      // ← this already exists ?>
+                        <?= $displayDate ?> ›
                     </div>
                 </div>
 
@@ -274,7 +274,7 @@ try {
                 </div>
             </div>
 
-            <!-- Today's Meals — placeholder until daily_meals table is created -->
+            <!-- Today's Meals -->
             <div class="card">
                 <div class="meals-header">
                     <div class="meals-title-group">
@@ -305,7 +305,7 @@ try {
 
         <div class="right-col">
 
-            <!-- Recent Foods — dynamic from recent_foods table -->
+            <!-- Recent Foods -->
             <div class="card">
                 <div class="card-title">Recent Foods</div>
                 <?php if (!empty($recentFoods)): ?>
@@ -324,16 +324,16 @@ try {
                             </div>
                         <?php endforeach; ?>
                     </div>
-                    <a href="explore.php" class="view-all-btn">Explore More ›</a>
+                    <a href="../Nutrition Explore Page/nutrition-explorer.php" class="view-all-btn">Explore More ›</a>
                 <?php else: ?>
                     <p style="font-size:0.85rem; color:var(--text-light); padding:4px 0 14px;">
                         No recently viewed foods yet.
                     </p>
-                    <a href="explore.php" class="view-all-btn">Start Exploring ›</a>
+                    <a href="../Nutrition Explore Page/nutrition-explorer.php" class="view-all-btn">Start Exploring ›</a>
                 <?php endif; ?>
             </div>
 
-            <!-- Favorites — dynamic from favorites table -->
+            <!-- Favorites -->
             <div class="card favorites-card">
                 <div class="card-title">Favorites</div>
                 <?php if (!empty($favorites)): ?>

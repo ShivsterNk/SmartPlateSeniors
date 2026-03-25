@@ -121,6 +121,11 @@ for ($i = 1; $i <= 20; $i++) {
         .back-btn:hover {
             text-decoration: underline;
         }
+        .logo-img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
     </style>
 </head>
 
@@ -128,13 +133,13 @@ for ($i = 1; $i <= 20; $i++) {
 
 <!-- NAVBAR -->
 <header class="navbar-custom d-flex justify-content-between align-items-center">
-    <div class="logo">Smart Plate</div>
+    <div class="logo">
+        <img src="../js/New Smartplate logo.png" alt="SmartPlate Logo" class="logo-img">
+    </div>
 
     <nav class="nav-links d-flex">
-        <a href="/PHP/index.php">Home</a>
         <a href="features.php" class="active">Features</a>
         <a href="login.php">Sign In</a>
-        <a href="readymeals.php">Pre-Meals</a>
         <a href="recipe_generator.php" class="active">Recipe Details</a>
     </nav>
 </header>

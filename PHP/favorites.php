@@ -184,6 +184,11 @@ $favorites = $stmtFavs->fetchAll();
             margin-top: auto;
             padding-top: 8px;
         }
+        .logo-img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body>
@@ -191,10 +196,11 @@ $favorites = $stmtFavs->fetchAll();
 <!-- NAVBAR -->
 <header class="navbar-custom">
     <div class="container d-flex justify-content-between align-items-center py-3">
-        <div class="logo">Smart Plate</div>
+        <div class="logo">
+            <img src="../js/New Smartplate logo.png" alt="SmartPlate Logo" class="logo-img">
+        </div>
         <nav class="nav-links">
             <a href="dashboard.php">Dashboard</a>
-            <a href="explore.php">Explore</a>
             <a href="favorites.php" class="active">Favorites</a>
             <a href="logout.php">Sign Out</a>
         </nav>

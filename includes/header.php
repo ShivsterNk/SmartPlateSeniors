@@ -27,8 +27,7 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
                 <a href="/SmartPlateSeniors/PHP/index.php">Home</a>
                 <a href="/SmartPlateSeniors/PHP/features.php">Features</a>
                 <?php if(!$isLoggedIn): ?>
-                    <a href="/SmartPlateSeniors/PHP/login.php">Login</a>
-                    <a href="/SmartPlateSeniors/PHP/signup.php">Sign Up</a>
+                    <a href="/SmartPlateSeniors/PHP/login.php">Sign In</a>
                 <?php endif; ?>
             </div>
 
@@ -54,29 +53,40 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
 </nav>
 
 <script>
-    // Hamburger toggle
-    const hamburger = document.getElementById("hamburger");
-    const navRight = document.getElementById("navRight");
-    hamburger.addEventListener("click", () => {
-        hamburger.classList.toggle("active");
-        navRight.classList.toggle("active");
-    });
+    document.addEventListener("DOMContentLoaded", () => {
 
-    // Desktop profile toggle
-    const navProfileBtn = document.getElementById("navProfileBtn");
-    const profileDropdown = document.getElementById("profileDropdown");
-    if(navProfileBtn){
-        let profileOpen = false;
-        navProfileBtn.addEventListener("click", (e)=>{
-            e.stopPropagation();
-            profileOpen = !profileOpen;
-            profileDropdown.classList.toggle("open", profileOpen);
-        });
-        document.addEventListener("click", ()=>{
-            profileDropdown.classList.remove("open");
-        });
-        document.addEventListener("keydown", (e)=>{
-            if(e.key==='Escape') profileDropdown.classList.remove("open");
-        });
-    }
+        const hamburger = document.getElementById("hamburger");
+        const navRight = document.getElementById("navRight");
+
+        if (hamburger && navRight) {
+            hamburger.addEventListener("click", () => {
+                hamburger.classList.toggle("active");
+                navRight.classList.toggle("active");
+            });
+        }
+
+        const navProfileBtn = document.getElementById("navProfileBtn");
+        const profileDropdown = document.getElementById("profileDropdown");
+
+        if (navProfileBtn && profileDropdown) {
+            let profileOpen = false;
+
+            navProfileBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                profileOpen = !profileOpen;
+                profileDropdown.classList.toggle("open", profileOpen);
+            });
+
+            document.addEventListener("click", () => {
+                profileDropdown.classList.remove("open");
+            });
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === 'Escape') {
+                    profileDropdown.classList.remove("open");
+                }
+            });
+        }
+
+    });
 </script>

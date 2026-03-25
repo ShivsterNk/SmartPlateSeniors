@@ -46,6 +46,8 @@ nav {
         height: 36px;
         width: auto;
         display: block;
+        text-decoration: none !important;
+        color: white !important;
     }
 }
 .nav-logo:hover { background: rgba(255,255,255,0.08); }

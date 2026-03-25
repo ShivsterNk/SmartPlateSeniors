@@ -225,7 +225,6 @@ session_start();
             <a href="/PHP/index.php">Home</a>
             <a href="features.php" class="active">Features</a>
             <a href="login.php">Sign In</a>
-            <a href="readymeals.php">Pre-Meals</a>
         </nav>
     </div>
 </header>
