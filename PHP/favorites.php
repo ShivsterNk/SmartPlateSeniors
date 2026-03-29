@@ -4,7 +4,7 @@
 // ══════════════════════════════════════════
 
 session_start();
-require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../config/db.php';
 
 // ── Redirect to login if not authenticated ──
 if (!isset($_SESSION['user_id'])) {

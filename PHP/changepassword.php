@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../config/db.php';
 
 // Only logged-in users can access this page
 if (!isset($_SESSION['user_id'])) {

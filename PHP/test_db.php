@@ -5,13 +5,13 @@ echo "Looking for config at: " . realpath(__DIR__ . '/../includes/config.php') .
 $configExists = file_exists(__DIR__ . '/../includes/config.php');
 echo "Config file found: " . ($configExists ? 'YES' : 'NO') . "<br>";
 
-$dbExists = file_exists(__DIR__ . '/../includes/db.php');
+$dbExists = file_exists(__DIR__ . '/../config/db.php');
 echo "DB file found: " . ($dbExists ? 'YES' : 'NO') . "<br>";
 
 echo "AMPPS Windows path exists: " . (file_exists('C:/Program Files/Ampps') ? 'YES' : 'NO') . "<br>";
 echo "Current directory: " . __DIR__ . "<br>";
 
-require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../config/config.php';
 echo "DB_HOST: " . DB_HOST . "<br>";
 echo "DB_NAME: " . DB_NAME . "<br>";
 echo "DB_USER: " . DB_USER . "<br>";

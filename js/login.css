@@ -1,8 +1,9 @@
-/* General Reset */
+/* General Reset to match Sign-up */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* Updated font to match Sign-up page */
     font-family: Arial, sans-serif;
 }
 
@@ -12,7 +13,7 @@ body {
     min-height: 100vh;
 }
 
-/* Navbar */
+/* Navbar: Matches Sign-up Page exactly */
 .navbar {
     background-color: #283618;
     padding: 15px 50px;
@@ -27,7 +28,7 @@ body {
 }
 
 .logo-img {
-    height: 40px;
+    height: 40px;   /* adjust if needed */
     width: auto;
     display: block;
 }
@@ -36,10 +37,12 @@ body {
     color: white;
     text-decoration: none;
     margin-left: 20px;
+    /* Font styles to match Sign-up */
     font-weight: bold;
+    font-size: 16px;
 }
 
-/* Desktop Centering */
+/* Form Container Box */
 .main-container {
     display: flex;
     justify-content: center;
@@ -47,14 +50,13 @@ body {
     padding: 50px 20px;
 }
 
-/* The White Box Container */
 .form-card {
     background-color: #ffffff;
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 550px; /* Constrains size for desktop */
+    max-width: 550px;
     text-align: center;
 }
 
@@ -63,7 +65,7 @@ body {
     margin-bottom: 30px;
 }
 
-/* Form Styling */
+/* Inputs and Buttons */
 .input-group {
     text-align: left;
     margin-bottom: 20px;
@@ -84,7 +86,17 @@ body {
     outline: none;
 }
 
-/* Button Styling */
+.forgot-pwd {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.forgot-pwd a {
+    color: #283618;
+    text-decoration: none;
+    font-size: 14px;
+}
+
 .action-btn {
     background-color: #283618;
     color: white;
@@ -94,13 +106,10 @@ body {
     font-size: 24px;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 10px;
 }
 
-/* Footer Link Styling */
 .footer-links {
     margin-top: 20px;
-    font-size: 16px;
 }
 
 .footer-links a {
@@ -108,7 +117,6 @@ body {
     font-weight: bold;
     text-decoration: underline;
 }
-
 .password-wrapper {
     position: relative;
     width: 100%;
