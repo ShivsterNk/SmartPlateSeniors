@@ -7,19 +7,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="nutrition-explorer.css" />
+
 </head>
 <body>
 
 <!-- NAVBAR -->
-<header class="navbar">
-    <div class="logo">Smart Plate</div>
-    <nav class="nav-links">
-        <a href="/PHP/index.php">Home</a>
-        <a href="features.php" class="active">Features</a>
-        <a href="login.php">Sign In</a>
-        <a href="../Pre-Meals.html">Pre-Meals</a>
-    </nav>
-</header>
+<?php include('../includes/header.php'); ?>
 
 <!-- HERO BANNER -->
 <div class="page-hero-banner">
@@ -30,7 +23,7 @@
 </div>
 
 <!-- MAIN -->
-<main class="main-container">
+<main class="nutrition-main">
 
     <!-- Search Card -->
     <div class="search-card">
@@ -56,7 +49,7 @@
 </main>
 
 <script>
-    const API_KEY = '<?php require_once __DIR__ . "/../config/api-keys.php"; echo FDC_API_KEY; ?>';
+    const API_KEY = '<?php require_once __DIR__ . "/../config/api-keys.example.php"; echo FDC_API_KEY; ?>';
 </script>
 <script src="nutrition-explorer.js"></script>
 </body>

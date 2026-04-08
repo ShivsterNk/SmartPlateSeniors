@@ -6,6 +6,12 @@ ini_set('display_errors', 1);
 
 require_once __DIR__ . '/../config/db.php';
 
+
+if (isset($_SESSION['user_id'])) {
+    header("Location: dashboard.php");
+    exit;
+}
+
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -47,7 +53,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Plate - Sign Up</title>
+    <link rel="stylesheet" href="../js/signup.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">Smart Plate</div>
+    <nav class="nav-links">
+        <a href="/SmartPlateSeniors/PHP/index.php">Home</a>
+        <a href="features.php" class="active">Features</a>
+        <a href="login.php">Sign In</a>
+    </nav>
+</header>
+
 <div class="main-container">
     <div class="form-card">
 

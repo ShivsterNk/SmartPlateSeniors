@@ -148,7 +148,8 @@ $isLoggedIn = isset($_SESSION['user_id']) ? 'true' : 'false';
             padding: 0; line-height: 1; flex-shrink: 0;
         }
         .btn-fav:hover { color: #e63946; transform: scale(1.2); }
-        .btn-fav.saved { color: #e63946; }
+        .btn-fav.saved { color: #e63946; animation: heartPop 0.25s ease; }
+
 
         /* VIEW BUTTON */
         .btn-view-recipe {
@@ -198,26 +199,28 @@ $isLoggedIn = isset($_SESSION['user_id']) ? 'true' : 'false';
             background: none; border: none; color: #999;
             font-size: 0.85rem; cursor: pointer; text-decoration: underline;
         }
+        .logo-img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
 
         /* ANIMATIONS */
         @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
         @keyframes shimmer { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        @keyframes heartPop {
+            0%   { transform: scale(1); }
+            50%  { transform: scale(1.3); }
+            100% { transform: scale(1.15); }
+        }
     </style>
 </head>
+
 <body>
 
+
 <!-- NAVBAR -->
-<header class="navbar-custom">
-    <div class="container d-flex justify-content-between align-items-center py-3">
-        <div class="logo">Smart Plate</div>
-        <nav class="nav-links">
-            <a href="/PHP/index.php">Home</a>
-            <a href="features.php">Features</a>
-            <a href="login.php">Sign In</a>
-            <a href="readymeals.php">Pre-Meals</a>
-        </nav>
-    </div>
-</header>
+<?php include('../includes/header.php'); ?>
 
 <!-- LOGIN MODAL -->
 <div class="login-modal-overlay" id="loginModal">

@@ -4,7 +4,7 @@
  * Handles communication with Claude API
  */
 
-require_once __DIR__ . '/../config/api-keys.php';
+require_once __DIR__ . '/../config/api-keys.example.php';
 
 class AIHelper {
 

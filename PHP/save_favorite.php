@@ -2,7 +2,7 @@
 ob_start();
 
 session_start();
-require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../config/db.php';
 
 ob_clean();
 
@@ -42,7 +42,13 @@ try {
 
     $stmt->execute([$userId, $mealId, $mealName, $mealThumb, $mealCategory, $mealArea]);
 
-    echo json_encode(['success' => true, 'message' => 'Recipe saved to favorites!']);
+    // 🔥 THIS IS THE UPGRADE
+    $status = $stmt->rowCount() ? 'saved' : 'exists';
+
+    echo json_encode([
+        'success' => true,
+        'status' => $status
+    ]);
 
 } catch (PDOException $e) {
     error_log("Save favorite error: " . $e->getMessage());

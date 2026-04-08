@@ -32,7 +32,7 @@ body {
 
 main {
     flex: 1;
-    margin-top: var(--nav-h);
+    margin-top: 70px;
 }
 
 section {
@@ -58,14 +58,18 @@ section {
 .nav-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
+    justify-content: space-between; /* ✅ key fix */
+    padding: 0 20px; /* consistent spacing */
+    width: 96%;
 }
+
 
 .logo {
     display: flex;
     align-items: center;
-}
+    margin-right: auto;
+    margin-left: 0 !important; /* 🔥 force left */
+    }
 
 .logo-img {
     height: 50px;   /* adjust if needed */
@@ -82,14 +86,13 @@ section {
 
 .nav-links {
     display: flex;
-    gap: 15px;
+    gap: 8px;
     list-style: none;
 }
 
 .nav-links a {
     color: white;
     text-decoration: none;
-    font-weight: 500;
     padding: 20px 10px;
     border-radius: 4px;
     transition: background 0.2s;
@@ -128,6 +131,22 @@ section {
 .nav-username {
     color: white;
     font-size: 0.88rem;
+}
+
+.nav-logout {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 999px; /* 🔥 makes it pill */
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.nav-logout:hover {
+    background: #e63946;
+    color: white;
 }
 
 /* PROFILE DROPDOWN */
@@ -329,6 +348,9 @@ section {
     text-align: center;
     margin-bottom: 30px;
 }
+.meals-page {
+    margin-top: 0 !important;
+}
 
 .meal-grid {
     display: grid;
@@ -382,10 +404,11 @@ footer {
         top: calc(var(--nav-h) + 10px);
         left: 0;
         width: 100%;
+        gap: 20px;
         background-color: var(--green-dark);
         flex-direction: column;
         align-items: center;
-        display: none;
+        display: flex;
         padding: 20px 0;
     }
 
@@ -412,6 +435,7 @@ footer {
     }
 
 }
+
 /* ══════════════════════════════
    ADD THESE STYLES TO THE BOTTOM
    OF YOUR EXISTING spstyle.css
@@ -427,6 +451,8 @@ footer {
     color: white;
     text-align: center;
     position: relative;
+    margin-top: -65px; /* pull hero up to cancel the padding */
+    padding-top: 70px; /* keep content inside from hiding under navbar */
 }
 
 .hero-overlay {
@@ -750,4 +776,48 @@ footer {
     .step-card { max-width: 100%; width: 100%; }
     .section-title { font-size: 1.5rem; }
     .features-cta h2, .signup-cta h2 { font-size: 1.4rem; }
+}
+/* DROPDOWN */
+.nav-dropdown {
+    position: relative;
+}
+
+.dropdown-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 20px 10px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    min-width: 180px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 999;
+}
+
+.dropdown-menu a {
+    color: #283618;
+    padding: 10px 14px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.dropdown-menu a:hover {
+    background: #f1f5f1;
+}
+
+/* SHOW DROPDOWN ON HOVER */
+.nav-dropdown:hover .dropdown-menu {
+    display: flex;
 }

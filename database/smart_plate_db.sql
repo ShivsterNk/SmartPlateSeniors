@@ -11,7 +11,6 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -95,115 +94,156 @@ INSERT INTO `chat_messages` (`id`, `conversation_id`, `role`, `content`, `create
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `meal_plans`
 --
 
-CREATE TABLE `users` (
-  `user_id` int NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `password_hash` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+CREATE TABLE `meal_plans` (
+                              `meal_plan_id` int NOT NULL,
+                              `user_id` int DEFAULT NULL,
+                              `start_date` date DEFAULT NULL,
+                              `days` int DEFAULT '7',
+                              `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`user_id`, `name`, `email`, `password_hash`, `created_at`, `updated_at`) VALUES
-    (1, 'Test User', 'test@smartplate.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '2026-03-23 19:01:25', '2026-03-23 19:01:25');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_preferences`
+-- Table structure for table `survey`
 --
 
-CREATE TABLE `user_preferences` (
-                                    `id` int NOT NULL,
-                                    `user_id` int NOT NULL,
-                                    `dietary_restrictions` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-                                    `allergies` text COLLATE utf8mb4_general_ci,
-                                    `calorie_goal` int DEFAULT NULL,
-                                    `protein_goal` int DEFAULT NULL,
-                                    `carbs_goal` int DEFAULT NULL,
-                                    `fat_goal` int DEFAULT NULL,
-                                    `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-                                    `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+CREATE TABLE `survey` (
+                          `id` int NOT NULL,
+                          `user_id` int NOT NULL,
+                          `meal_preference` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+                          `meals_per_day` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+                          `cooking_level` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+                          `flexibility` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+                          `dietary_restrictions` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+                          `foods_to_avoid` text COLLATE utf8mb4_general_ci,
+                          `submitted_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `user_preferences`
---
+-- --------------------------------------------------------
 
-INSERT INTO `user_preferences` (`id`, `user_id`, `dietary_restrictions`, `allergies`, `calorie_goal`, `protein_goal`, `carbs_goal`, `fat_goal`, `created_at`, `updated_at`) VALUES
-    (1, 1, 'Vegetarian', 'Nuts', 2000, 150, 200, 65, '2026-03-23 19:01:25', '2026-03-23 19:01:25');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `chat_conversations`
---
-ALTER TABLE `chat_conversations`
-    ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_user_id` (`user_id`);
-
---
--- Indexes for table `chat_messages`
---
-ALTER TABLE `chat_messages`
-    ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_conversation_id` (`conversation_id`);
+-- --------------------------------------------------------
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
     ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD KEY `idx_email` (`email`);
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `user_preferences`
 --
 ALTER TABLE `user_preferences`
     ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `chat_conversations`
+--
+ALTER TABLE `chat_conversations`
+    ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `chat_messages`
+--
+ALTER TABLE `chat_messages`
+    ADD PRIMARY KEY (`id`),
+  ADD KEY `conversation_id` (`conversation_id`);
+
+--
+-- Indexes for table `favorites`
+--
+ALTER TABLE `favorites`
+    ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_favorite` (`user_id`,`meal_id`);
+
+--
+-- Dumping data for table `user_preferences`
+--
+ALTER TABLE `foods`
+    ADD PRIMARY KEY (`food_id`),
+  ADD UNIQUE KEY `fdc_id` (`fdc_id`);
+
+--
+-- Indexes for dumped tables
+--
+ALTER TABLE `meal_plans`
+    ADD PRIMARY KEY (`meal_plan_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `survey`
+--
+ALTER TABLE `survey`
+    ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_survey` (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `chat_conversations`
---
-ALTER TABLE `chat_conversations`
-    MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `chat_messages`
---
-ALTER TABLE `chat_messages`
-    MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
---
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-    MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+    MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_preferences`
 --
 ALTER TABLE `user_preferences`
-    MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+    MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `chat_conversations`
+--
+ALTER TABLE `chat_conversations`
+    MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `chat_messages`
+--
+ALTER TABLE `chat_messages`
+    MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- Indexes for table `user_preferences`
+--
+ALTER TABLE `favorites`
+    MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+ALTER TABLE `foods`
+    MODIFY `food_id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `chat_conversations`
+--
+ALTER TABLE `meal_plans`
+    MODIFY `meal_plan_id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `survey`
+--
+ALTER TABLE `survey`
+    MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `user_preferences`
+--
+ALTER TABLE `user_preferences`
+    ADD CONSTRAINT `user_preferences_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `chat_conversations`
@@ -218,10 +258,23 @@ ALTER TABLE `chat_messages`
     ADD CONSTRAINT `chat_messages_ibfk_1` FOREIGN KEY (`conversation_id`) REFERENCES `chat_conversations` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `chat_conversations`
+--
+ALTER TABLE `favorites`
+    ADD CONSTRAINT `favorites_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `chat_messages`
+--
+ALTER TABLE `meal_plans`
+    ADD CONSTRAINT `meal_plans_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+--
 -- Constraints for table `user_preferences`
 --
-ALTER TABLE `user_preferences`
-    ADD CONSTRAINT `user_preferences_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
+ALTER TABLE `survey`
+    ADD CONSTRAINT `survey_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

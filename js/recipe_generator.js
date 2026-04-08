@@ -226,13 +226,26 @@ function renderMeals(meals, category = '') {
 }
 
 // ── Handle favorite ───────────────────────────
+
+function showToast(message, isError = false) {
+    const toast = document.createElement("div");
+    toast.className = "toast" + (isError ? " error" : "");
+    toast.textContent = message;
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => toast.classList.add("show"), 100);
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 300);
+    }, 2500);
+}
+
+
 function handleFavorite(btn) {
     if (!IS_LOGGED_IN) {
         loginModal.classList.add('show');
-        return;
-    }
-    if (btn.classList.contains('saved')) {
-        btn.title = 'Already saved!';
         return;
     }
 
@@ -245,15 +258,24 @@ function handleFavorite(btn) {
 
     axios.post('save_favorite.php', payload)
         .then(response => {
-            if (response.data.success) {
-                btn.classList.add('saved');
-                btn.title = 'Saved to Favorites!';
+            const data = response.data;
+
+            if (data.success) {
+
+                if (data.status === "saved") {
+                    btn.classList.add('saved');
+                    btn.title = 'Saved to Favorites!';
+                    showToast("Saved to favorites ❤️");
+                } else {
+                    showToast("Already in favorites ❤️");
+                }
+
             } else {
-                alert(response.data.message || 'Could not save. Please try again.');
+                showToast(data.message || 'Could not save.', true);
             }
         })
         .catch(() => {
-            alert('Something went wrong. Please try again.');
+            showToast('Something went wrong. Please try again.', true);
         });
 }
 

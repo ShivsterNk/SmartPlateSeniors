@@ -178,6 +178,11 @@ include('../includes/header.php');
 </head>
 
 <body>
+
+<!-- NAVBAR -->
+<?php include('../includes/header.php'); ?>
+
+
 <!-- HERO -->
 <section class="hero-section">
     <div class="hero-badge">Before you sign in</div>
