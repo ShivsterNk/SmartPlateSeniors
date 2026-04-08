@@ -3,10 +3,21 @@ body {
     margin: 0; 
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
 nav {
     background-color: #283618; 
     color: white; 
-    font-size: 1.5em; 
+    font-size: 1em;
     text-align: right;
     font-family: Arial, sans-serif;  
     padding: 15px 50px;
@@ -17,7 +28,7 @@ nav {
 
 .nav-links {
     display: flex;
-    gap: 40px; 
+    gap: 40px;
 }
 
 .nav-links a {
