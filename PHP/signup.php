@@ -4,7 +4,6 @@ include('../includes/header.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-session_start();
 require_once __DIR__ . '/../config/db.php';
 
 
@@ -163,5 +162,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     };
 </script>
 
-</body>
-</html>
+</main>
+
+<?php
+//index.php
+include('../includes/footer.php');
+?>
