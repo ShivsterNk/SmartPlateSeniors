@@ -11,7 +11,6 @@ Thumbs.db
 
 # API Keys and Secrets and Files
 config/api-keys.php
-config/api-keys.example.php
 config/*.local.php
 config/config.php
 config/db.php
