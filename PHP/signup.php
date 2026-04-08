@@ -1,10 +1,9 @@
 <?php
-//include('../includes/header.php');
+include('../includes/header.php');
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-session_start();
 require_once __DIR__ . '/../config/db.php';
 
 $error = '';
@@ -48,26 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Plate - Sign Up</title>
-    <link rel="stylesheet" href="../js/signup.css">
-</head>
-<body>
-
-<header class="navbar">
-    <div class="logo">Smart Plate</div>
-    <nav class="nav-links">
-        <a href="/PHP/index.php">Home</a>
-        <a href="features.php" class="active">Features</a>
-        <a href="login.php">Sign In</a>
-        <a href="readymeals.php">Pre-Meals</a>
-    </nav>
-</header>
-
+<main>
 <div class="main-container">
     <div class="form-card">
 
@@ -158,5 +138,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     };
 </script>
 
-</body>
-</html>
+</main>
+
+<?php
+//index.php
+include('../includes/footer.php');
+?>

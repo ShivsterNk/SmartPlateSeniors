@@ -1,7 +1,8 @@
 <?php
 // Optional, but good practice for consistency with other pages
-session_start();
+include('../includes/header.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,44 +27,6 @@ session_start();
             background-color: var(--background);
             font-family: Arial, sans-serif;
             color: var(--primary);
-        }
-
-        /* NAVBAR – matches your Smart Plate style */
-        .navbar-custom {
-            background-color: var(--primary);
-            width: 100%;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 18px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            color: white;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px;
-        }
-
-        .nav-links a {
-            color: white;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 1rem;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            text-decoration: underline;
         }
 
         /* HERO SECTION */
@@ -215,21 +178,6 @@ session_start();
 </head>
 
 <body>
-
-<!-- NAVBAR -->
-<header class="navbar-custom">
-    <div class="nav-container">
-        <div class="logo">Smart Plate</div>
-        <nav class="nav-links">
-            <!-- nav bar -->
-            <a href="/PHP/index.php">Home</a>
-            <a href="features.php" class="active">Features</a>
-            <a href="login.php">Sign In</a>
-            <a href="readymeals.php">Pre-Meals</a>
-        </nav>
-    </div>
-</header>
-
 <!-- HERO -->
 <section class="hero-section">
     <div class="hero-badge">Before you sign in</div>
