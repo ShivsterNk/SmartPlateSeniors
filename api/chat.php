@@ -13,7 +13,12 @@ session_start();
 
 // Set JSON header
 header('Content-Type: application/json');
-
+// TEMPORARY DEBUG - remove after fixing
+$aiFile = __DIR__ . '/../includes/ai-helper.php';
+if (!file_exists($aiFile)) {
+    echo json_encode(['error' => 'ai-helper.php not found at: ' . $aiFile]);
+    exit;
+}
 try {
     // Check if files exist before requiring
     $requiredFiles = [

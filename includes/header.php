@@ -1,9 +1,12 @@
 <?php
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-$isLoggedIn = isset($_SESSION['username']);
-$username = $isLoggedIn ? $_SESSION['username'] : '';
+
+$isLoggedIn = isset($_SESSION['user_id']);
+$username = $_SESSION['user_name'] ?? '';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,44 +14,50 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Smart Plate</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/SmartPlateSeniors/assets/spstyle.css">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <?php if (!empty($extraStyles)) echo $extraStyles; ?>
 </head>
+
 <body>
 
 <nav class="navbar">
     <div class="nav-container">
          <div class="logo">
-            <img src="../js/New Smartplate logo.png" alt="SmartPlate Logo" class="logo-img">
+            <img src= "../js/New Smartplate logo.png" alt="SmartPlate Logo" class="logo-img">
         </div>
 
-        <div class="nav-right" id="navRight">
-            <div class="nav-links">
+        <div class="nav-links">
+
+            <?php if(!$isLoggedIn): ?>
+                <!-- PUBLIC NAV -->
                 <a href="/SmartPlateSeniors/PHP/index.php">Home</a>
                 <a href="/SmartPlateSeniors/PHP/features.php">Features</a>
-                <?php if(!$isLoggedIn): ?>
-                    <a href="/SmartPlateSeniors/PHP/login.php">Sign In</a>
-                <?php endif; ?>
-            </div>
+                <a href="/SmartPlateSeniors/PHP/login.php">Sign In</a>
 
-            <?php if($isLoggedIn): ?>
-                <div class="nav-profile-btn" id="navProfileBtn">
-                    <div class="avatar"><?php echo strtoupper(substr($username,0,1)); ?></div>
-                    <span class="nav-username"><?php echo htmlspecialchars($username); ?></span>
-                    <span class="nav-chevron">▾</span>
+            <?php else: ?>
+                <!-- APP NAV -->
+                <a href="/SmartPlateSeniors/PHP/dashboard.php">Dashboard</a>
+                <a href="/SmartPlateSeniors/Pages/platebot.php">Platebot</a>
+
+                <!-- 🔥 MORE DROPDOWN -->
+                <div class="nav-dropdown">
+                    <button class="dropdown-btn">More ▾</button>
+
+                    <div class="dropdown-menu">
+                        <a href="/SmartPlateSeniors/Nutrition Explore Page/nutrition-explorer.php">Explore</a>
+                        <a href="/SmartPlateSeniors/PHP/recipe_generator.php">Recipe Generator</a>
+                        <a href="/SmartPlateSeniors/Pages/shopping_list.php">Shopping List</a>
+                        <a href="/SmartPlateSeniors/PHP/favorites.php">Favorites</a>
+                    </div>
                 </div>
-                <div class="profile-dropdown" id="profileDropdown">
-                    <a href="dashboard.php" class="pd-item">Dashboard</a>
-                    <a href="logout.php" class="pd-item danger">Logout</a>
-                </div>
+                <!-- ✅ ADD THIS -->
+                <a href="/SmartPlateSeniors/PHP/logout.php" class="nav-logout">Logout</a>
+
             <?php endif; ?>
+
         </div>
 
-        <button class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
     </div>
 </nav>
 

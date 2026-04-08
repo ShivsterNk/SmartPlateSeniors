@@ -58,6 +58,41 @@ $favorites = $stmtFavs->fetchAll();
             font-family: Arial, sans-serif;
             margin: 0;
         }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #283618;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 9999;
+        }
+
+        .toast.error {
+            background: #e63946;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .heart-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .heart-btn.active {
+            color: red;
+            transform: scale(1.2);
+        }
 
         /* ── NAVBAR ── */
         .navbar-custom { background-color: #283618; }
@@ -194,18 +229,7 @@ $favorites = $stmtFavs->fetchAll();
 <body>
 
 <!-- NAVBAR -->
-<header class="navbar-custom">
-    <div class="container d-flex justify-content-between align-items-center py-3">
-        <div class="logo">
-            <img src="../js/New Smartplate logo.png" alt="SmartPlate Logo" class="logo-img">
-        </div>
-        <nav class="nav-links">
-            <a href="dashboard.php">Dashboard</a>
-            <a href="favorites.php" class="active">Favorites</a>
-            <a href="logout.php">Sign Out</a>
-        </nav>
-    </div>
-</header>
+<?php include('../includes/header.php'); ?>
 
 <!-- PAGE HEADER -->
 <div class="page-header">
@@ -248,15 +272,12 @@ $favorites = $stmtFavs->fetchAll();
                                 View Recipe
                             </a>
 
+
                             <!-- Remove from favorites -->
-                            <form method="POST" action="favorites.php"
-                                  onsubmit="return confirm('Remove <?= htmlspecialchars(addslashes($fav['meal_name'])) ?> from favorites?')">
-                                <input type="hidden" name="remove_meal_id"
-                                       value="<?= htmlspecialchars($fav['meal_id']) ?>">
-                                <button type="submit" class="btn-remove">
-                                    &#9825; Remove
-                                </button>
-                            </form>
+                            <button class="btn-remove"
+                                    onclick="removeFavorite('<?= htmlspecialchars($fav['meal_id']) ?>', this)">
+                                &#9825; Remove
+                            </button>
 
                             <div class="saved-date">
                                 Saved <?= date('M j, Y', strtotime($fav['saved_at'])) ?>
@@ -281,6 +302,36 @@ $favorites = $stmtFavs->fetchAll();
     <?php endif; ?>
 
 </div>
+
+<script>
+    function showToast(message, isError = false) {
+        const toast = document.createElement("div");
+        toast.className = "toast" + (isError ? " error" : "");
+        toast.textContent = message;
+
+        document.body.appendChild(toast);
+
+        setTimeout(() => toast.classList.add("show"), 100);
+
+        setTimeout(() => {
+            toast.classList.remove("show");
+            setTimeout(() => toast.remove(), 300);
+        }, 2500);
+    }
+
+    function removeFavorite(mealId, btn) {
+        fetch('favorites.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `remove_meal_id=${mealId}`
+        })
+            .then(() => {
+                btn.closest('.col-md-4').remove();
+                showToast("Removed from favorites ❌");
+            })
+            .catch(() => showToast("Could not remove", true));
+    }
+</script>
 
 </body>
 </html>

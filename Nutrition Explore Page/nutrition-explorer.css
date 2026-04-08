@@ -38,17 +38,7 @@ body {
 }
 
 /* ── Navbar ── */
-.navbar {
-    background-color: var(--green-dark);
-    padding: 16px 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
-}
+
 
 .logo {
     color: var(--white);
@@ -78,7 +68,9 @@ body {
     background: var(--green-dark);
     position: relative;
     overflow: hidden;
-    padding: 56px 50px 48px;
+    padding:  40px 0 28px; /* remove side padding */
+    display: flex;
+    justify-content: center;
 }
 
 .page-hero-banner::before {
@@ -114,10 +106,12 @@ body {
 }
 
 /* ── Main Layout ── */
-.main-container {
+.nutrition-main {
     max-width: 820px;
     margin: 0 auto;
-    padding: 40px 24px 80px;
+    padding: 16px 24px 80px;
+    width: 100%;
+    display: block;
 }
 
 /* ── Search Card ── */
@@ -179,6 +173,7 @@ body {
     cursor: pointer;
     white-space: nowrap;
     transition: background 0.2s, transform 0.1s;
+    width: auto !important;
 }
 
 .action-btn:hover { background-color: var(--green-mid); }
@@ -530,4 +525,9 @@ body {
     height: 40px;
     width: auto;
     object-fit: contain;
+}
+/* ── Hide empty result containers ── */
+#resultsSection:empty,
+#detailPanel:empty {
+    display: none;
 }

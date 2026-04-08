@@ -56,32 +56,11 @@ for ($i = 1; $i <= 20; $i++) {
             margin: 0;
         }
 
-        /* NAVBAR */
-        .navbar-custom {
-            background-color: #283618;
-            padding: 18px 25px;
+        .container {
+            max-width: 1100px;
+            padding: 0 24px;
         }
 
-        .navbar-custom .logo {
-            color: #fff;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .navbar-custom .nav-links {
-            gap: 40px;
-        }
-
-        .navbar-custom .nav-links a {
-            color: white;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .navbar-custom .nav-links a:hover,
-        .navbar-custom .nav-links a.active {
-            text-decoration: underline;
-        }
 
         /* CARD STYLING */
         .recipe-card {
@@ -94,7 +73,10 @@ for ($i = 1; $i <= 20; $i++) {
         .recipe-content {
             background-color: white;
             padding: 25px;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
         }
+
 
         h2, h5, h6 {
             color: #283618;
@@ -132,17 +114,7 @@ for ($i = 1; $i <= 20; $i++) {
 <body>
 
 <!-- NAVBAR -->
-<header class="navbar-custom d-flex justify-content-between align-items-center">
-    <div class="logo">
-        <img src="../js/New Smartplate logo.png" alt="SmartPlate Logo" class="logo-img">
-    </div>
-
-    <nav class="nav-links d-flex">
-        <a href="features.php" class="active">Features</a>
-        <a href="login.php">Sign In</a>
-        <a href="recipe_generator.php" class="active">Recipe Details</a>
-    </nav>
-</header>
+<?php include('../includes/header.php'); ?>
 
 <!-- CONTENT -->
 <div class="container my-5">
@@ -154,8 +126,9 @@ for ($i = 1; $i <= 20; $i++) {
 
             <div class="col-md-5">
                 <img src="<?= htmlspecialchars($meal['strMealThumb']) ?>"
-                     class="img-fluid w-100 h-100"
-                     alt="<?= htmlspecialchars($meal['strMeal']) ?>">
+                     class="img-fluid w-100"
+                     alt="<?= htmlspecialchars($meal['strMeal']) ?>"
+                     style="height: 350px; object-fit: cover;">
             </div>
 
             <div class="col-md-7">

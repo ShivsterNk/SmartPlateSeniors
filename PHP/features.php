@@ -217,17 +217,8 @@ session_start();
 <body>
 
 <!-- NAVBAR -->
-<header class="navbar-custom">
-    <div class="nav-container">
-        <div class="logo">Smart Plate</div>
-        <nav class="nav-links">
-            <!-- nav bar -->
-            <a href="/PHP/index.php">Home</a>
-            <a href="features.php" class="active">Features</a>
-            <a href="login.php">Sign In</a>
-        </nav>
-    </div>
-</header>
+<?php include('../includes/header.php'); ?>
+
 
 <!-- HERO -->
 <section class="hero-section">
