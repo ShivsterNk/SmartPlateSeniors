@@ -91,12 +91,12 @@ try {
 
     // Get user profile data
     $stmt = $pdo->prepare("
-        SELECT u.name, up.dietary_restrictions, up.allergies, 
-               up.calorie_goal, up.protein_goal, up.carbs_goal, up.fat_goal
-        FROM users u
-        LEFT JOIN user_preferences up ON u.id = up.user_id
-        WHERE u.id = ?
-    ");
+    SELECT u.name, up.dietary_restrictions, up.allergies, 
+           up.calorie_goal, up.protein_goal, up.carbs_goal, up.fat_goal
+    FROM users u
+    LEFT JOIN user_preferences up ON u.user_id = up.user_id
+    WHERE u.user_id = ?
+");
     $stmt->execute([$userId]);
     $userData = $stmt->fetch(PDO::FETCH_ASSOC);
 
