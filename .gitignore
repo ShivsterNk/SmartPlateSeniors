@@ -9,7 +9,7 @@
 .DS_Store
 Thumbs.db
 
-# API Keys and Secrets
+# API Keys and Secrets and Files
 config/api-keys.php
 config/api-keys.example.php
 config/*.local.php
