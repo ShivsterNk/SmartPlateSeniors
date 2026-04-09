@@ -20,44 +20,41 @@ $username = $_SESSION['user_name'] ?? '';
 </head>
 
 <body>
-
 <nav class="navbar">
     <div class="nav-container">
-         <div class="logo">
-            <img src= "../js/New Smartplate logo.png" alt="SmartPlate Logo" class="logo-img">
+        <div class="logo">
+            <img src="../js/New Smartplate logo.png" alt="SmartPlate Logo" class="logo-img">
         </div>
 
-        <div class="nav-links">
+        <!-- ✅ Hamburger button added, with correct id -->
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-            <?php if(!$isLoggedIn): ?>
-                <!-- PUBLIC NAV -->
-                <a href="/SmartPlateSeniors/PHP/index.php">Home</a>
-                <a href="/SmartPlateSeniors/PHP/features.php">Features</a>
-                <a href="/SmartPlateSeniors/PHP/login.php">Sign In</a>
-
-            <?php else: ?>
-                <!-- APP NAV -->
-                <a href="/SmartPlateSeniors/PHP/dashboard.php">Dashboard</a>
-                <a href="/SmartPlateSeniors/Pages/platebot.php">Platebot</a>
-
-                <!-- 🔥 MORE DROPDOWN -->
-                <div class="nav-dropdown">
-                    <button class="dropdown-btn">More ▾</button>
-
-                    <div class="dropdown-menu">
-                        <a href="/SmartPlateSeniors/Nutrition Explore Page/nutrition-explorer.php">Explore</a>
-                        <a href="/SmartPlateSeniors/PHP/recipe_generator.php">Recipe Generator</a>
-                        <a href="/SmartPlateSeniors/Pages/shopping_list.php">Shopping List</a>
-                        <a href="/SmartPlateSeniors/PHP/favorites.php">Favorites</a>
-                    </div>
-                </div>
-                <!-- ✅ ADD THIS -->
-                <a href="/SmartPlateSeniors/PHP/logout.php" class="nav-logout">Logout</a>
-
-            <?php endif; ?>
-
+        <!-- ✅ Changed to nav-right with id="navRight" so CSS/JS works -->
+        <div class="nav-right" id="navRight">
+            <ul class="nav-links">
+                <?php if (!$isLoggedIn): ?>
+                    <li><a href="/SmartPlateSeniors/PHP/index.php">Home</a></li>
+                    <li><a href="/SmartPlateSeniors/PHP/features.php">Features</a></li>
+                    <li><a href="/SmartPlateSeniors/PHP/login.php">Sign In</a></li>
+                <?php else: ?>
+                    <li><a href="/SmartPlateSeniors/PHP/dashboard.php">Dashboard</a></li>
+                    <li class="nav-dropdown">
+                        <button class="dropdown-btn">More ▾</button>
+                        <div class="dropdown-menu">
+                            <a href="/SmartPlateSeniors/Nutrition Explore Page/nutrition-explorer.php">Explore</a>
+                            <a href="/SmartPlateSeniors/PHP/recipe_generator.php">Recipe Generator</a>
+                            <a href="/SmartPlateSeniors/Pages/shopping_list.php">Shopping List</a>
+                            <a href="/SmartPlateSeniors/PHP/favorites.php">Favorites</a>
+                        </div>
+                    </li>
+                    <li><a href="/SmartPlateSeniors/PHP/logout.php" class="nav-logout">Logout</a></li>
+                <?php endif; ?>
+            </ul>
         </div>
-
     </div>
 </nav>
 

@@ -13,5 +13,7 @@ Thumbs.db
 config/api-keys.php
 config/api-keys.example.php
 config/*.local.php
+config/config.php
+config/db.php
 *.key
 secrets.json

@@ -1,6 +1,14 @@
 <?php
-// Optional, but good practice for consistency with other pages
-session_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Redirect logged-in users to dashboard
+if (isset($_SESSION['user_id'])) {
+    header('Location: /SmartPlateSeniors/PHP/dashboard.php');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,8 +18,8 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap (for grid + spacing) -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/SmartPlateSeniors/assets/spstyle.css">
 
     <style>
         :root {
@@ -28,43 +36,6 @@ session_start();
             color: var(--primary);
         }
 
-        /* NAVBAR – matches your Smart Plate style */
-        .navbar-custom {
-            background-color: var(--primary);
-            width: 100%;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 18px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            color: white;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px;
-        }
-
-        .nav-links a {
-            color: white;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 1rem;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            text-decoration: underline;
-        }
 
         /* HERO SECTION */
         .hero-section {
@@ -200,15 +171,23 @@ session_start();
         }
 
         @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
+            .hero-section,
+            .features-wrapper,
+            .cta-box {
+                padding-left: 16px;
+                padding-right: 16px;
+                margin-left: 0;
+                margin-right: 0;
+                width: 100%;
+                box-sizing: border-box;
             }
 
-            .nav-links {
-                gap: 20px;
-                flex-wrap: wrap;
+            .hero-section h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero-section p {
+                font-size: 0.9rem;
             }
         }
     </style>
