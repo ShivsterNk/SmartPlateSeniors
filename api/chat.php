@@ -13,12 +13,8 @@ session_start();
 
 // Set JSON header
 header('Content-Type: application/json');
-// TEMPORARY DEBUG - remove after fixing
-$aiFile = __DIR__ . '/../includes/ai-helper.php';
-if (!file_exists($aiFile)) {
-    echo json_encode(['error' => 'ai-helper.php not found at: ' . $aiFile]);
-    exit;
-}
+
+
 try {
     // Check if files exist before requiring
     $requiredFiles = [
@@ -91,12 +87,12 @@ try {
 
     // Get user profile data
     $stmt = $pdo->prepare("
-        SELECT u.name, up.dietary_restrictions, up.allergies, 
-               up.calorie_goal, up.protein_goal, up.carbs_goal, up.fat_goal
-        FROM users u
-        LEFT JOIN user_preferences up ON u.id = up.user_id
-        WHERE u.id = ?
-    ");
+    SELECT u.name, s.dietary_restrictions, s.foods_to_avoid,
+           s.meal_preference, s.meals_per_day, s.cooking_level
+    FROM users u
+    LEFT JOIN survey s ON u.user_id = s.user_id
+    WHERE u.user_id = ?
+");
     $stmt->execute([$userId]);
     $userData = $stmt->fetch(PDO::FETCH_ASSOC);
 
