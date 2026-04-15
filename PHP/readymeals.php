@@ -6,7 +6,7 @@ $extraStyles = '
             /* ── PAGE HEADER ── */
             .meals-banner {
                 background: #283618;
-                padding: 36px 0 36px; /* was 10px 0 36px */
+                padding: 36px 0 36px;
                 text-align: center;
                 position: relative;
                 overflow: hidden;
@@ -21,27 +21,27 @@ $extraStyles = '
             }
             .meals-banner-inner { position: relative; z-index: 1; }
             .meals-banner h1 {
-    color: white;
-    font-size: 2.2rem;
+                color: white;
+                font-size: 2.2rem;
                 font-weight: 700;
                 margin-bottom: 8px;
             }
             .meals-banner p {
-    color: rgba(255,255,255,0.78);
-    font-size: 1rem;
+                color: rgba(255,255,255,0.78);
+                font-size: 1rem;
                 margin: 0;
             }
 
             /* ── CAROUSEL WRAPPER ── */
             .carousel-section {
-    background: #FEFAE0;
-    padding: 48px 0 60px;
+                background: #FEFAE0;
+                padding: 48px 0 60px;
             }
 
             /* ── CAROUSEL CONTROLS ── */
             .carousel-control-prev,
             .carousel-control-next {
-    width: 48px;
+                width: 48px;
                 height: 48px;
                 background: #283618;
                 border-radius: 50%;
@@ -54,15 +54,15 @@ $extraStyles = '
             .carousel-control-next { right: -24px; }
             .carousel-control-prev:hover,
             .carousel-control-next:hover { background: #1f2a12; }
-    .carousel-control-prev-icon,
+            .carousel-control-prev-icon,
             .carousel-control-next-icon { width: 18px; height: 18px; }
 
             /* ── INDICATORS ── */
             .carousel-indicators {
-        bottom: -40px;
+                bottom: -40px;
             }
             .carousel-indicators [data-bs-target] {
-    background-color: #283618;
+                background-color: #283618;
                 width: 10px;
                 height: 10px;
                 border-radius: 50%;
@@ -73,7 +73,7 @@ $extraStyles = '
 
             /* ── SLIDE LABEL ── */
             .slide-label {
-        font-size: 0.75rem;
+                font-size: 0.75rem;
                 font-weight: 700;
                 text-transform: uppercase;
                 letter-spacing: 0.08em;
@@ -84,8 +84,8 @@ $extraStyles = '
 
             /* ── MEAL CARDS ── */
             .meal-card {
-        background: white;
-        border-radius: 14px;
+                background: white;
+                border-radius: 14px;
                 overflow: hidden;
                 box-shadow: 0 2px 12px rgba(40,54,24,0.08);
                 transition: transform 0.22s ease, box-shadow 0.22s ease;
@@ -94,30 +94,30 @@ $extraStyles = '
                 flex-direction: column;
             }
             .meal-card:hover {
-        transform: translateY(-5px);
+                transform: translateY(-5px);
                 box-shadow: 0 10px 28px rgba(40,54,24,0.14);
             }
             .meal-card-img-wrap {
-        overflow: hidden;
-        aspect-ratio: 4/3;
+                overflow: hidden;
+                aspect-ratio: 4/3;
             }
             .meal-card img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
                 transition: transform 0.3s ease;
             }
             .meal-card:hover img { transform: scale(1.05); }
 
             .meal-card-body {
-        padding: 14px 16px 16px;
+                padding: 14px 16px 16px;
                 display: flex;
                 flex-direction: column;
                 flex: 1;
                 gap: 8px;
             }
             .meal-card-name {
-        font-size: 0.95rem;
+                font-size: 0.95rem;
                 font-weight: 700;
                 color: #283618;
                 line-height: 1.3;
@@ -125,7 +125,7 @@ $extraStyles = '
                 text-align: center;
             }
             .meal-card-desc {
-        font-size: 0.8rem;
+                font-size: 0.8rem;
                 color: #6b7060;
                 line-height: 1.5;
                 flex: 1;
@@ -133,11 +133,11 @@ $extraStyles = '
                 text-align: center;
             }
             .meal-card-btn {
-        display: block;
-        width: 100%;
-        background: #edf3eb;
-        color: #283618;
-        border: 2px solid #d8e8d4;
+                display: block;
+                width: 100%;
+                background: #edf3eb;
+                color: #283618;
+                border: 2px solid #d8e8d4;
                 border-radius: 8px;
                 padding: 7px 14px;
                 font-size: 0.82rem;
@@ -149,23 +149,23 @@ $extraStyles = '
                 font-family: Arial, sans-serif;
             }
             .meal-card-btn:hover {
-        background: #283618;
-        color: white;
-        border-color: #283618;
+                background: #283618;
+                color: white;
+                border-color: #283618;
             }
 
             /* ── EMPTY STATE ── */
             .empty-meals {
-        text-align: center;
+                text-align: center;
                 padding: 80px 20px;
                 color: #888;
             }
             .empty-meals .empty-icon { font-size: 3.5rem; margin-bottom: 16px; }
             .empty-meals h4 { color: #283618; font-weight: 700; margin-bottom: 8px; }
 
-        /* ── RESPONSIVE ── */
-        @media (max-width: 768px) {
-            .carousel-control-prev { left: 0; }
+            /* ── RESPONSIVE ── */
+            @media (max-width: 768px) {
+                .carousel-control-prev { left: 0; }
                 .carousel-control-next { right: 0; }
             }
 </style>
@@ -194,10 +194,8 @@ $conn->close();
 $slides = array_chunk($meals, 6);
 ?>
 
-    <main  class="meals-page">
+    <main class="meals-page">
 
-
-        <!-- PAGE BANNER -->
         <div class="meals-banner">
             <div class="meals-banner-inner">
                 <h1>&#127859; Smart Meals</h1>
@@ -205,7 +203,6 @@ $slides = array_chunk($meals, 6);
             </div>
         </div>
 
-        <!-- CAROUSEL SECTION -->
         <div class="carousel-section">
             <div class="container" style="max-width: 1100px;">
 
@@ -213,7 +210,6 @@ $slides = array_chunk($meals, 6);
 
                     <div id="mealsCarousel" class="carousel slide" data-bs-ride="false" style="position:relative; padding: 0 36px;">
 
-                        <!-- Indicators -->
                         <div class="carousel-indicators">
                             <?php foreach ($slides as $i => $slide): ?>
                                 <button type="button"
@@ -225,7 +221,6 @@ $slides = array_chunk($meals, 6);
                             <?php endforeach; ?>
                         </div>
 
-                        <!-- Slides -->
                         <div class="carousel-inner">
                             <?php foreach ($slides as $slideIndex => $slideMeals): ?>
                                 <div class="carousel-item <?= $slideIndex === 0 ? 'active' : '' ?>">
@@ -245,7 +240,7 @@ $slides = array_chunk($meals, 6);
                                                                     ? htmlspecialchars($meal['meal_description'])
                                                                     : 'A delicious ready-to-eat meal curated by our nutrition experts.' ?>
                                                         </p>
-                                                        <button class="meal-card-btn" onclick="viewIngredients(<?= isset($meal['meal_id']) ? (int)$meal['meal_id'] : 0 ?>, this)">
+                                                        <button class="meal-card-btn" onclick="viewIngredients(<?= (int)$meal['meal_id'] ?>, this)">
                                                             View Ingredients ›
                                                         </button>
                                                     </div>
@@ -257,7 +252,6 @@ $slides = array_chunk($meals, 6);
                             <?php endforeach; ?>
                         </div>
 
-                        <!-- Controls -->
                         <button class="carousel-control-prev" type="button"
                                 data-bs-target="#mealsCarousel" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -269,7 +263,7 @@ $slides = array_chunk($meals, 6);
                             <span class="visually-hidden">Next</span>
                         </button>
 
-                    </div><!-- /#mealsCarousel -->
+                    </div>
 
                 <?php else: ?>
                     <div class="empty-meals">
@@ -282,7 +276,6 @@ $slides = array_chunk($meals, 6);
             </div>
         </div>
 
-        <!-- Ingredients Modal (ready for when you create the ingredients table) -->
         <div class="modal fade" id="ingredientsModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content" style="border-radius:14px; overflow:hidden;">
@@ -291,9 +284,6 @@ $slides = array_chunk($meals, 6);
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body" id="ingredientsModalBody" style="padding:24px;">
-                        <p style="color:#888; font-size:0.9rem;">
-                            Ingredients will be available once the ingredients table is set up.
-                        </p>
                     </div>
                 </div>
             </div>
@@ -302,8 +292,30 @@ $slides = array_chunk($meals, 6);
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <script>
             function viewIngredients(mealId, btn) {
+                // Set the modal title to the meal name
                 const mealName = btn.closest('.meal-card').querySelector('.meal-card-name').textContent;
                 document.getElementById('ingredientsModalTitle').textContent = mealName + ' — Ingredients';
+
+                const modalBody = document.getElementById('ingredientsModalBody');
+
+                // Show a loading spinner
+                modalBody.innerHTML = '<div class="text-center py-3"><div class="spinner-border text-success" role="status"></div><p class="mt-2">Loading ingredients...</p></div>';
+
+                // Fetch data from ingredients.php
+                fetch('ingredients.php?meal_id=' + mealId)
+                    .then(response => {
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        return response.text();
+                    })
+                    .then(html => {
+                        modalBody.innerHTML = html;
+                    })
+                    .catch(error => {
+                        modalBody.innerHTML = '<p class="text-danger text-center">Sorry, we could not load the ingredients at this time.</p>';
+                        console.error('Fetch error:', error);
+                    });
+
+                // Open the modal
                 const modal = new bootstrap.Modal(document.getElementById('ingredientsModal'));
                 modal.show();
             }

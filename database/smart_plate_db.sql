@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 15, 2026 at 01:01 AM
+-- Generation Time: Mar 29, 2026 at 07:14 PM
 -- Server version: 8.0.45
 -- PHP Version: 8.2.30
 
@@ -246,7 +246,7 @@ INSERT INTO `survey` (`id`, `user_id`, `meal_preference`, `meals_per_day`, `cook
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Indexes for table `users`
 --
 
 CREATE TABLE `users` (
@@ -256,6 +256,9 @@ CREATE TABLE `users` (
                          `password_hash` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
                          `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+ALTER TABLE `users`
+    ADD PRIMARY KEY (`user_id`),
+    ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Dumping data for table `users`
@@ -271,6 +274,9 @@ INSERT INTO `users` (`user_id`, `name`, `email`, `password_hash`, `created_at`) 
 --
 -- Indexes for dumped tables
 --
+ALTER TABLE `user_preferences`
+    ADD PRIMARY KEY (`id`),
+    ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `chat_conversations`
@@ -298,10 +304,10 @@ ALTER TABLE `favorites`
 --
 ALTER TABLE `foods`
     ADD PRIMARY KEY (`food_id`),
-  ADD UNIQUE KEY `fdc_id` (`fdc_id`);
+    ADD UNIQUE KEY `fdc_id` (`fdc_id`);
 
 --
--- Indexes for table `meal_plans`
+-- Indexes for dumped tables
 --
 ALTER TABLE `meal_plans`
     ADD PRIMARY KEY (`meal_plan_id`),
@@ -313,6 +319,7 @@ ALTER TABLE `meal_plans`
 ALTER TABLE `nutrition_logs`
     ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
+
 
 --
 -- Indexes for table `ready_meals`
@@ -392,6 +399,47 @@ ALTER TABLE `survey`
 ALTER TABLE `users`
     MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ingredients`
+--
+
+CREATE TABLE `ingredients` (
+                               `ingredient_id` int NOT NULL AUTO_INCREMENT,
+                               `meal_id` int NOT NULL,
+                               `ingredient_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+                               `amount` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+                               PRIMARY KEY (`ingredient_id`),
+                               KEY `meal_id` (`meal_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ingredients`
+--
+
+INSERT INTO `ingredients` (`meal_id`, `ingredient_name`, `amount`) VALUES
+                                                                       (1, 'Mixed Greens', '2 cups'), (1, 'Cherry Tomatoes', '1/2 cup'), (1, 'Balsamic Glaze', '1 tbsp'),
+                                                                       (2, 'Gala Apples', '2 whole'), (2, 'Cinnamon', '1 tsp'),
+                                                                       (3, 'Chicken Breast', '6 oz'), (3, 'BBQ Sauce', '2 tbsp'), (3, 'Roasted Corn', '1/4 cup'),
+                                                                       (4, 'Romaine Lettuce', '3 cups'), (4, 'Parmesan', '2 tbsp'), (4, 'Croutons', '1/2 cup'),
+                                                                       (5, 'Baby Carrots', '1 lb'), (5, 'Honey', '2 tbsp'), (5, 'Fresh Parsley', '1 tsp'),
+                                                                       (6, 'Cheddar Cheese', '2 oz'), (6, 'Gouda', '2 oz'), (6, 'Whole Wheat Crackers', '5 pcs'),
+                                                                       (7, 'Herb Chicken', '1 breast'), (7, 'Quinoa', '1/2 cup'), (7, 'Red Onion', '1/4 cup'),
+                                                                       (8, 'Farm Fresh Eggs', '2 large'), (8, 'Black Pepper', 'pinch'),
+                                                                       (9, 'Lasagna Sheets', '3 layers'), (9, 'Ricotta', '1/2 cup'), (9, 'Marinara Sauce', '1 cup'),
+                                                                       (10, 'White Fish', '6 oz'), (10, 'Lemon Zest', '1 tsp'), (10, 'Dill', '1/2 tsp'),
+                                                                       (11, 'Large Eggs', '3 total'), (11, 'Bell Peppers', '1/4 cup'), (11, 'Onions', '2 tbsp'),
+                                                                       (12, 'Buttermilk Batter', '1 cup'), (12, 'Maple Syrup', '2 tbsp'), (12, 'Mixed Berries', '1/4 cup'),
+                                                                       (13, 'Flour Tortilla', '1 large'), (13, 'Mexican Cheese', '1/2 cup'), (13, 'Salsa', '2 tbsp'),
+                                                                       (14, 'Steamed White Rice', '1 cup'), (14, 'Soy Sauce', '1 tsp'), (14, 'Sesame Seeds', '1 tsp'),
+                                                                       (15, 'Mixed Baby Greens', '3 cups'), (15, 'Sliced Radish', '1/4 cup'), (15, 'Hard Boiled Egg', '1 unit'),
+                                                                       (16, 'Large Shrimp', '6 units'), (16, 'Garlic Butter', '2 tbsp'), (16, 'Parsley', '1 tsp'),
+                                                                       (17, 'Corn Tortillas', '2 units'), (17, 'Lean Ground Beef', '4 oz'), (17, 'Fresh Salsa', '2 tbsp'),
+                                                                       (18, 'Broccoli & Carrots', '1 cup'), (18, 'Snap Peas', '1/2 cup'), (18, 'Zucchini', '1/2 cup'),
+                                                                       (19, 'Greek Yogurt', '1 cup'), (19, 'Walnuts', '2 tbsp'), (19, 'Honey', '1 tbsp'),
+                                                                       (20, 'Penne Pasta', '2 cups'), (20, 'Mozzarella', '1/2 cup'), (20, 'Marinara', '1 cup');
+
 --
 -- Constraints for dumped tables
 --
@@ -431,6 +479,13 @@ ALTER TABLE `nutrition_logs`
 --
 ALTER TABLE `survey`
     ADD CONSTRAINT `survey_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `ingredients`
+--
+ALTER TABLE `ingredients`
+    ADD CONSTRAINT `ingredients_ibfk_1` FOREIGN KEY (`meal_id`) REFERENCES `ready_meals` (`meal_id`) ON DELETE CASCADE;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
