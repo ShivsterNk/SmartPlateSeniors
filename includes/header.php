@@ -23,17 +23,15 @@ $username = $_SESSION['user_name'] ?? '';
 <nav class="navbar">
     <div class="nav-container">
         <div class="logo">
-            <img src="../js/New Smartplate logo.png" alt="SmartPlate Logo" class="logo-img">
+            <img src="/SmartPlateSeniors/js/New Smartplate logo.png" alt="SmartPlate Logo" class="logo-img">
         </div>
 
-        <!-- ✅ Hamburger button added, with correct id -->
         <button class="hamburger" id="hamburger" aria-label="Toggle menu">
             <span></span>
             <span></span>
             <span></span>
         </button>
 
-        <!-- ✅ Changed to nav-right with id="navRight" so CSS/JS works -->
         <div class="nav-right" id="navRight">
             <ul class="nav-links">
                 <?php if (!$isLoggedIn): ?>
@@ -43,20 +41,35 @@ $username = $_SESSION['user_name'] ?? '';
                 <?php else: ?>
                     <li><a href="/SmartPlateSeniors/PHP/dashboard.php">Dashboard</a></li>
                     <li class="nav-dropdown">
-                        <button class="dropdown-btn">More ▾</button>
+                        <button class="dropdown-btn">More
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
                         <div class="dropdown-menu">
-                            <a href="/SmartPlateSeniors/Nutrition Explore Page/nutrition-explorer.php">Explore</a>
-                            <a href="/SmartPlateSeniors/PHP/recipe_generator.php">Recipe Generator</a>
-                            <a href="/SmartPlateSeniors/Pages/shopping_list.php">Shopping List</a>
-                            <a href="/SmartPlateSeniors/PHP/favorites.php">Favorites</a>
+                            <a href="/SmartPlateSeniors/Nutrition Explore Page/nutrition-explorer.php">
+                                <span>🔍</span> Explore
+                            </a>
+                            <a href="/SmartPlateSeniors/PHP/recipe_generator.php">
+                                <span>📖</span> Recipe Generator
+                            </a>
+                            <a href="/SmartPlateSeniors/Pages/shopping_list.php">
+                                <span>🛒</span> Shopping List
+                            </a>
+                            <a href="/SmartPlateSeniors/PHP/favorites.php">
+                                <span>❤️</span> Favorites
+                            </a>
                         </div>
                     </li>
-                    <li><a href="/SmartPlateSeniors/PHP/logout.php" class="nav-logout">Logout</a></li>
+                    <li>
+                        <a href="/SmartPlateSeniors/PHP/logout.php" class="nav-logout">
+                            Sign Out
+                        </a>
+                    </li>
                 <?php endif; ?>
             </ul>
         </div>
     </div>
 </nav>
+
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {

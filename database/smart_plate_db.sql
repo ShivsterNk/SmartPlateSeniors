@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 09, 2026 at 08:13 PM
+-- Generation Time: Apr 15, 2026 at 01:01 AM
 -- Server version: 8.0.45
 -- PHP Version: 8.2.30
 
@@ -132,8 +132,54 @@ CREATE TABLE `meal_plans` (
                               `user_id` int DEFAULT NULL,
                               `start_date` date DEFAULT NULL,
                               `days` int DEFAULT '7',
-                              `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+                              `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+                              `plan_date` date DEFAULT NULL,
+                              `meal_type` varchar(50) COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Breakfast',
+                              `meal_name` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+                              `description` text COLLATE utf8mb4_general_ci,
+                              `emoji` varchar(10) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `meal_plans`
+--
+
+INSERT INTO `meal_plans` (`meal_plan_id`, `user_id`, `start_date`, `days`, `created_at`, `plan_date`, `meal_type`, `meal_name`, `description`, `emoji`) VALUES
+                                                                                                                                                            (17, 4, NULL, 7, '2026-04-15 00:58:57', '2026-04-15', 'Breakfast', 'Greek Yogurt Parfait', 'Layered store-bought Greek yogurt with granola and fresh berries for a quick and nutritious morning meal.', '🥣'),
+                                                                                                                                                            (18, 4, NULL, 7, '2026-04-15 00:58:57', '2026-04-15', 'Snack', 'Apple Slices with Peanut Butter', 'Crisp apple slices paired with creamy peanut butter for a satisfying and energizing midday snack.', '🍎'),
+                                                                                                                                                            (19, 4, NULL, 7, '2026-04-15 00:58:57', '2026-04-15', 'Lunch', 'Rotisserie Chicken Wrap', 'Store-bought rotisserie chicken wrapped in a flour tortilla with lettuce, tomato, and a drizzle of ranch dressing.', '🌯'),
+                                                                                                                                                            (20, 4, NULL, 7, '2026-04-15 00:58:57', '2026-04-15', 'Dinner', 'Stir-Fry Rice Bowl', 'A simple stir-fry using pre-made rice, frozen vegetables, and your choice of protein tossed in soy sauce.', '🍽️'),
+                                                                                                                                                            (21, 4, NULL, 7, '2026-04-15 00:59:05', '2026-04-14', 'Breakfast', 'Greek Yogurt Parfait', 'Layered store-bought Greek yogurt with granola and fresh berries for a quick and nutritious morning meal.', '🥣'),
+                                                                                                                                                            (22, 4, NULL, 7, '2026-04-15 00:59:05', '2026-04-14', 'Snack', 'Apple Slices with Almond Butter', 'Pre-sliced apple paired with a single-serve almond butter packet for a satisfying midday snack.', '🍎'),
+                                                                                                                                                            (23, 4, NULL, 7, '2026-04-15 00:59:05', '2026-04-14', 'Lunch', 'Rotisserie Chicken Wrap', 'Store-bought rotisserie chicken wrapped in a flour tortilla with pre-washed lettuce, tomato, and a drizzle of ranch dressing.', '🌯'),
+                                                                                                                                                            (24, 4, NULL, 7, '2026-04-15 00:59:05', '2026-04-14', 'Dinner', 'Pasta with Jarred Marinara and Italian Sausage', 'Boiled pasta tossed with jarred marinara sauce and sliced pre-cooked Italian sausage for a hearty and easy weeknight dinner.', '🍝');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nutrition_logs`
+--
+
+CREATE TABLE `nutrition_logs` (
+                                  `id` int NOT NULL,
+                                  `user_id` int NOT NULL,
+                                  `log_date` date NOT NULL,
+                                  `meal_type` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+                                  `food_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+                                  `calories` decimal(8,2) DEFAULT '0.00',
+                                  `carbs_g` decimal(8,2) DEFAULT '0.00',
+                                  `protein_g` decimal(8,2) DEFAULT '0.00',
+                                  `fat_g` decimal(8,2) DEFAULT '0.00',
+                                  `source` varchar(20) COLLATE utf8mb4_general_ci DEFAULT 'manual',
+                                  `logged_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `nutrition_logs`
+--
+
+INSERT INTO `nutrition_logs` (`id`, `user_id`, `log_date`, `meal_type`, `food_name`, `calories`, `carbs_g`, `protein_g`, `fat_g`, `source`, `logged_at`) VALUES
+    (5, 4, '2026-04-15', 'Manual', 'BANANA', 0.00, 0.00, 0.00, 0.00, 'meal_plan', '2026-04-15 00:59:25');
 
 -- --------------------------------------------------------
 
@@ -259,6 +305,13 @@ ALTER TABLE `foods`
 --
 ALTER TABLE `meal_plans`
     ADD PRIMARY KEY (`meal_plan_id`),
+  ADD UNIQUE KEY `unique_meal` (`user_id`,`plan_date`,`meal_type`);
+
+--
+-- Indexes for table `nutrition_logs`
+--
+ALTER TABLE `nutrition_logs`
+    ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -313,7 +366,13 @@ ALTER TABLE `foods`
 -- AUTO_INCREMENT for table `meal_plans`
 --
 ALTER TABLE `meal_plans`
-    MODIFY `meal_plan_id` int NOT NULL AUTO_INCREMENT;
+    MODIFY `meal_plan_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `nutrition_logs`
+--
+ALTER TABLE `nutrition_logs`
+    MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ready_meals`
@@ -360,6 +419,12 @@ ALTER TABLE `favorites`
 --
 ALTER TABLE `meal_plans`
     ADD CONSTRAINT `meal_plans_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Constraints for table `nutrition_logs`
+--
+ALTER TABLE `nutrition_logs`
+    ADD CONSTRAINT `nutrition_logs_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `survey`

@@ -90,20 +90,40 @@ function checkedRestriction($value, $existing) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dietary Preferences | SmartPlate</title>
+    <link rel="stylesheet" href="/SmartPlateSeniors/assets/spstyle.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; }
         body { background-color: #FEFAE0; font-family: Arial, sans-serif; margin: 0; }
 
-        .navbar-custom { background-color: #283618; }
-        .logo { color: white; font-size: 1.8rem; font-weight: 700; }
-        .nav-links { display: flex; gap: 40px; }
-        .nav-links a { color: white; font-weight: 600; text-decoration: none; font-size: 1rem; }
-        .nav-links a:hover { text-decoration: underline; }
+        .page-banner {
+            background: linear-gradient(135deg, #1a2e10, #3a5220);
+            padding: 28px 0;
+            margin-top: 70px;
+            margin-bottom: 32px;
+            border-bottom: 3px solid #a7c957;
+            text-align: center;
+        }
 
-        .page-banner { background: #283618; padding: 36px 0 28px; margin-bottom: 32px; }
-        .page-banner h1 { color: white; font-size: 1.8rem; font-weight: 700; margin-bottom: 6px; }
-        .page-banner p { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin: 0; }
+        .banner-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .page-banner h1 {
+            color: white;
+            font-family: 'DM Serif Display', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 6px;
+        }
+
+        .page-banner p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            margin: 0;
+        }
 
         .s-card {
             background: white; border-radius: 14px;
@@ -164,19 +184,11 @@ function checkedRestriction($value, $existing) {
 </head>
 <body>
 
-<header class="navbar-custom">
-    <div class="container d-flex justify-content-between align-items-center py-3">
-        <div class="logo">Smart Plate</div>
-        <nav class="nav-links">
-            <a href="dashboard.php">Dashboard</a>
-            <a href="favorites.php">Favorites</a>
-            <a href="logout.php">Sign Out</a>
-        </nav>
-    </div>
-</header>
+<?php include('../includes/header.php'); ?>
 
 <div class="page-banner">
-    <div class="container">
+    <div class="container text-center">
+        <div class="banner-icon">🥗</div>
         <h1>Dietary Preferences</h1>
         <p>Tell us about your meal preferences so we can personalize your experience.</p>
     </div>
