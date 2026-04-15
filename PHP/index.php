@@ -1,5 +1,16 @@
 <?php
 //index.php
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Redirect logged-in users to dashboard
+if (isset($_SESSION['user_id'])) {
+    header('Location: /SmartPlateSeniors/PHP/dashboard.php');
+    exit;
+}
+
 include('../includes/header.php');
 ?>
 
@@ -7,11 +18,10 @@ include('../includes/header.php');
         <section class="hero-bg">
             <div class="hero-overlay">
                 <h1>Eat Smarter,<br>Live Better.</h1>
-                <p>Plan nutritious meals, discover recipes, and track your nutrition — all in one place.</p>
+                <p>Plan nutritious meals, discover recipes, and track your nutrition, all in one place!</p>
 
                 <div class="hero-buttons">
                     <a href="about.php" class="homebtn">Learn More</a>
-                    <a href="readymeals.php" class="homebtn">Check Our Ready-To-Eat Meals</a>
                 </div>
             </div>
         </section>
@@ -19,7 +29,7 @@ include('../includes/header.php');
         <!-- ── HOW IT WORKS ── -->
         <section class="how-it-works">
             <h2 class="section-title">How It Works</h2>
-            <p class="section-sub">Getting started with Smart Plate is simple</p>
+            <p class="section-sub">Getting started with Smart Plate is simple.</p>
             <div class="steps-row">
                 <div class="step-card">
                     <div class="step-num">1</div>
@@ -48,7 +58,7 @@ include('../includes/header.php');
         <section class="features-cta">
             <div class="features-cta-inner">
                 <h2>Discover What Smart Plate Can Do</h2>
-                <p>From nutrition tracking to AI-powered meal plans — explore everything we offer.</p>
+                <p>From nutrition tracking to AI-powered meal plans, explore everything we offer.</p>
                 <a href="features.php" class="cta-btn">Explore Our Features &#8594;</a>
             </div>
         </section>
@@ -57,7 +67,7 @@ include('../includes/header.php');
         <section class="signup-cta">
             <h2>Ready to eat smarter?</h2>
             <p>Join Smart Plate today and take control of your nutrition.</p>
-            <a href="signup.php" class="signup-btn">Get Started — It's Free</a>
+            <a href="signup.php" class="signup-btn">Get Started | It's Free</a>
         </section>
 
         <script>

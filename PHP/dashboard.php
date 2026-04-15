@@ -94,13 +94,9 @@ $displayMonth = date('F Y');
 <body>
 
 <nav>
+
     <a class="nav-logo" id="navLogo" href="#" title="Toggle sidebar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-             stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
-            <path d="M9 21V12h6v9"/>
-        </svg>
-        SmartPlate
+        <img src="../js/New Smartplate logo.png" alt="SmartPlate" class="nav-logo-img">
     </a>
     <ul class="nav-links">
         <li><a href="dashboard.php" class="active">Dashboard</a></li>
@@ -163,14 +159,14 @@ $displayMonth = date('F Y');
 <div class="app-layout">
 
     <aside id="sidebar">
-        <a class="sidebar-item active" href="meal-plans.php">
+        <a class="sidebar-item active"  href="/SmartPlateSeniors/Pages/platebot.php">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="3" y="4" width="18" height="18" rx="2"/>
                 <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
                 <line x1="3" y1="10" x2="21" y2="10"/>
             </svg>
-            Custom Meal Plans
-        </a>
+            PlateBot
+        </>
         <a class="sidebar-item" href="nutrition-tracker.php">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
@@ -184,13 +180,7 @@ $displayMonth = date('F Y');
             </svg>
             Shopping List Generator
         </a>
-        <div class="sidebar-spacer"></div>
-        <a class="logout-row" href="logout.php">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18.36 6.64a9 9 0 11-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/>
-            </svg>
-            Log Out
-        </a>
+
     </aside>
 
     <main id="mainContent">
@@ -284,21 +274,18 @@ $displayMonth = date('F Y');
                         <button class="cal-btn">‹</button>
                         <div class="cal-month"><?= $displayMonth ?></div>
                         <div class="cal-days">
+                            <span class="cal-day">Sun</span>
                             <span class="cal-day">Mon</span>
                             <span class="cal-day">Tue</span>
                             <span class="cal-day">Wed</span>
                             <span class="cal-day">Thu</span>
                             <span class="cal-day">Fri</span>
+                            <span class="cal-day">Sat</span>
                         </div>
                         <button class="cal-btn">›</button>
                     </div>
                 </div>
-                <div class="meal-cards-scroll">
-                    <div style="grid-column:1/-1; text-align:center; padding:32px 0;
-                      color:var(--text-light); font-size:0.9rem;">
-                        No meals logged yet — meals will appear here once your meal plan is set up.
-                    </div>
-                </div>
+                <div class="meal-cards-scroll"></div>
             </div>
 
         </div><!-- /.main-col -->
@@ -371,6 +358,19 @@ $displayMonth = date('F Y');
 
         </div><!-- /.right-col -->
     </main>
+
+    <!-- Meal Detail Modal -->
+    <div class="meal-modal-overlay" id="mealModal">
+        <div class="meal-modal-box">
+            <button class="meal-modal-close" id="mealModalClose">✕</button>
+            <div class="meal-modal-icon" id="mealModalIcon">🍽️</div>
+            <div class="meal-modal-type" id="mealModalType">Breakfast</div>
+            <div class="meal-modal-name" id="mealModalName">Meal Name</div>
+            <div class="meal-modal-desc" id="mealModalDesc">Description goes here.</div>
+            <button class="meal-log-btn" id="mealLogBtn">+ Log this meal</button>
+            <div class="meal-log-feedback" id="mealLogFeedback"></div>
+        </div>
+    </div>
 
 </div><!-- /.app-layout -->
 
