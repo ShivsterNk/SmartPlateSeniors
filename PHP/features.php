@@ -1,8 +1,15 @@
 <?php
-// Optional, but good practice for consistency with other pages
-include('../includes/header.php');
-?>
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Redirect logged-in users to dashboard
+if (isset($_SESSION['user_id'])) {
+    header('Location: /SmartPlateSeniors/PHP/dashboard.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +18,8 @@ include('../includes/header.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap (for grid + spacing) -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/SmartPlateSeniors/assets/spstyle.css">
 
     <style>
         :root {
@@ -28,6 +35,7 @@ include('../includes/header.php');
             font-family: Arial, sans-serif;
             color: var(--primary);
         }
+
 
         /* HERO SECTION */
         .hero-section {
@@ -163,15 +171,23 @@ include('../includes/header.php');
         }
 
         @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
+            .hero-section,
+            .features-wrapper,
+            .cta-box {
+                padding-left: 16px;
+                padding-right: 16px;
+                margin-left: 0;
+                margin-right: 0;
+                width: 100%;
+                box-sizing: border-box;
             }
 
-            .nav-links {
-                gap: 20px;
-                flex-wrap: wrap;
+            .hero-section h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero-section p {
+                font-size: 0.9rem;
             }
         }
     </style>

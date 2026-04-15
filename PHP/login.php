@@ -1,13 +1,16 @@
 <?php
-session_start();
-
-include_once __DIR__ . '/../includes/header.php';
-require_once __DIR__ . '/../config/db.php';
+//index.php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (isset($_SESSION['user_id'])) {
     header("Location: dashboard.php");
     exit;
 }
+
+include('../includes/header.php');
+require_once __DIR__ . '/../config/db.php';
 
 $error = '';
 
@@ -18,28 +21,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($email === '' || $password === '') {
         $error = 'Please enter email and password.';
     } else {
-        try {
-            $pdo = getPDO();
+        $pdo = getPDO();
+        $stmt = $pdo->prepare("SELECT user_id, name, password_hash FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
 
-            // 1. Fetch 'name' and 'password_hash' to match your DB structure
-            $stmt = $pdo->prepare("SELECT user_id, name, password_hash FROM users WHERE email = ?");
-            $stmt->execute([$email]);
-            $user = $stmt->fetch();
+        if (!$user || !password_verify($password, $user['password_hash'])) {
+            $error = 'Invalid email or password.';
+        } else {
+            $_SESSION['user_id'] = (int)$user['user_id'];
+            $_SESSION['user_name'] = $user['name'];
 
-            // 2. Use 'password_hash' in the verification
-            if (!$user || !password_verify($password, $user['password_hash'])) {
-                $error = 'Invalid email or password.';
-            } else {
-                $_SESSION['user_id'] = (int)$user['user_id'];
-
-                // 3. Use 'name' to match your SELECT statement above
-                $_SESSION['user_name'] = $user['name'];
-
-                header("Location: dashboard.php");
-                exit;
-            }
-        } catch (Exception $e) {
-            $error = "System Error: " . $e->getMessage();
+            header("Location: dashboard.php");
+            exit;
         }
     }
 }

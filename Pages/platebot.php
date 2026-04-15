@@ -11,8 +11,10 @@ include('../includes/header.php');
         /* PlateBot specific styles */
         .platebot-container {
             max-width: 900px;
-            margin: 40px auto;
+            margin: 0 auto;
             padding: 0 20px;
+            padding-top: calc(70px + 10px); /* ✅ 70px navbar + 20px breathing room */
+
         }
 
         .platebot-card {
@@ -23,7 +25,7 @@ include('../includes/header.php');
         }
 
         .platebot-header {
-            background: linear-gradient(135deg, #283618 0%, #606c38 100%);
+            background: #283618;
             color: white;
             padding: 24px 28px;
             text-align: center;
