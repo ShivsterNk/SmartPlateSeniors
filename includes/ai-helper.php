@@ -3,8 +3,7 @@
  * AI Helper Class for Smart Plate
  * Handles communication with Claude API
  */
-
-require_once __DIR__ . '/../apiKey/api-keys.php';
+require_once __DIR__ . '/../config/api-keys.php';
 
 class AIHelper {
 
