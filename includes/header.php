@@ -20,46 +20,56 @@ $username = $_SESSION['user_name'] ?? '';
 </head>
 
 <body>
-
 <nav class="navbar">
     <div class="nav-container">
-         <div class="logo">
-            <img src= "../js/New Smartplate logo.png" alt="SmartPlate Logo" class="logo-img">
+        <div class="logo">
+            <img src="/SmartPlateSeniors/js/New Smartplate logo.png" alt="SmartPlate Logo" class="logo-img">
         </div>
 
-        <div class="nav-links">
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-            <?php if(!$isLoggedIn): ?>
-                <!-- PUBLIC NAV -->
-                <a href="/SmartPlateSeniors/PHP/index.php">Home</a>
-                <a href="/SmartPlateSeniors/PHP/features.php">Features</a>
-                <a href="/SmartPlateSeniors/PHP/login.php">Sign In</a>
-
-            <?php else: ?>
-                <!-- APP NAV -->
-                <a href="/SmartPlateSeniors/PHP/dashboard.php">Dashboard</a>
-                <a href="/SmartPlateSeniors/Pages/platebot.php">Platebot</a>
-
-                <!-- 🔥 MORE DROPDOWN -->
-                <div class="nav-dropdown">
-                    <button class="dropdown-btn">More ▾</button>
-
-                    <div class="dropdown-menu">
-                        <a href="/SmartPlateSeniors/Nutrition Explore Page/nutrition-explorer.php">Explore</a>
-                        <a href="/SmartPlateSeniors/PHP/recipe_generator.php">Recipe Generator</a>
-                        <a href="/SmartPlateSeniors/Pages/shopping_list.php">Shopping List</a>
-                        <a href="/SmartPlateSeniors/PHP/favorites.php">Favorites</a>
-                    </div>
-                </div>
-                <!-- ✅ ADD THIS -->
-                <a href="/SmartPlateSeniors/PHP/logout.php" class="nav-logout">Logout</a>
-
-            <?php endif; ?>
-
+        <div class="nav-right" id="navRight">
+            <ul class="nav-links">
+                <?php if (!$isLoggedIn): ?>
+                    <li><a href="/SmartPlateSeniors/PHP/index.php">Home</a></li>
+                    <li><a href="/SmartPlateSeniors/PHP/features.php">Features</a></li>
+                    <li><a href="/SmartPlateSeniors/PHP/login.php">Sign In</a></li>
+                <?php else: ?>
+                    <li><a href="/SmartPlateSeniors/PHP/dashboard.php">Dashboard</a></li>
+                    <li class="nav-dropdown">
+                        <button class="dropdown-btn">More
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="/SmartPlateSeniors/Nutrition Explore Page/nutrition-explorer.php">
+                                <span>🔍</span> Explore
+                            </a>
+                            <a href="/SmartPlateSeniors/PHP/recipe_generator.php">
+                                <span>📖</span> Recipe Generator
+                            </a>
+                            <a href="/SmartPlateSeniors/Pages/shopping_list.php">
+                                <span>🛒</span> Shopping List
+                            </a>
+                            <a href="/SmartPlateSeniors/PHP/favorites.php">
+                                <span>❤️</span> Favorites
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="/SmartPlateSeniors/PHP/logout.php" class="nav-logout">
+                            Sign Out
+                        </a>
+                    </li>
+                <?php endif; ?>
+            </ul>
         </div>
-
     </div>
 </nav>
+
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {

@@ -127,6 +127,7 @@ function loadCategories() {
         });
 }
 
+
 // ── Search by category ────────────────────────
 function searchByCategory(category, pillEl) {
     setActiveCategoryPill(pillEl);

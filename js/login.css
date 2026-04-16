@@ -13,34 +13,7 @@ body {
     min-height: 100vh;
 }
 
-/* Navbar: Matches Sign-up Page exactly */
-.navbar {
-    background-color: #283618;
-    padding: 15px 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
-.logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo-img {
-    height: 40px;   /* adjust if needed */
-    width: auto;
-    display: block;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-    /* Font styles to match Sign-up */
-    font-weight: bold;
-    font-size: 16px;
-}
 
 /* Form Container Box */
 .main-container {
@@ -48,6 +21,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 50px 20px;
+    padding-top: 90px;
 }
 
 .form-card {

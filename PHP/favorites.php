@@ -109,13 +109,46 @@ $favorites = $stmtFavs->fetchAll();
 
         /* ── PAGE HEADER ── */
         .page-header {
-            background-color: #283618;
+            background: linear-gradient(135deg, #1a2e10, #3a5220);
             color: white;
-            padding: 40px 0 30px;
-            margin-bottom: 40px;
+            padding: 20px 0; /* ✅ reduce from 32px */
+            margin-top: 70px;
+            margin-bottom: 0 !important;
+            border-bottom: 3px solid #a7c957;
+            text-align: center;
         }
-        .page-header h1 { font-size: 2rem; font-weight: 700; }
-        .page-header p { opacity: 0.75; margin: 0; }
+
+        .page-header-icon {
+            font-size: 1.8rem; /* ✅ smaller icon */
+            margin-bottom: 6px;
+        }
+
+        .page-header h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.9rem; /* ✅ slightly smaller */
+            font-weight: 400;
+            margin: 0 0 6px;
+            letter-spacing: -0.01em;
+        }
+
+        .page-header p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.65);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .recipe-count {
+            background: #a7c957;
+            color: #1a2e10;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
 
         /* ── RECIPE CARDS ── */
         .recipe-card {
@@ -233,17 +266,18 @@ $favorites = $stmtFavs->fetchAll();
 
 <!-- PAGE HEADER -->
 <div class="page-header">
-    <div class="container">
-        <h1>&#9829; My Favorites</h1>
+    <div class="container text-center">
+        <div class="page-header-icon">❤️</div>
+        <h1>My Favorites</h1>
         <p>
-            <?= $name ?>'s saved recipes —
-            <?= count($favorites) ?> recipe<?= count($favorites) !== 1 ? 's' : '' ?> saved
+            <span class="recipe-count"><?= count($favorites) ?> recipe<?= count($favorites) !== 1 ? 's' : '' ?></span>
+            saved by <?= $name ?>
         </p>
     </div>
 </div>
 
 <!-- CONTENT -->
-<div class="container pb-5">
+<div class="container" style="padding-top: 16px; padding-bottom: 40px;">
 
     <?php if (!empty($favorites)): ?>
 

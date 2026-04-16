@@ -11,8 +11,7 @@ $isLoggedIn = isset($_SESSION['user_id']) ? 'true' : 'false';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <style>
         * { box-sizing: border-box; }
-        body { background-color: #FEFAE0; margin: 0; font-family: Arial, sans-serif; }
-
+        body { background-color: #FEFAE0; margin: 0; font-family: Arial, sans-serif;  padding-top: 30px; display: block !important;}
         /* NAVBAR */
         .navbar-custom { background-color: #283618; width: 100%; }
         .logo { color: white; font-size: 1.8rem; font-weight: 700; letter-spacing: 0.5px; }
@@ -27,6 +26,7 @@ $isLoggedIn = isset($_SESSION['user_id']) ? 'true' : 'false';
             text-align: center;
             position: relative;
             overflow: hidden;
+            min-height: 280px; /* prevent collapse */
         }
         .hero::before {
             content: '';
@@ -284,7 +284,7 @@ $isLoggedIn = isset($_SESSION['user_id']) ? 'true' : 'false';
 </div>
 
 <script>
-    const IS_LOGGED_IN = <?= $isLoggedIn ?>;
+    const IS_LOGGED_IN = <?= json_encode(isset($_SESSION['user_id'])) ?>;
 </script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="../js/recipe_generator.js"></script>
