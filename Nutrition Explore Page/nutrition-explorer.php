@@ -2,7 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require_once __DIR__ . '/../apiKey/api-keys.php';
+require_once __DIR__ . '/../config/api-keys.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
