@@ -246,7 +246,28 @@ INSERT INTO `survey` (`id`, `user_id`, `meal_preference`, `meals_per_day`, `cook
 -- --------------------------------------------------------
 
 --
--- Indexes for table `users`
+-- Table structure for table `user_preferences`
+--
+
+CREATE TABLE `user_preferences` (
+                                    `id` int NOT NULL AUTO_INCREMENT,
+                                    `user_id` int NOT NULL,
+                                    `dietary_restrictions` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+                                    `allergies` text COLLATE utf8mb4_general_ci DEFAULT NULL,
+                                    `calorie_goal` int DEFAULT NULL,
+                                    `protein_goal` int DEFAULT NULL,
+                                    `carbs_goal` int DEFAULT NULL,
+                                    `fat_goal` int DEFAULT NULL,
+                                    `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+                                    `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                                    PRIMARY KEY (`id`),
+                                    KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -271,12 +292,6 @@ INSERT INTO `users` (`user_id`, `name`, `email`, `password_hash`, `created_at`) 
                                                                                     (5, 'Graci Medina', 'gracie.medina9@gmail.com', '$2y$10$8ievwOb89Ck2mpelqpzU5eBPACGkbvTf6Df9sJWRTC11ppipTGY2.', '2026-03-25 13:47:59'),
                                                                                     (6, 'Chris Gaguancela', 'gaguancelac@gmail.com', '$2y$10$QfzuUMAfsS.39kf4RfVZDO7eVQgbIfxtF54z1WQVfX6PVXhnZHG4u', '2026-03-25 14:20:10');
 
---
--- Indexes for dumped tables
---
-ALTER TABLE `user_preferences`
-    ADD PRIMARY KEY (`id`),
-    ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `chat_conversations`
