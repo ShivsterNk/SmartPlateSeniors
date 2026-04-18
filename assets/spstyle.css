@@ -797,6 +797,35 @@ footer {
     transition: opacity 0.2s ease;
 }
 
+/* CARD SECTION FOR USER PROFILE */
+#profile-information .profile-layout {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.info-section {
+    flex: 1;
+}
+
+.stats-section {
+    flex: 1.5;
+}
+
+.card {
+    background-color: var(--green-dark);
+    color: white;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
 /* ── Responsive ── */
 @media (max-width: 768px) {
     .steps-row { flex-direction: column; align-items: center; }
