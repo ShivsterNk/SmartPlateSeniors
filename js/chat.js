@@ -1,4 +1,5 @@
 // Chat functionality for Smart Plate AI Assistant
+console.log('chat.js file loaded!');
 
 let conversationId = null;
 
@@ -120,7 +121,6 @@ messageInput.addEventListener('keydown', (e) => {
         e.preventDefault();
         chatForm.dispatchEvent(new Event('submit'));
     }
-});
 
 // Focus input on load
 messageInput.focus();
