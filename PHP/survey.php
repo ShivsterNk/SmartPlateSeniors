@@ -1,7 +1,4 @@
 <?php
-include('includes/header.php');
-?>
-
 // ══════════════════════════════════════════
 //  SmartPlate — survey.php
 //  Dietary Preferences Survey
@@ -342,6 +339,6 @@ function checkedRestriction($value, $existing) {
 </body>
 </html>
 
-<?php
-include('includes/footer.php');
+
+include('../includes/footer.php');
 ?>
