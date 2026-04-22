@@ -13,6 +13,111 @@ const loginModal       = document.getElementById('loginModal');
 const modalCancel      = document.getElementById('modalCancel');
 const recentSearchesDiv = document.getElementById('recentSearches');
 const recentPillsDiv   = document.getElementById('recentPills');
+// ── Dietary Filters ───────────────────────────
+let activeFilters = typeof USER_RESTRICTIONS !== 'undefined' ? [...USER_RESTRICTIONS] : [];
+// Remove 'None' from active filters since it means no restriction
+activeFilters = activeFilters.filter(f => f !== 'None');
+
+// Category to dietary mapping for TheMealDB
+const DIETARY_MAP = {
+    'Vegetarian': ['Vegetarian'],
+    'Vegan':      ['Vegan', 'Vegetarian'],
+    'Gluten-Free': [],  // handled by name filtering
+    'Dairy-Free':  [],  // handled by name filtering
+    'Halal':       [],  // no direct API support — filter by excluding pork
+    'Kosher':      [],  // no direct API support
+};
+
+function initFilters() {
+    const pills = document.querySelectorAll('.filter-pill');
+    if (!pills.length) return;
+
+    pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            const filter = pill.dataset.filter;
+            if (filter === 'None') {
+                // Clear all filters
+                activeFilters = [];
+                pills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+            } else {
+                pill.classList.toggle('active');
+                // Remove None if selecting specific filter
+                document.querySelector('[data-filter="None"]')?.classList.remove('active');
+
+                if (pill.classList.contains('active')) {
+                    activeFilters.push(filter);
+                    activeFilters = activeFilters.filter(f => f !== 'None');
+                } else {
+                    activeFilters = activeFilters.filter(f => f !== filter);
+                }
+            }
+            // Re-run current search with new filters
+            reapplyFilters();
+        });
+    });
+
+    // Clear button
+    document.getElementById('filterClear')?.addEventListener('click', () => {
+        activeFilters = [];
+        pills.forEach(p => p.classList.remove('active'));
+        reapplyFilters();
+    });
+}
+
+let lastMeals = [];
+
+function reapplyFilters() {
+    if (lastMeals.length > 0) {
+        renderMeals(filterMeals(lastMeals));
+    }
+}
+
+function filterMeals(meals) {
+    if (!activeFilters.length) return meals;
+
+    return meals.filter(meal => {
+        const name     = (meal.strMeal || '').toLowerCase();
+        const category = (meal.strCategory || '').toLowerCase();
+
+        return activeFilters.every(filter => {
+            switch (filter) {
+                case 'Vegetarian':
+                    return category === 'vegetarian' ||
+                        !name.includes('chicken') && !name.includes('beef') &&
+                        !name.includes('pork') && !name.includes('lamb') &&
+                        !name.includes('fish') && !name.includes('prawn') &&
+                        !name.includes('shrimp') && !name.includes('salmon') &&
+                        !name.includes('tuna') && !name.includes('bacon');
+                case 'Vegan':
+                    return category === 'vegan' || category === 'vegetarian' &&
+                        !name.includes('egg') && !name.includes('cheese') &&
+                        !name.includes('milk') && !name.includes('butter') &&
+                        !name.includes('cream') && !name.includes('honey');
+                case 'Gluten-Free':
+                    return !name.includes('pasta') && !name.includes('bread') &&
+                        !name.includes('flour') && !name.includes('noodle') &&
+                        !name.includes('wheat') && !name.includes('ramen') &&
+                        !name.includes('dumpling') && !name.includes('pancake');
+                case 'Dairy-Free':
+                    return !name.includes('cheese') && !name.includes('cream') &&
+                        !name.includes('milk') && !name.includes('butter') &&
+                        !name.includes('yogurt') && !name.includes('parmesan');
+                case 'Halal':
+                    return !name.includes('pork') && !name.includes('bacon') &&
+                        !name.includes('ham') && !name.includes('lard') &&
+                        category !== 'pork';
+                case 'Kosher':
+                    return !name.includes('pork') && !name.includes('bacon') &&
+                        !name.includes('ham') && !name.includes('shellfish') &&
+                        !name.includes('prawn') && !name.includes('shrimp') &&
+                        !name.includes('lobster') && !name.includes('crab');
+                default:
+                    return true;
+            }
+        });
+    });
+}
 
 // ── Recent Searches (localStorage) ───────────
 const MAX_RECENT = 5;
@@ -99,7 +204,8 @@ function searchByIngredient(ingredient) {
     axios.post('api_recipe_generator.php', formData)
         .then(response => {
             hideLoading();
-            renderMeals(response.data.meals || []);
+            lastMeals = response.data.meals || []; // ✅ save
+            renderMeals(filterMeals(lastMeals));   // ✅ filter before render
         })
         .catch(error => {
             hideLoading();
@@ -137,7 +243,8 @@ function searchByCategory(category, pillEl) {
     axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${encodeURIComponent(category)}`)
         .then(response => {
             hideLoading();
-            renderMeals(response.data.meals || [], category);
+            lastMeals = response.data.meals || []; // ✅ save
+            renderMeals(filterMeals(lastMeals));   // ✅ filter before render
         })
         .catch(() => {
             hideLoading();
@@ -301,3 +408,4 @@ function showError(msg) {
 // ── Init ──────────────────────────────────────
 loadCategories();
 renderRecentSearches();
+initFilters();

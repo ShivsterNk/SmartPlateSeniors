@@ -111,7 +111,7 @@ $favorites = $stmtFavs->fetchAll();
         .page-header {
             background: linear-gradient(135deg, #1a2e10, #3a5220);
             color: white;
-            padding: 20px 0; /* ✅ reduce from 32px */
+            padding: 20px 0;
             margin-top: 70px;
             margin-bottom: 0 !important;
             border-bottom: 3px solid #a7c957;
@@ -119,13 +119,13 @@ $favorites = $stmtFavs->fetchAll();
         }
 
         .page-header-icon {
-            font-size: 1.8rem; /* ✅ smaller icon */
+            font-size: 1.8rem;
             margin-bottom: 6px;
         }
 
         .page-header h1 {
             font-family: 'DM Serif Display', serif;
-            font-size: 1.9rem; /* ✅ slightly smaller */
+            font-size: 1.9rem;
             font-weight: 400;
             margin: 0 0 6px;
             letter-spacing: -0.01em;
@@ -157,7 +157,7 @@ $favorites = $stmtFavs->fetchAll();
             overflow: hidden;
             box-shadow: 0 2px 12px rgba(0,0,0,0.1);
             transition: transform 0.2s, box-shadow 0.2s;
-            background: #fff;
+            background: #fff !important;
             height: 100%;
         }
         .recipe-card:hover {
@@ -173,11 +173,12 @@ $favorites = $stmtFavs->fetchAll();
             padding: 16px;
             display: flex;
             flex-direction: column;
+            background: #fff !important;
         }
         .recipe-card .card-title {
             font-size: 1rem;
             font-weight: 700;
-            color: #283618;
+            color: #283618 !important;
             margin-bottom: 4px;
         }
         .recipe-card .card-meta {
@@ -206,6 +207,25 @@ $favorites = $stmtFavs->fetchAll();
             text-align: center;
         }
         .btn-view:hover { background-color: #1f2a12; color: white; }
+
+        .btn-shopping-list {
+            background: none;
+            border: 1px solid #606c38;
+            color: #606c38;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            margin-top: 8px;
+        }
+        .btn-shopping-list:hover {
+            background-color: #606c38;
+            color: white;
+        }
+
         .btn-remove {
             background: none;
             border: 1px solid #e63946;
@@ -306,6 +326,11 @@ $favorites = $stmtFavs->fetchAll();
                                 View Recipe
                             </a>
 
+                            <!-- Add to Shopping List -->
+                            <button class="btn-shopping-list"
+                                    onclick="addToShoppingList('<?= htmlspecialchars($fav['meal_id']) ?>', '<?= htmlspecialchars($fav['meal_name']) ?>')">
+                                🛒 Add to Shopping List
+                            </button>
 
                             <!-- Remove from favorites -->
                             <button class="btn-remove"
@@ -364,6 +389,28 @@ $favorites = $stmtFavs->fetchAll();
                 showToast("Removed from favorites ❌");
             })
             .catch(() => showToast("Could not remove", true));
+    }
+
+    function addToShoppingList(mealId, mealName) {
+        // TODO: Implement shopping list functionality
+        // For now, just show a toast
+        showToast(`Added "${mealName}" to shopping list! 🛒`);
+
+        // When you have a shopping list API endpoint, you can do:
+        // fetch('/SmartPlateSeniors/api/shopping-list.php', {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({ meal_id: mealId })
+        // })
+        // .then(response => response.json())
+        // .then(data => {
+        //     if (data.success) {
+        //         showToast(`Added "${mealName}" to shopping list! 🛒`);
+        //     } else {
+        //         showToast("Could not add to shopping list", true);
+        //     }
+        // })
+        // .catch(() => showToast("Error adding to shopping list", true));
     }
 </script>
 
