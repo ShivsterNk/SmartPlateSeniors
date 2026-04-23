@@ -40,7 +40,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
             justify-content: center;
             position: relative;
             overflow: hidden;
-            margin-top: 70px;
+            margin-top: 0;
             padding: 80px 24px;
         }
 
@@ -718,12 +718,6 @@ $isLoggedIn = isset($_SESSION['user_id']);
         </div>
     </div>
 </section>
-
-<!-- ── MISSION STRIPE ── -->
-<div class="mission-stripe">
-    <h2 class="reveal">"Your health deserves a tool that actually works for you."</h2>
-    <p class="reveal reveal-delay-1">That's the idea behind everything we built. Simple, accessible, and genuinely useful for everyone.</p>
-</div>
 
 <!-- ── TEAM ── -->
 <section style="padding-bottom: 48px;">
