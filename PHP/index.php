@@ -542,7 +542,7 @@ include('../includes/header.php');
         <!-- ══ QUOTE BAND ══ -->
         <div class="quote-band">
             <p class="quote-text reveal">
-                "Healthy eating doesn't have to be complicated — it just needs the right tools."
+                "Healthy eating doesn't have to be complicated. It just needs the right tools."
             </p>
             <p class="quote-attr reveal reveal-delay-1">The SmartPlate Team</p>
         </div>
