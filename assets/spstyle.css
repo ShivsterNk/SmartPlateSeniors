@@ -1,4 +1,4 @@
-/* ================= VARIABLES ================= */
+/* variables */
 :root {
     --nav-h: 70px;
     --green-dark: #283618;
@@ -15,7 +15,7 @@
     --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
 }
 
-/* ================= BASE ================= */
+/* base */
 html, body {
     height: 100%;
     margin: 0;
@@ -45,7 +45,7 @@ section {
     margin: 40px auto;
 }
 
-/* ================= NAVBAR ================= */
+/* navbar */
 .navbar {
     background-color: var(--green-dark);
     color: var(--white);
@@ -58,8 +58,8 @@ section {
 .nav-container {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* ✅ key fix */
-    padding: 0 20px; /* consistent spacing */
+    justify-content: space-between;
+    padding: 0 20px;
     width: 96%;
     height: 97%;
 }
@@ -69,16 +69,16 @@ section {
     display: flex;
     align-items: center;
     margin-right: auto;
-    margin-left: 0 !important; /* 🔥 force left */
-    }
+    margin-left: 0 !important;
+}
 
 .logo-img {
-    height: 50px;   /* adjust if needed */
+    height: 50px;
     width: auto;
     display: block;
 }
 
-/* RIGHT-SIDE LINKS + PROFILE */
+/* nav right */
 .nav-right {
     display: flex;
     align-items: center;
@@ -112,7 +112,7 @@ section {
     background: rgba(255,255,255,0.15);
 }
 
-/* PROFILE BUTTON */
+/* profile button */
 .nav-profile-btn {
     display: flex;
     align-items: center;
@@ -140,7 +140,7 @@ section {
     font-size: 0.88rem;
 }
 
-/* LOGOUT BUTTON */
+/* logout button */
 .nav-logout {
     background: none;
     color: white !important;
@@ -159,7 +159,7 @@ section {
     color: white !important;
 }
 
-/* PROFILE DROPDOWN */
+/* profile dropdown */
 .profile-dropdown {
     position: absolute;
     top: var(--nav-h);
@@ -188,7 +188,7 @@ section {
     background-color: var(--green-bg);
 }
 
-/* HAMBURGER */
+/* hamburger */
 .hamburger {
     display: none;
     flex-direction: column;
@@ -215,7 +215,7 @@ section {
     transform: rotate(-45deg) translateY(-8px);
 }
 
-/* ================= HERO ================= */
+/* hero */
 .hero-bg {
     position: relative;
     height: 80vh;
@@ -269,7 +269,7 @@ section {
     margin-top: 20px;
 }
 
-/* ================= LOGIN FORM ================= */
+/* login form */
 .main-container {
     display: flex;
     justify-content: center;
@@ -318,13 +318,13 @@ section {
 }
 
 .forgot-pwd a {
-    color: #283618;
+    color: var(--green-dark);
     text-decoration: none;
     font-size: 14px;
 }
 
 .action-btn {
-    background-color: #283618;
+    background-color: var(--green-dark);
     color: white;
     width: 100%;
     padding: 15px;
@@ -349,7 +349,7 @@ section {
     cursor: pointer;
 }
 
-/* ================= READY MEALS ================= */
+/* ready meals */
 .meals {
     margin: 40px auto;
 }
@@ -388,7 +388,7 @@ section {
     text-align: center;
 }
 
-/* ================= FOOTER ================= */
+/* footer */
 footer {
     background-color: var(--green-dark);
     color: white;
@@ -397,7 +397,7 @@ footer {
     margin-top: auto;
 }
 
-/* ================= MEDIA QUERIES ================= */
+/* media queries */
 @media (max-width: 900px) {
     .meal-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -463,12 +463,7 @@ footer {
 
 }
 
-/* ══════════════════════════════
-   ADD THESE STYLES TO THE BOTTOM
-   OF YOUR EXISTING spstyle.css
-══════════════════════════════ */
-
-/* ── HERO UPDATES ── */
+/* hero updates */
 .hero-bg {
     height: 75vh !important;
     background: url('./Images/healthyplatter.jpg') no-repeat center center/cover;
@@ -478,8 +473,8 @@ footer {
     color: white;
     text-align: center;
     position: relative;
-    margin-top: -65px; /* pull hero up to cancel the padding */
-    padding-top: 70px; /* keep content inside from hiding under navbar */
+    margin-top: -65px;
+    padding-top: 70px;
 }
 
 .hero-overlay {
@@ -508,7 +503,7 @@ footer {
 .hero-overlay a.homebtn {
     display: inline-block;
     background: white;
-    color: #283618;
+    color: var(--green-dark);
     width: auto;
     padding: 12px 28px;
     font-size: 0.95rem;
@@ -521,8 +516,8 @@ footer {
 }
 
 .hero-overlay a.homebtn:hover {
-    background: #edf3eb;
-    color: #283618;
+    background: var(--green-bg);
+    color: var(--green-dark);
     transform: translateY(-2px);
 }
 
@@ -534,20 +529,20 @@ footer {
     margin-top: 24px;
 }
 
-/* ── Section shared styles ── */
+/* shared section styles */
 .section-title {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #283618;
+    color: var(--green-dark);
     margin-bottom: 8px;
 }
 .section-sub {
-    color: #6b7060;
+    color: var(--text-mid);
     font-size: 1rem;
     margin-bottom: 36px;
 }
 
-/* ── HOW IT WORKS ── */
+/* how it works */
 .how-it-works {
     background: #FEFAE0;
     padding: 60px 24px;
@@ -573,7 +568,7 @@ footer {
     min-width: 200px;
     max-width: 240px;
     box-shadow: 0 2px 12px rgba(40,54,24,0.08);
-    border-top: 4px solid #283618;
+    border-top: 4px solid var(--green-dark);
     position: relative;
     transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -587,7 +582,7 @@ footer {
     top: -16px;
     left: 50%;
     transform: translateX(-50%);
-    background: #283618;
+    background: var(--green-dark);
     color: white;
     width: 32px;
     height: 32px;
@@ -608,13 +603,13 @@ footer {
 .step-card h3 {
     font-size: 1rem;
     font-weight: 700;
-    color: #283618;
+    color: var(--green-dark);
     margin-bottom: 8px;
 }
 
 .step-card p {
     font-size: 0.88rem;
-    color: #6b7060;
+    color: var(--text-mid);
     line-height: 1.6;
 }
 
@@ -624,9 +619,9 @@ footer {
     flex-shrink: 0;
 }
 
-/* ── FEATURES CTA ── */
+/* features cta */
 .features-cta {
-    background: #edf3eb;
+    background: var(--green-bg);
     padding: 56px 24px;
     text-align: center;
     margin: 0 !important;
@@ -642,12 +637,12 @@ footer {
 .features-cta h2 {
     font-size: 1.7rem;
     font-weight: 700;
-    color: #283618;
+    color: var(--green-dark);
     margin-bottom: 10px;
 }
 
 .features-cta p {
-    color: #6b7060;
+    color: var(--text-mid);
     font-size: 0.95rem;
     margin-bottom: 24px;
     line-height: 1.6;
@@ -655,7 +650,7 @@ footer {
 
 .cta-btn {
     display: inline-block;
-    background: #283618;
+    background: var(--green-dark);
     color: white;
     font-weight: 700;
     font-size: 0.95rem;
@@ -665,14 +660,14 @@ footer {
     transition: background 0.2s, transform 0.15s;
 }
 .cta-btn:hover {
-    background: #1f2a12;
+    background: var(--green-dark);
     transform: translateY(-2px);
     color: white;
 }
 
-/* ── SIGN UP CTA ── */
+/* sign up cta */
 .signup-cta {
-    background: #283618;
+    background: var(--green-dark);
     padding: 60px 24px;
     text-align: center;
     margin: 0 !important;
@@ -695,7 +690,7 @@ footer {
 .signup-btn {
     display: inline-block;
     background: white;
-    color: #283618;
+    color: var(--green-dark);
     font-weight: 700;
     font-size: 0.95rem;
     padding: 13px 32px;
@@ -704,13 +699,13 @@ footer {
     transition: background 0.2s, transform 0.15s;
 }
 .signup-btn:hover {
-    background: #edf3eb;
+    background: var(--green-bg);
     transform: translateY(-2px);
 }
 
-/* SIGN UP.PHP PAGE CSS STYLING */
+/* signup page */
 
-/* Desktop Centering */
+
 .main-container {
     display: flex;
     justify-content: center;
@@ -718,14 +713,14 @@ footer {
     padding: 50px 20px;
 }
 
-/* The White Box Container */
+
 .form-card {
     background-color: #ffffff;
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 550px; /* Constrains size for desktop */
+    max-width: 550px;
     text-align: center;
 }
 
@@ -734,7 +729,7 @@ footer {
     margin-bottom: 30px;
 }
 
-/* Form Styling */
+
 .input-group {
     text-align: left;
     margin-bottom: 20px;
@@ -755,9 +750,9 @@ footer {
     outline: none;
 }
 
-/* Button Styling */
+
 .action-btn {
-    background-color: #283618;
+    background-color: var(--green-dark);
     color: white;
     width: 100%;
     padding: 15px;
@@ -768,14 +763,14 @@ footer {
     margin-top: 10px;
 }
 
-/* Footer Link Styling */
+
 .footer-links {
     margin-top: 20px;
     font-size: 16px;
 }
 
 .footer-links a {
-    color: #283618;
+    color: var(--green-dark);
     font-weight: bold;
     text-decoration: underline;
 }
@@ -797,7 +792,7 @@ footer {
     transition: opacity 0.2s ease;
 }
 
-/* CARD SECTION FOR USER PROFILE */
+/* profile page */
 #profile-information .profile-layout {
     display: flex;
     gap: 30px;
@@ -826,7 +821,7 @@ footer {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-/* ── Responsive ── */
+/* responsive */
 @media (max-width: 768px) {
     .steps-row { flex-direction: column; align-items: center; }
     .step-divider { transform: rotate(90deg); }
@@ -834,7 +829,7 @@ footer {
     .section-title { font-size: 1.5rem; }
     .features-cta h2, .signup-cta h2 { font-size: 1.4rem; }
 }
-/* DROPDOWN */
+/* dropdown */
 .nav-dropdown {
     position: relative;
     list-style: none;
@@ -865,7 +860,7 @@ footer {
     right: 0;
     background: white;
     min-width: 200px;
-    border-radius: 12px;
+    border-radius: var(--radius);
     box-shadow: 0 8px 32px rgba(0,0,0,0.15);
     display: none;
     flex-direction: column;
@@ -874,7 +869,7 @@ footer {
     border: 1px solid #e8f0e8;
 }
 .dropdown-menu a {
-    color: #283618;
+    color: var(--green-dark);
     padding: 11px 16px;
     text-decoration: none;
     font-weight: 500;
@@ -885,8 +880,8 @@ footer {
     transition: background 0.15s;
 }
 .dropdown-menu a:hover {
-    background: #edf3eb;
-    color: #283618;
+    background: var(--green-bg);
+    color: var(--green-dark);
 }
 
 .dropdown-menu a span {
@@ -894,29 +889,17 @@ footer {
     width: 20px;
     text-align: center;
 }
-/* Divider between items */
+
 .dropdown-menu a + a {
     border-top: 1px solid #f0f5f0;
 }
 
-/* SHOW DROPDOWN ON HOVER */
+
 .nav-dropdown:hover .dropdown-menu {
     display: flex;
 }
 
-/* ── PLATEBOT FIX ── */
-.platebot-container {
-    margin-top: 70px !important;
-    padding-top: 24px !important;
-}
-
-/* ── PLATEBOT FIX ── */
-.platebot-container {
-    margin-top: 70px !important;
-    padding-top: 24px !important;
-}
-
-/* ── PLATEBOT FIX ── */
+/* platebot */
 .platebot-container {
     margin-top: 70px !important;
     padding-top: 24px !important;
