@@ -13,8 +13,8 @@ if ($isLoggedIn) {
         $userRestrictions = array_map('trim', explode(',', $survey['dietary_restrictions']));
     }
 }
-include('../includes/header.php');
 $extraStyles = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">';
+include('../includes/header.php');
 ?>
 
     <style>
