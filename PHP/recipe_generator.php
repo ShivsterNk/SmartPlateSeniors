@@ -2,44 +2,33 @@
 session_start();
 $isLoggedIn = isset($_SESSION['user_id']);
 
-// Fetch dietary preferences if logged in
 $userRestrictions = [];
 if ($isLoggedIn) {
     require_once __DIR__ . '/../config/db.php';
     $pdo = getPDO();
-    $stmt = $pdo->prepare("SELECT dietary_restrictions FROM survey WHERE user_id = ?");
+    $stmt = $pdo->prepare("SELECT dietary_restrictions FROM user_preferences WHERE user_id = ?");
     $stmt->execute([$_SESSION['user_id']]);
     $survey = $stmt->fetch();
     if (!empty($survey['dietary_restrictions'])) {
         $userRestrictions = array_map('trim', explode(',', $survey['dietary_restrictions']));
     }
 }
+include('../includes/header.php');
+$extraStyles = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe Generator | Smart Plate</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <style>
-        * { box-sizing: border-box; }
-        body { background-color: #FEFAE0; margin: 0; font-family: Arial, sans-serif;  padding-top: 30px; display: block !important;}
-        /* NAVBAR */
-        .navbar-custom { background-color: #283618; width: 100%; }
-        .logo { color: white; font-size: 1.8rem; font-weight: 700; letter-spacing: 0.5px; }
-        .nav-links { display: flex; gap: 40px; }
-        .nav-links a { color: white; font-weight: 600; text-decoration: none; font-size: 1rem; }
-        .nav-links a:hover { text-decoration: underline; }
 
-        /* HERO */
+    <style>
+        body { background-color: #FEFAE0; }
+        main { margin-top: 0; }
+
+        /* hero */
         .hero {
             background: #283618;
             padding: 60px 0 50px;
             text-align: center;
             position: relative;
             overflow: hidden;
-            min-height: 280px; /* prevent collapse */
+            min-height: 280px;
         }
         .hero::before {
             content: '';
@@ -52,7 +41,7 @@ if ($isLoggedIn) {
         .hero h1 { color: white; font-size: 2.4rem; font-weight: 700; margin-bottom: 10px; }
         .hero p { color: rgba(255,255,255,0.85); font-size: 1.05rem; margin-bottom: 32px; }
 
-        /* SEARCH */
+        /* search */
         .search-card {
             background: white; border-radius: 16px;
             padding: 24px 28px;
@@ -62,20 +51,20 @@ if ($isLoggedIn) {
         .search-input-group { display: flex; gap: 10px; }
         .search-input-group input {
             flex: 1; border: 2px solid #d8e8d4; border-radius: 10px;
-            padding: 12px 16px; font-size: 0.95rem; color: #283618; outline: none;
+            padding: 12px 16px; font-size: 0.95rem; color: var(--green-dark); outline: none;
             transition: border-color 0.2s;
         }
-        .search-input-group input:focus { border-color: #283618; }
+        .search-input-group input:focus { border-color: var(--green-dark); }
         .search-input-group input::placeholder { color: #aaa; }
         .btn-search {
-            background: #283618; color: white; border: none;
+            background: var(--green-dark); color: white; border: none;
             border-radius: 10px; padding: 12px 24px;
             font-size: 0.95rem; font-weight: 700; cursor: pointer;
             white-space: nowrap; transition: background 0.2s;
         }
-        .btn-search:hover { background: #1f2a12; }
+        .btn-search:hover { opacity: 0.85; }
 
-        /* RECENT SEARCHES */
+        /* recent searches */
         .recent-searches { margin-top: 14px; display: none; }
         .recent-label {
             font-size: 0.75rem; color: #888; margin-bottom: 8px;
@@ -83,46 +72,45 @@ if ($isLoggedIn) {
         }
         .recent-pills { display: flex; flex-wrap: wrap; gap: 6px; }
         .recent-pill {
-            background: #edf3eb; color: #283618;
+            background: var(--green-bg); color: var(--green-dark);
             border: 1px solid #d8e8d4; border-radius: 20px;
             padding: 4px 12px; font-size: 0.8rem; font-weight: 600;
             cursor: pointer; transition: all 0.15s;
         }
-        .recent-pill:hover { background: #283618; color: white; border-color: #283618; }
+        .recent-pill:hover { background: var(--green-dark); color: white; border-color: var(--green-dark); }
 
-        /* MAIN */
+        /* main */
         .main-content { padding: 40px 0 60px; }
 
-        /* CATEGORIES */
+        /* categories */
         .section-label {
             font-size: 0.78rem; font-weight: 700; color: #888;
             text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 12px;
         }
         .category-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
         .cat-pill {
-            background: white; color: #283618; border: 2px solid #d8e8d4;
+            background: white; color: var(--green-dark); border: 2px solid #d8e8d4;
             border-radius: 24px; padding: 7px 16px; font-size: 0.85rem;
             font-weight: 600; cursor: pointer; transition: all 0.18s;
             display: flex; align-items: center; gap: 6px;
         }
         .cat-pill img { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; }
-        .cat-pill:hover { border-color: #283618; background: #edf3eb; }
-        .cat-pill.active { background: #283618; color: white; border-color: #283618; }
+        .cat-pill:hover { border-color: var(--green-dark); background: var(--green-bg); }
+        .cat-pill.active { background: var(--green-dark); color: white; border-color: var(--green-dark); }
         .cat-pill-skeleton {
             background: #e0e0e0; border-radius: 24px;
             height: 36px; width: 90px;
             animation: shimmer 1.2s infinite;
         }
 
-        /* LOADING */
+        /* loading */
         .loading-wrap { text-align: center; padding: 60px 0; display: none; }
-        .spinner-border { color: #283618; width: 2.5rem; height: 2.5rem; }
+        .spinner-border { color: var(--green-dark); width: 2.5rem; height: 2.5rem; }
         .loading-wrap p { color: #888; margin-top: 12px; font-size: 0.9rem; }
 
-        /* RESULTS */
         #results { display: none; }
 
-        /* CARDS */
+        /* cards */
         .recipe-card {
             background: white; border-radius: 14px; overflow: hidden;
             box-shadow: 0 2px 12px rgba(0,0,0,0.08);
@@ -150,10 +138,10 @@ if ($isLoggedIn) {
         }
         .card-meal-title {
             font-size: 0.95rem; font-weight: 700;
-            color: #283618; line-height: 1.3; flex: 1;
+            color: var(--green-dark); line-height: 1.3; flex: 1;
         }
 
-        /* HEART */
+        /* favorite button */
         .btn-fav {
             background: none; border: none; font-size: 1.3rem;
             cursor: pointer; color: #ddd;
@@ -163,30 +151,29 @@ if ($isLoggedIn) {
         .btn-fav:hover { color: #e63946; transform: scale(1.2); }
         .btn-fav.saved { color: #e63946; animation: heartPop 0.25s ease; }
 
-
-        /* VIEW BUTTON */
+        /* view button */
         .btn-view-recipe {
-            display: block; background: #edf3eb; color: #283618;
+            display: block; background: var(--green-bg); color: var(--green-dark);
             border: 2px solid #d8e8d4; border-radius: 8px;
             padding: 8px 14px; font-size: 0.85rem; font-weight: 700;
             text-decoration: none; text-align: center; transition: all 0.18s;
         }
-        .btn-view-recipe:hover { background: #283618; color: white; border-color: #283618; }
+        .btn-view-recipe:hover { background: var(--green-dark); color: white; border-color: var(--green-dark); }
 
-        /* EMPTY STATE */
+        /* empty state */
         .empty-state { text-align: center; padding: 60px 20px; display: none; }
         .empty-icon { font-size: 4rem; margin-bottom: 16px; }
-        .empty-state h4 { color: #283618; font-weight: 700; margin-bottom: 8px; }
+        .empty-state h4 { color: var(--green-dark); font-weight: 700; margin-bottom: 8px; }
         .empty-state p { color: #888; font-size: 0.9rem; }
 
-        /* ERROR */
+        /* error */
         .alert-error {
             background: #fef2f2; color: #b91c1c; border: 1px solid #fca5a5;
             border-radius: 10px; padding: 14px 20px;
             font-size: 0.88rem; display: none; margin-bottom: 20px;
         }
 
-        /* LOGIN MODAL */
+        /* login modal */
         .login-modal-overlay {
             display: none; position: fixed; inset: 0;
             background: rgba(0,0,0,0.5); z-index: 9999;
@@ -199,79 +186,47 @@ if ($isLoggedIn) {
             box-shadow: 0 12px 40px rgba(0,0,0,0.2);
         }
         .modal-icon { font-size: 2.8rem; margin-bottom: 14px; }
-        .login-modal-box h5 { color: #283618; font-weight: 700; font-size: 1.1rem; margin-bottom: 8px; }
+        .login-modal-box h5 { color: var(--green-dark); font-weight: 700; font-size: 1.1rem; margin-bottom: 8px; }
         .login-modal-box p { color: #666; font-size: 0.88rem; margin-bottom: 22px; }
         .modal-btn-login {
-            display: block; width: 100%; background: #283618; color: white;
+            display: block; width: 100%; background: var(--green-dark); color: white;
             border: none; border-radius: 10px; padding: 12px;
             font-size: 0.95rem; font-weight: 700; text-decoration: none;
             margin-bottom: 10px; transition: background 0.2s;
         }
-        .modal-btn-login:hover { background: #1f2a12; color: white; }
+        .modal-btn-login:hover { opacity: 0.85; color: white; }
         .modal-btn-cancel {
             background: none; border: none; color: #999;
             font-size: 0.85rem; cursor: pointer; text-decoration: underline;
         }
-        .logo-img {
-            height: 40px;
-            width: auto;
-            object-fit: contain;
-        }
-        /* DIETARY FILTER BAR */
+
+        /* dietary filter bar */
         .filter-bar {
-            background: white;
-            border-bottom: 1px solid #d8e8d4;
-            padding: 12px 0;
-            position: sticky;
-            top: 70px;
-            z-index: 100;
+            background: white; border-bottom: 1px solid #d8e8d4;
+            padding: 12px 0; position: sticky; top: 70px; z-index: 100;
         }
-        .filter-bar-inner {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
+        .filter-bar-inner { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
         .filter-label {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #7a8a7a;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            white-space: nowrap;
+            font-size: 0.8rem; font-weight: 700; color: var(--text-light);
+            text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap;
         }
-        .filter-pills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            flex: 1;
-        }
+        .filter-pills { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
         .filter-pill {
-            background: #f0f5f0;
-            color: #283618;
-            border: 1px solid #d8e8d4;
-            border-radius: 20px;
-            padding: 4px 14px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.15s;
+            background: #f0f5f0; color: var(--green-dark);
+            border: 1px solid #d8e8d4; border-radius: 20px;
+            padding: 4px 14px; font-size: 0.82rem; font-weight: 600;
+            cursor: pointer; transition: all 0.15s;
         }
-        .filter-pill:hover { border-color: #283618; background: #edf3eb; }
-        .filter-pill.active { background: #283618; color: white; border-color: #283618; }
+        .filter-pill:hover { border-color: var(--green-dark); background: var(--green-bg); }
+        .filter-pill.active { background: var(--green-dark); color: white; border-color: var(--green-dark); }
         .filter-clear {
-            background: none;
-            border: none;
-            color: #b91c1c;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            white-space: nowrap;
-            padding: 0;
+            background: none; border: none; color: #b91c1c;
+            font-size: 0.8rem; font-weight: 600; cursor: pointer;
+            white-space: nowrap; padding: 0;
         }
         .filter-clear:hover { text-decoration: underline; }
 
-        /* ANIMATIONS */
+        /* animations */
         @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
         @keyframes shimmer { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
         @keyframes heartPop {
@@ -280,108 +235,104 @@ if ($isLoggedIn) {
             100% { transform: scale(1.15); }
         }
     </style>
-</head>
 
-<body>
+    <main>
 
-
-<!-- NAVBAR -->
-<?php include('../includes/header.php'); ?>
-
-<!-- LOGIN MODAL -->
-<div class="login-modal-overlay" id="loginModal">
-    <div class="login-modal-box">
-        <div class="modal-icon">&#128274;</div>
-        <h5>Sign in to Save Recipes</h5>
-        <p>Create a free account or sign in to save your favorite recipes and access them anytime.</p>
-        <a href="login.php" class="modal-btn-login">Sign In</a>
-        <button class="modal-btn-cancel" id="modalCancel">Maybe later</button>
-    </div>
-</div>
-
-<!-- HERO -->
-<div class="hero">
-    <div class="hero-content">
-        <h1>&#127859; Recipe Generator</h1>
-        <p>Enter an ingredient or pick a category to discover delicious recipes</p>
-        <div class="search-card">
-            <div class="search-input-group">
-                <input type="text" id="ingredient" placeholder="e.g. chicken, salmon, beef...">
-                <button class="btn-search" id="searchBtn">Find Recipes</button>
-            </div>
-            <div class="recent-searches" id="recentSearches">
-                <div class="recent-label">Recent searches</div>
-                <div class="recent-pills" id="recentPills"></div>
+        <!-- login modal -->
+        <div class="login-modal-overlay" id="loginModal">
+            <div class="login-modal-box">
+                <div class="modal-icon">&#128274;</div>
+                <h5>Sign in to Save Recipes</h5>
+                <p>Create a free account or sign in to save your favorite recipes and access them anytime.</p>
+                <a href="login.php" class="modal-btn-login">Sign In</a>
+                <button class="modal-btn-cancel" id="modalCancel">Maybe later</button>
             </div>
         </div>
-    </div>
-</div>
 
-<!-- MAIN -->
-<div class="main-content">
-    <div class="container">
+        <!-- hero -->
+        <div class="hero">
+            <div class="hero-content">
+                <h1>&#127859; Recipe Generator</h1>
+                <p>Enter an ingredient or pick a category to discover delicious recipes</p>
+                <div class="search-card">
+                    <div class="search-input-group">
+                        <input type="text" id="ingredient" placeholder="e.g. chicken, salmon, beef...">
+                        <button class="btn-search" id="searchBtn">Find Recipes</button>
+                    </div>
+                    <div class="recent-searches" id="recentSearches">
+                        <div class="recent-label">Recent searches</div>
+                        <div class="recent-pills" id="recentPills"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <?php if (!$isLoggedIn): ?>
-            <!-- GUESTS: show category pills -->
-            <div class="section-label">Browse by category</div>
-            <div class="category-pills" id="categoryPills">
-                <div class="cat-pill-skeleton"></div>
-                <div class="cat-pill-skeleton"></div>
-                <div class="cat-pill-skeleton"></div>
-                <div class="cat-pill-skeleton"></div>
-                <div class="cat-pill-skeleton"></div>
-                <div class="cat-pill-skeleton"></div>
-            </div>
-        <?php else: ?>
-            <!-- LOGGED IN: show category pills + dietary filters below -->
-            <div class="section-label">Browse by category</div>
-            <div class="category-pills" id="categoryPills">
-                <div class="cat-pill-skeleton"></div>
-                <div class="cat-pill-skeleton"></div>
-                <div class="cat-pill-skeleton"></div>
-                <div class="cat-pill-skeleton"></div>
-                <div class="cat-pill-skeleton"></div>
-                <div class="cat-pill-skeleton"></div>
-            </div>
-            <div class="section-label" style="margin-top: 24px;">Your dietary filters</div>
-            <div class="filter-pills" id="filterPills" style="margin-bottom: 32px;">
-                <?php
-                $allFilters = ['Vegetarian', 'Vegan', 'Gluten-Free', 'Dairy-Free', 'Halal', 'Kosher'];
-                foreach ($allFilters as $filter):
-                    $active = in_array($filter, $userRestrictions) && $filter !== 'None' ? 'active' : '';
-                    ?>
-                    <span class="filter-pill <?= $active ?>" data-filter="<?= $filter ?>">
+        <!-- main content -->
+        <div class="main-content">
+            <div class="container">
+
+                <?php if (!$isLoggedIn): ?>
+                    <!-- guests -->
+                    <div class="section-label">Browse by category</div>
+                    <div class="category-pills" id="categoryPills">
+                        <div class="cat-pill-skeleton"></div>
+                        <div class="cat-pill-skeleton"></div>
+                        <div class="cat-pill-skeleton"></div>
+                        <div class="cat-pill-skeleton"></div>
+                        <div class="cat-pill-skeleton"></div>
+                        <div class="cat-pill-skeleton"></div>
+                    </div>
+                <?php else: ?>
+                    <!-- logged in -->
+                    <div class="section-label">Browse by category</div>
+                    <div class="category-pills" id="categoryPills">
+                        <div class="cat-pill-skeleton"></div>
+                        <div class="cat-pill-skeleton"></div>
+                        <div class="cat-pill-skeleton"></div>
+                        <div class="cat-pill-skeleton"></div>
+                        <div class="cat-pill-skeleton"></div>
+                        <div class="cat-pill-skeleton"></div>
+                    </div>
+                    <div class="section-label" style="margin-top: 24px;">Your dietary filters</div>
+                    <div class="filter-pills" id="filterPills" style="margin-bottom: 32px;">
+                        <?php
+                        $allFilters = ['Vegetarian', 'Vegan', 'Gluten-Free', 'Dairy-Free', 'Halal', 'Kosher'];
+                        foreach ($allFilters as $filter):
+                            $active = in_array($filter, $userRestrictions) && $filter !== 'None' ? 'active' : '';
+                            ?>
+                            <span class="filter-pill <?= $active ?>" data-filter="<?= $filter ?>">
                 <?= $filter ?>
             </span>
-                <?php endforeach; ?>
-                <button class="filter-clear" id="filterClear">Clear filters</button>
+                        <?php endforeach; ?>
+                        <button class="filter-clear" id="filterClear">Clear filters</button>
+                    </div>
+                <?php endif; ?>
+
+                <div class="alert-error" id="error"></div>
+
+                <div class="loading-wrap" id="loading">
+                    <div class="spinner-border" role="status"></div>
+                    <p>Finding delicious recipes...</p>
+                </div>
+
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon">&#127859;</div>
+                    <h4>No recipes found</h4>
+                    <p>Try a different ingredient or pick a category above.</p>
+                </div>
+
+                <div id="results" class="row g-4"></div>
+
             </div>
-        <?php endif; ?>
-
-        <div class="alert-error" id="error"></div>
-
-        <div class="loading-wrap" id="loading">
-            <div class="spinner-border" role="status"></div>
-            <p>Finding delicious recipes...</p>
         </div>
 
-        <div class="empty-state" id="emptyState">
-            <div class="empty-icon">&#127859;</div>
-            <h4>No recipes found</h4>
-            <p>Try a different ingredient or pick a category above.</p>
-        </div>
+        <script>
+            const IS_LOGGED_IN = <?= json_encode($isLoggedIn) ?>;
+            const USER_RESTRICTIONS = <?= json_encode($userRestrictions) ?>;
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="../js/recipe_generator.js"></script>
 
-        <div id="results" class="row g-4"></div>
+    </main>
 
-    </div>
-</div>
-
-<script>
-    const IS_LOGGED_IN = <?= json_encode($isLoggedIn) ?>;
-    const USER_RESTRICTIONS = <?= json_encode($userRestrictions) ?>;
-</script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="../js/recipe_generator.js"></script>
-
-</body>
-</html>
+<?php include('../includes/footer.php'); ?>
