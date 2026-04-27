@@ -108,22 +108,7 @@ $initial    = strtoupper(substr($username, 0, 1) ?: 'U');
                     </li>
 
                     <!-- profile dropdown -->
-                    <li class="nav-dropdown">
-                        <button class="nav-profile-btn" id="navProfileBtn">
-                            <span class="nav-avatar"><?= $initial ?></span>
-                            <?= htmlspecialchars($username) ?>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right" id="profileDropdown">
-                            <a href="/SmartPlateSeniors/PHP/profile.php">
-                                <span>👤</span> Profile Settings
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="/SmartPlateSeniors/PHP/logout.php" style="color:#e63946;">
-                                <span>🚪</span> Sign Out
-                            </a>
-                        </div>
-                    </li>
+                    <li><a href="/SmartPlateSeniors/PHP/logout.php">Sign Out</a></li>
 
                 <?php endif;?>
             </ul>
