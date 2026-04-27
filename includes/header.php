@@ -20,6 +20,9 @@ $initial    = strtoupper(substr($username, 0, 1) ?: 'U');
     <?php if (!empty($extraStyles)) echo $extraStyles; ?>
 
     <style>
+        .navbar{
+            padding-bottom: 0px !important;
+        }
         /* ── Profile avatar button ── */
         .nav-profile-btn {
             display: flex;
