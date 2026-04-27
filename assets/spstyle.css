@@ -838,11 +838,11 @@ footer {
     background: none;
     border: none;
     color: white;
-    font-weight: 600;
+    font-weight: bold;
     cursor: pointer;
-    font-size: 0.95rem;
-    padding: 7px 16px;
-    border-radius: 8px;
+    font-size: 1.25rem;
+    padding: 20px 10px;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     gap: 6px;
