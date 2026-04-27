@@ -2,11 +2,10 @@
 if (session_status() === PHP_SESSION_NONE) session_start();
 
 if (isset($_SESSION['user_id'])) {
-    header("Location: dashboard.php");
+    header("Location: /SmartPlateSeniors/PHP/dashboard.php");
     exit;
 }
 
-include('../includes/header.php');
 require_once __DIR__ . '/../config/db.php';
 
 $error = '';
@@ -28,11 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $_SESSION['user_id']   = (int)$user['user_id'];
             $_SESSION['user_name'] = $user['name'];
-            header("Location: /PHP/dashboard.php");
+            header("Location: /SmartPlateSeniors/PHP/dashboard.php");
             exit;
         }
     }
 }
+
+include('../includes/header.php');
 ?>
 
     <style>
