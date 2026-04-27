@@ -10,8 +10,6 @@ include('../includes/header.php');
 ?>
 
     <style>
-        *, *::before, *::after { box-sizing: border-box; }
-
         body { background: cornsilk; overflow-x: hidden; }
 
 
