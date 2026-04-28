@@ -40,33 +40,38 @@ if (isset($_SESSION['user_id'])) {
         /* HERO SECTION */
         .hero-section {
             max-width: 1100px;
-            margin: 40px auto 20px auto;
+            margin: 50px auto 30px auto;
             text-align: center;
+            padding: 30px 20px 0;
         }
 
         .hero-badge {
             display: inline-block;
-            padding: 6px 14px;
+            padding: 8px 18px;
             border-radius: 999px;
-            background-color: rgba(40, 54, 24, 0.1);
+            background: linear-gradient(135deg, #283618, #4a7c4a);
+            color: white; /* ✅ white text on dark background */
             font-size: 0.85rem;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.04em;
-            margin-bottom: 12px;
+            letter-spacing: 0.06em;
+            margin-bottom: 16px;
         }
 
         .hero-section h1 {
-            font-size: 2.3rem;
+            font-size: 2.6rem;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 14px;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
         }
 
         .hero-section p {
-            font-size: 1rem;
-            max-width: 700px;
+            font-size: 1.05rem;
+            max-width: 620px;
             margin: 0 auto;
             color: #4b4b3a;
+            line-height: 1.7;
         }
 
         /* FEATURES GRID */
@@ -201,12 +206,12 @@ if (isset($_SESSION['user_id'])) {
 
 <!-- HERO -->
 <section class="hero-section">
-    <div class="hero-badge">Before you sign in</div>
-    <h1>Smart Plate Features</h1>
+    <div class="hero-badge">✨ No account needed</div>
+    <h1>Everything You Need to Eat Smart</h1>
     <p>
-        Explore Smart Plate’s tools before creating an account. You can use the Nutrition Explorer,
-        Ready-Made Meals, and Recipe Generator without signing in. Sign in later to save your plans
-        and favorites.
+        Start exploring SmartPlate's tools right now, no sign up required!
+        When you're ready, create an account to unlock your personal meal plans,
+        nutrition tracking, and more.
     </p>
 </section>
 
@@ -217,7 +222,7 @@ if (isset($_SESSION['user_id'])) {
         <!-- Nutrition Explorer -->
         <div class="col-md-4">
             <div class="feature-card">
-                <span class="feature-tag">Feature 01</span>
+                <span class="feature-tag">⚡ Try it now</span>
                 <div class="feature-icon">🥦</div>
                 <div class="feature-title">Nutrition Explorer</div>
 
@@ -241,7 +246,7 @@ if (isset($_SESSION['user_id'])) {
         <!-- Ready-Made Meals -->
         <div class="col-md-4">
             <div class="feature-card">
-                <span class="feature-tag">Feature 02</span>
+                <span class="feature-tag">⚡ Try it now</span>
                 <div class="feature-icon">🍽️</div>
                 <div class="feature-title">Ready-Made Meals</div>
 
@@ -265,7 +270,7 @@ if (isset($_SESSION['user_id'])) {
         <!-- Recipe Generator -->
         <div class="col-md-4">
             <div class="feature-card">
-                <span class="feature-tag">Feature 03</span>
+                <span class="feature-tag">⚡ Try it now</span>
                 <div class="feature-icon">📖</div>
                 <div class="feature-title">Recipe Generator</div>
 
@@ -292,14 +297,14 @@ if (isset($_SESSION['user_id'])) {
 <!-- CALL TO ACTION -->
 <section class="cta-box">
     <div class="cta-text">
-        <h3>Ready to build your own Smart Plate?</h3>
+        <h3>🔒 Want the full SmartPlate experience?</h3>
         <p>
-            Sign in to unlock your personal dashboard, save favorite meals, and
-            create meal plans tailored to your health goals.
+            Sign in to unlock AI-powered daily meal plans tailored to your dietary
+            preferences, save favorite recipes, and track your nutrition — all in one place.
         </p>
     </div>
     <a href="login.php" class="btn-primary-custom">
-        Sign In to Start Planning
+        Sign In to Start Planning →
     </a>
 </section>
 

@@ -1,7 +1,10 @@
 <?php
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/debug.log');
+error_log("=== get_meal_plan.php called ===");
 session_start();
 require_once __DIR__ . '/../config/db.php';
-require_once __DIR__ . '/../apiKey/api-keys.php';
+require_once __DIR__ . '/../config/api-keys.php';
 
 if (!isset($_SESSION['user_id'])) {
     http_response_code(401);
@@ -80,11 +83,23 @@ curl_setopt_array($ch, [
 ]);
 
 $response = curl_exec($ch);
+$curlError = curl_error($ch);
 curl_close($ch);
 
-// Parse response
-$data    = json_decode($response, true);
+// ADD THIS - temporary debug
+if ($curlError) {
+    error_log("CURL ERROR: " . $curlError);
+    echo json_encode(['error' => 'Curl failed: ' . $curlError]);
+    exit;
+}
+error_log("RAW RESPONSE: " . $response); // see what Claude returned
+
+// ADD THESE 4 lines
+$data = json_decode($response, true);
+error_log("DECODED DATA: " . print_r($data, true));
 $rawText = $data['content'][0]['text'] ?? '';
+error_log("RAW TEXT: " . $rawText);
+
 
 
 if (empty($rawText)) {
@@ -118,7 +133,23 @@ foreach ($mealData['meals'] as $meal) {
         $meal['description'],
         $meal['emoji']
     ]);
+    if ($stmtInsert->rowCount() === 0) {
+        error_log("INSERT IGNORE skipped: " . json_encode($meal));
+    }
 }
 
+
+// ✅ Always return from DB after saving so we get consistent ordering
+$stmtFinal = $pdo->prepare("
+    SELECT meal_type, meal_name, description, emoji 
+    FROM meal_plans 
+    WHERE user_id = ? AND plan_date = ?
+    ORDER BY FIELD(meal_type, 'Breakfast', 'Snack', 'Lunch', 'Dinner')
+");
+$stmtFinal->execute([$userId, $requestedDate]);
+$saved = $stmtFinal->fetchAll();
+
+
 header('Content-Type: application/json');
-echo json_encode(['meals' => $mealData['meals'], 'source' => 'ai']);
+// To this
+echo json_encode(['meals' => $saved, 'source' => 'ai']);

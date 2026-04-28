@@ -15,4 +15,5 @@ config/*.local.php
 config/config.php
 config/db.php
 *.key
-secrets.json
+secrets.jsonPHP/debug.log
+.DS_Store

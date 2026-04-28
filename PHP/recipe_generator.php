@@ -1,6 +1,19 @@
 <?php
 session_start();
-$isLoggedIn = isset($_SESSION['user_id']) ? 'true' : 'false';
+$isLoggedIn = isset($_SESSION['user_id']);
+
+// Fetch dietary preferences if logged in
+$userRestrictions = [];
+if ($isLoggedIn) {
+    require_once __DIR__ . '/../config/db.php';
+    $pdo = getPDO();
+    $stmt = $pdo->prepare("SELECT dietary_restrictions FROM survey WHERE user_id = ?");
+    $stmt->execute([$_SESSION['user_id']]);
+    $survey = $stmt->fetch();
+    if (!empty($survey['dietary_restrictions'])) {
+        $userRestrictions = array_map('trim', explode(',', $survey['dietary_restrictions']));
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -204,6 +217,59 @@ $isLoggedIn = isset($_SESSION['user_id']) ? 'true' : 'false';
             width: auto;
             object-fit: contain;
         }
+        /* DIETARY FILTER BAR */
+        .filter-bar {
+            background: white;
+            border-bottom: 1px solid #d8e8d4;
+            padding: 12px 0;
+            position: sticky;
+            top: 70px;
+            z-index: 100;
+        }
+        .filter-bar-inner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .filter-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #7a8a7a;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+        .filter-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            flex: 1;
+        }
+        .filter-pill {
+            background: #f0f5f0;
+            color: #283618;
+            border: 1px solid #d8e8d4;
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .filter-pill:hover { border-color: #283618; background: #edf3eb; }
+        .filter-pill.active { background: #283618; color: white; border-color: #283618; }
+        .filter-clear {
+            background: none;
+            border: none;
+            color: #b91c1c;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            padding: 0;
+        }
+        .filter-clear:hover { text-decoration: underline; }
 
         /* ANIMATIONS */
         @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
@@ -255,15 +321,42 @@ $isLoggedIn = isset($_SESSION['user_id']) ? 'true' : 'false';
 <div class="main-content">
     <div class="container">
 
-        <div class="section-label">Browse by category</div>
-        <div class="category-pills" id="categoryPills">
-            <div class="cat-pill-skeleton"></div>
-            <div class="cat-pill-skeleton"></div>
-            <div class="cat-pill-skeleton"></div>
-            <div class="cat-pill-skeleton"></div>
-            <div class="cat-pill-skeleton"></div>
-            <div class="cat-pill-skeleton"></div>
-        </div>
+        <?php if (!$isLoggedIn): ?>
+            <!-- GUESTS: show category pills -->
+            <div class="section-label">Browse by category</div>
+            <div class="category-pills" id="categoryPills">
+                <div class="cat-pill-skeleton"></div>
+                <div class="cat-pill-skeleton"></div>
+                <div class="cat-pill-skeleton"></div>
+                <div class="cat-pill-skeleton"></div>
+                <div class="cat-pill-skeleton"></div>
+                <div class="cat-pill-skeleton"></div>
+            </div>
+        <?php else: ?>
+            <!-- LOGGED IN: show category pills + dietary filters below -->
+            <div class="section-label">Browse by category</div>
+            <div class="category-pills" id="categoryPills">
+                <div class="cat-pill-skeleton"></div>
+                <div class="cat-pill-skeleton"></div>
+                <div class="cat-pill-skeleton"></div>
+                <div class="cat-pill-skeleton"></div>
+                <div class="cat-pill-skeleton"></div>
+                <div class="cat-pill-skeleton"></div>
+            </div>
+            <div class="section-label" style="margin-top: 24px;">Your dietary filters</div>
+            <div class="filter-pills" id="filterPills" style="margin-bottom: 32px;">
+                <?php
+                $allFilters = ['Vegetarian', 'Vegan', 'Gluten-Free', 'Dairy-Free', 'Halal', 'Kosher'];
+                foreach ($allFilters as $filter):
+                    $active = in_array($filter, $userRestrictions) && $filter !== 'None' ? 'active' : '';
+                    ?>
+                    <span class="filter-pill <?= $active ?>" data-filter="<?= $filter ?>">
+                <?= $filter ?>
+            </span>
+                <?php endforeach; ?>
+                <button class="filter-clear" id="filterClear">Clear filters</button>
+            </div>
+        <?php endif; ?>
 
         <div class="alert-error" id="error"></div>
 
@@ -284,7 +377,8 @@ $isLoggedIn = isset($_SESSION['user_id']) ? 'true' : 'false';
 </div>
 
 <script>
-    const IS_LOGGED_IN = <?= json_encode(isset($_SESSION['user_id'])) ?>;
+    const IS_LOGGED_IN = <?= json_encode($isLoggedIn) ?>;
+    const USER_RESTRICTIONS = <?= json_encode($userRestrictions) ?>;
 </script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="../js/recipe_generator.js"></script>

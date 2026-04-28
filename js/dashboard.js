@@ -230,12 +230,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (err) {
             mealScroll.innerHTML = `
-                <div style="grid-column:1/-1; text-align:center; padding:32px 0;
-                     color:var(--text-light); font-size:0.9rem;">
-                    Could not load meal plan.
-                    <span style="cursor:pointer; text-decoration:underline;"
-                    onclick="loadMeals('${date}')">Try again</span>
-                </div>`;
+        <div style="grid-column:1/-1; text-align:center; padding:32px 0;
+             color:var(--text-light); font-size:0.9rem;">
+            Could not load meal plan.
+            <span id="retryBtn" style="cursor:pointer; text-decoration:underline;">Try again</span>
+        </div>`;
+
+            document.getElementById('retryBtn')?.addEventListener('click', () => loadMeals(date));
         }
     }
 
