@@ -17,3 +17,4 @@ config/db.php
 *.key
 secrets.jsonPHP/debug.log
 .DS_Store
+PHP/debug.log
