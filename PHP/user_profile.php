@@ -1,23 +1,40 @@
 <?php
-session_start();
-require_once __DIR__ . '/../config/db.php';
+include('../includes/header.php');
+?>
 
-if (!isset($_SESSION['user_id'])) {
-    header('Location: ../PHP/login.php');
-    exit;
-}
+<main>
 
-$pdo    = getPDO();
-$userId = (int) $_SESSION['user_id'];
+<section id="profile-information">
+    
+    <div class="profile-layout">
+        <!-- User Info -->
+        <div class="info-section">
+            <img src="avatar.jpg" alt="Profile Avatar" class="avatar">
+            <p><strong>Username:</strong> Express</p>
+            <p><strong>Password:</strong> ********</p>
+            <p><strong>Change Password:</strong> Yes Or No<p>
+            <p><strong>Email:</strong> email@email.com</p>
+            <p><strong>Address:</strong> NY, USA</p>
+            <p><strong>DOB:</strong> 01/01/2000</p>
+        </div>
 
-// Fetch current user data
-$stmt = $pdo->prepare("SELECT name, email FROM users WHERE user_id = ?");
-$stmt->execute([$userId]);
-$user = $stmt->fetch();
+        <!-- Stats -->
+        <div class="stats-section">
+            <div class="card">
+                <h4>Goals: </h4>
+                <p>Calories: </p>
+                <p>Fats: </p>
+                <p>Proteins: </p>
+                <p>Carbohydrates: </p>
+            </div>
+        </div>
+    </div>
+</section>
 
-$successMsg = $_SESSION['profile_success'] ?? '';
-$errorMsg   = $_SESSION['profile_error']   ?? '';
-unset($_SESSION['profile_success'], $_SESSION['profile_error']);
+</main>
+
+<?php
+include('../includes/footer.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
