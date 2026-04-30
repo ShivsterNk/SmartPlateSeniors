@@ -9,49 +9,66 @@ include('../includes/header.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping List - SmartPlate</title>
-
     <link rel="stylesheet" href="../js/list.css">
-
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
 </head>
 <body>
 
+<div class="list-hero">
+    <img src="/SmartPlateSeniors/assets/Images/healthyplatter.jpg" alt="Fresh Food" class="hero-img">
+    <div class="hero-overlay">
+        <h1>Grocery Essentials</h1>
+    </div>
+</div>
+
 <div class="list-page-wrapper">
     <div class="container sp">
-        <div class="sp-label">Meal Planning</div>
-        <h1 class="sp-heading">Your Shopping List</h1>
-        <p class="sp-sub">Select the ingredients you need to order for your upcoming meals.</p>
+        <p class="sp-sub">Select items to build your personalized shopping list based on your weekly meal plan.</p>
 
         <form action="save_list.php" method="POST">
-            <div class="ingredients-grid">
-                <?php
-                $items = [
-                    'apple' => 'Apple', 'cinnamon' => 'Cinnamon', 'breast' => 'Chicken Breast',
-                    'sauce' => 'BBQ Sauce', 'corn' => 'Corn', 'lettuce' => 'Lettuce',
-                    'parmesan' => 'Parmesan', 'crouton' => 'Croutons', 'tiny' => 'Baby Carrots',
-                    'honey' => 'Honey', 'parsley' => 'Parsley', 'cheddar' => 'Cheddar Cheese',
-                    'gouda' => 'Gouda Cheese', 'cracker' => 'Whole Wheat Crackers', 'herb' => 'Herb Chicken',
-                    'quinoa' => 'Quinoa', 'red' => 'Red Onion', 'egg' => 'Eggs',
-                    'pepper' => 'Black Peppers', 'marinara' => 'Marinara Sauce', 'lasagna' => 'Lasagna Sheets',
-                    'ricotta' => 'Ricotta', 'fish' => 'White Fish', 'lemon' => 'Lemons',
-                    'dill' => 'Dill', 'onion' => 'Onions', 'bell' => 'Bell Peppers',
-                    'syrup' => 'Maple Syrup', 'berry' => 'Mixed Berries', 'batter' => 'Buttermilk Batter',
-                    'salsa' => 'Salsa', 'cheese' => 'Mexican Cheese', 'tortilla' => 'Flour Tortillas',
-                    'rice' => 'White Rice', 'soy' => 'Soy Sauce', 'sesame' => 'Sesame Seeds'
-                ];
+            <?php
+            $categories = [
+                    '🍎 Produce' => [
+                            'apple' => 'Apple', 'corn' => 'Corn', 'lettuce' => 'Lettuce', 'tiny' => 'Baby Carrots',
+                            'red' => 'Red Onion', 'onion' => 'Onions', 'bell' => 'Bell Peppers', 'berry' => 'Mixed Berries',
+                            'lemon' => 'Lemons'
+                    ],
+                    '🍗 Proteins' => [
+                            'breast' => 'Chicken Breast', 'herb' => 'Herb Chicken', 'egg' => 'Eggs', 'fish' => 'White Fish'
+                    ],
+                    '🧀 Dairy & Refrigerated' => [
+                            'parmesan' => 'Parmesan', 'cheddar' => 'Cheddar Cheese', 'gouda' => 'Gouda Cheese',
+                            'ricotta' => 'Ricotta', 'cheese' => 'Mexican Cheese', 'batter' => 'Buttermilk Batter'
+                    ],
+                    '🧂 Pantry & Grains' => [
+                            'cinnamon' => 'Cinnamon', 'sauce' => 'BBQ Sauce', 'crouton' => 'Croutons', 'honey' => 'Honey',
+                            'parsley' => 'Parsley', 'cracker' => 'Whole Wheat Crackers', 'quinoa' => 'Quinoa',
+                            'pepper' => 'Black Peppers', 'marinara' => 'Marinara Sauce', 'lasagna' => 'Lasagna Sheets',
+                            'dill' => 'Dill', 'syrup' => 'Maple Syrup', 'salsa' => 'Salsa', 'tortilla' => 'Flour Tortillas',
+                            'rice' => 'White Rice', 'soy' => 'Soy Sauce', 'sesame' => 'Sesame Seeds'
+                    ]
+            ];
 
-                foreach ($items as $id => $name) {
-                    echo "
-                    <div class='ingredient-item'>
-                        <input type='checkbox' name='items[]' value='$name' id='$id'>
-                        <label for='$id'>$name</label>
-                    </div>";
-                }
-                ?>
-            </div>
+            foreach ($categories as $catName => $items): ?>
+                <div class="category-section">
+                    <h2 class="category-title"><?php echo $catName; ?></h2>
+                    <div class="ingredients-grid">
+                        <?php foreach ($items as $id => $name): ?>
+                            <div class="ingredient-card">
+                                <div class="item-icon">🛒</div>
+                                <span class="item-name"><?php echo $name; ?></span>
+                                <div class="checkbox-wrapper">
+                                    <input type="checkbox" name="items[]" value="<?php echo $name; ?>" id="<?php echo $id; ?>">
+                                    <label for="<?php echo $id; ?>"></label>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
 
             <div class="action-container">
-                <button type="submit" class="btn-primary">Save Shopping List</button>
+                <button type="submit" class="btn-primary">Save Selected to List</button>
             </div>
         </form>
     </div>
