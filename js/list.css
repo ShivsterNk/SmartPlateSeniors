@@ -1,0 +1,47 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) session_start();
+include('../includes/header.php');
+?>
+
+<div class="list-page-wrapper">
+<div class="container sp">
+<div class="sp-label">Meal Planning</div>
+<h1 class="sp-heading">Your Shopping List</h1>
+<p class="sp-sub">Select the ingredients you need to order for your upcoming meals.</p>
+
+<form action="save_list.php" method="POST">
+<div class="ingredients-grid">
+<?php
+                $items = [
+'apple' => 'Apple', 'cinnamon' => 'Cinnamon', 'breast' => 'Chicken Breast',
+'sauce' => 'BBQ Sauce', 'corn' => 'Corn', 'lettuce' => 'Lettuce',
+'parmesan' => 'Parmesan', 'crouton' => 'Croutons', 'tiny' => 'Baby Carrots',
+'honey' => 'Honey', 'parsley' => 'Parsley', 'cheddar' => 'Cheddar Cheese',
+'gouda' => 'Gouda Cheese', 'cracker' => 'Whole Wheat Crackers', 'herb' => 'Herb Chicken',
+'quinoa' => 'Quinoa', 'red' => 'Red Onion', 'egg' => 'Eggs',
+'pepper' => 'Black Peppers', 'marinara' => 'Marinara Sauce', 'lasagna' => 'Lasagna Sheets',
+'ricotta' => 'Ricotta', 'fish' => 'White Fish', 'lemon' => 'Lemons',
+'dill' => 'Dill', 'onion' => 'Onions', 'bell' => 'Bell Peppers',
+'syrup' => 'Maple Syrup', 'berry' => 'Mixed Berries', 'batter' => 'Buttermilk Batter',
+'salsa' => 'Salsa', 'cheese' => 'Mexican Cheese', 'tortilla' => 'Flour Tortillas',
+'rice' => 'White Rice', 'soy' => 'Soy Sauce', 'sesame' => 'Sesame Seeds'
+];
+
+foreach ($items as $id => $name) {
+    echo "
+    <div class='ingredient-item'>
+    <input type='checkbox' name='items[]' value='$name' id='$id'>
+    <label for='$id'>$name</label>
+    </div>";
+}
+?>
+</div>
+
+<div class="action-container">
+<button type="submit" class="btn-primary">Save Shopping List</button>
+</div>
+</form>
+</div>
+</div>
+
+<?php include('../includes/footer.php'); ?>
