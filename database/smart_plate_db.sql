@@ -124,11 +124,72 @@ CREATE TABLE ingredients (
 );
 
 INSERT INTO ingredients (meal_id, ingredient_name, amount) VALUES
-(1,'Mixed Greens','2 cups'),(1,'Cherry Tomatoes','1/2 cup'),(1,'Balsamic Glaze','1 tbsp'),
-(2,'Gala Apples','2 whole'),(2,'Cinnamon','1 tsp'),
-(3,'Chicken Breast','6 oz'),(3,'BBQ Sauce','2 tbsp'),(3,'Roasted Corn','1/4 cup'),
-(4,'Romaine Lettuce','3 cups'),(4,'Parmesan','2 tbsp'),(4,'Croutons','1/2 cup'),
-(5,'Baby Carrots','1 lb'),(5,'Honey','2 tbsp'),(5,'Fresh Parsley','1 tsp');
+-- Apple Cinnamon Oatmeal (1)
+(1, 'Gala Apples', '2 whole'),
+(1, 'Cinnamon', '1 tsp'),
+-- Barbecue Grilled Chicken (2)
+(2, 'Chicken Breast', '6 oz'),
+(2, 'BBQ Sauce', '2 tbsp'),
+(2, 'Roasted Corn', '1/4 cup'),
+-- Chicken Caesar Salad (3)
+(3, 'Romaine Lettuce', '3 cups'),
+(3, 'Parmesan', '2 tbsp'),
+(3, 'Croutons', '1/2 cup'),
+-- Roasted Carrots (4)
+(4, 'Baby Carrots', '1 lb'),
+(4, 'Honey', '2 tbsp'),
+(4, 'Fresh Parsley', '1 tsp'),
+-- Mac and Cheese (5)
+(5, 'Cheddar Cheese', '2 oz'),
+(5, 'Gouda', '2 oz'),
+(5, 'Whole Wheat Crackers', '5 pcs'),
+-- Mediterranean Chicken Bowl (6)
+(6, 'Herb Chicken', '1 breast'),
+(6, 'Quinoa', '1/2 cup'),
+(6, 'Red Onion', '1/4 cup'),
+-- Egg Roll (7)
+(7, 'Farm Fresh Eggs', '2 large'),
+(7, 'Black Pepper', 'pinch'),
+-- Lasagna (8)
+(8, 'Lasagna Sheets', '3 layers'),
+(8, 'Ricotta', '1/2 cup'),
+(8, 'Marinara Sauce', '1 cup'),
+-- Lemon-Spiced Salmon (9)
+(9, 'White Fish', '6 oz'),
+(9, 'Lemon Zest', '1 tsp'),
+(9, 'Dill', '1/2 tsp'),
+-- Vegetarian Omelette (10)
+(10, 'Large Eggs', '3 total'),
+(10, 'Bell Peppers', '1/4 cup'),
+(10, 'Onions', '2 tbsp'),
+-- Protein Pancakes (11)
+(11, 'Buttermilk Batter', '1 cup'),
+(11, 'Maple Syrup', '2 tbsp'),
+(11, 'Mixed Berries', '1/4 cup'),
+-- Chicken Quesadilla (12)
+(12, 'Flour Tortilla', '1 large'),
+(12, 'Mexican Cheese', '1/2 cup'),
+(12, 'Salsa', '2 tbsp'),
+-- Protein Rice Bowl (13)
+(13, 'Steamed White Rice', '1 cup'),
+(13, 'Soy Sauce', '1 tsp'),
+(13, 'Sesame Seeds', '1 tsp'),
+-- Beef Tacos (14)
+(14, 'Corn Tortillas', '2 units'),
+(14, 'Lean Ground Beef', '4 oz'),
+(14, 'Fresh Salsa', '2 tbsp'),
+-- Quinoa/Roasted Veg Bowl (15)
+(15, 'Broccoli & Carrots', '1 cup'),
+(15, 'Snap Peas', '1/2 cup'),
+(15, 'Zucchini', '1/2 cup'),
+-- Fruit/Yogurt Bowl (16)
+(16, 'Greek Yogurt', '1 cup'),
+(16, 'Walnuts', '2 tbsp'),
+(16, 'Honey', '1 tbsp'),
+-- Healthy Baked Ziti (17)
+(17, 'Penne Pasta', '2 cups'),
+(17, 'Mozzarella', '1/2 cup'),
+(17, 'Marinara', '1 cup');
 
 -- MEAL PLANS
 CREATE TABLE meal_plans (

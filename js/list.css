@@ -1,0 +1,166 @@
+/* ══════════════════════════════
+   HERO IMAGE SECTION
+   ══════════════════════════════ */
+.list-hero {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(26, 46, 16, 0.6); /* Dark green overlay to match index */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-overlay h1 {
+    font-family: 'DM Serif Display', serif;
+    color: white;
+    font-size: 4rem;
+}
+
+/* ══════════════════════════════
+   LAYOUT & CONTAINERS
+   ══════════════════════════════ */
+body {
+    background-color: cornsilk;
+    color: #1a2e10;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 24px;
+}
+
+.sp-sub {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.category-section {
+    margin-bottom: 60px;
+}
+
+.category-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: #2d4a1a;
+    border-bottom: 3px solid #a7c957;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+/* ══════════════════════════════
+   INGREDIENT BOXES (GRID ROWS)
+   ══════════════════════════════ */
+.ingredients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
+}
+
+.ingredient-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s, border-color 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ingredient-card:hover {
+    transform: translateY(-5px);
+    border-color: #a7c957;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.item-icon {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.item-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    min-height: 40px; /* Aligns buttons across rows */
+    display: flex;
+    align-items: center;
+}
+
+/* ══════════════════════════════
+   CUSTOM CHECKBOX BUTTONS
+   ══════════════════════════════ */
+.checkbox-wrapper input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-wrapper label {
+    display: inline-block;
+    background: #f1f3f5;
+    color: #1a2e10;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.checkbox-wrapper label::after {
+    content: '+ Add';
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked + label {
+    background: #a7c957; /* Green light highlight */
+    color: #1a2e10;
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked + label::after {
+    content: '✓ Added';
+}
+
+/* ══════════════════════════════
+   STICKY SAVE BUTTON
+   ══════════════════════════════ */
+.action-container {
+    text-align: center;
+    margin-top: 40px;
+    padding-bottom: 60px;
+}
+
+.btn-primary {
+    background: #a7c957;
+    color: #1a2e10;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 18px 60px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(167, 201, 87, 0.4);
+    transition: transform 0.2s;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+}

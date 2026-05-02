@@ -2,11 +2,10 @@
 if (session_status() === PHP_SESSION_NONE) session_start();
 
 if (isset($_SESSION['user_id'])) {
-    header("Location: ../PHP/dashboard.php");
+    header("Location: /SmartPlateSeniors/PHP/dashboard.php");
     exit;
 }
 
-include('../includes/header.php');
 require_once __DIR__ . '/../config/db.php';
 
 $error = '';
@@ -33,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
+include('../includes/header.php');
 ?>
 
     <style>

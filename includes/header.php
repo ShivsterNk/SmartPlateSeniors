@@ -20,7 +20,10 @@ $initial    = strtoupper(substr($username, 0, 1) ?: 'U');
     <?php if (!empty($extraStyles)) echo $extraStyles; ?>
 
     <style>
-        /* ── Profile avatar button ── */
+        .navbar{
+            padding-bottom: 0px !important;
+        }
+        /* profile avatar button */
         .nav-profile-btn {
             display: flex;
             align-items: center;
@@ -49,7 +52,7 @@ $initial    = strtoupper(substr($username, 0, 1) ?: 'U');
             flex-shrink: 0;
         }
 
-        /* ── Align profile dropdown to the right so it doesn't clip ── */
+        /* align profile dropdown right */
         .dropdown-menu-right {
             right: 0;
             left: auto;
@@ -83,7 +86,7 @@ $initial    = strtoupper(substr($username, 0, 1) ?: 'U');
                 <?php else: ?>
                     <li><a href="/SmartPlateSeniors/PHP/dashboard.php">Dashboard</a></li>
 
-                    <!-- More dropdown -->
+                    <!-- more dropdown -->
                     <li class="nav-dropdown">
                         <button class="dropdown-btn">More
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
@@ -104,23 +107,8 @@ $initial    = strtoupper(substr($username, 0, 1) ?: 'U');
                         </div>
                     </li>
 
-                    <!-- Profile avatar dropdown (replaces the old Sign Out link) -->
-                    <li class="nav-dropdown">
-                        <button class="nav-profile-btn" id="navProfileBtn">
-                            <span class="nav-avatar"><?= $initial ?></span>
-                            <?= htmlspecialchars($username) ?>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right" id="profileDropdown">
-                            <a href="/SmartPlateSeniors/PHP/profile.php">
-                                <span>👤</span> Profile Settings
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="/SmartPlateSeniors/PHP/logout.php" style="color:#e63946;">
-                                <span>🚪</span> Sign Out
-                            </a>
-                        </div>
-                    </li>
+                    <!-- profile dropdown -->
+                    <li><a href="/SmartPlateSeniors/PHP/logout.php">Sign Out</a></li>
 
                 <?php endif;?>
             </ul>
@@ -131,7 +119,7 @@ $initial    = strtoupper(substr($username, 0, 1) ?: 'U');
 <script>
     document.addEventListener("DOMContentLoaded", () => {
 
-        // ── Hamburger ──
+        // hamburger
         const hamburger = document.getElementById("hamburger");
         const navRight  = document.getElementById("navRight");
         if (hamburger && navRight) {
@@ -141,7 +129,7 @@ $initial    = strtoupper(substr($username, 0, 1) ?: 'U');
             });
         }
 
-        // ── Profile dropdown ──
+        // profile dropdown
         const navProfileBtn    = document.getElementById("navProfileBtn");
         const profileDropdown  = document.getElementById("profileDropdown");
 
@@ -160,14 +148,13 @@ $initial    = strtoupper(substr($username, 0, 1) ?: 'U');
             });
         }
 
-        // ── Generic More dropdowns ──
+        // more dropdowns
         document.querySelectorAll('.nav-dropdown').forEach(item => {
             const btn  = item.querySelector('.dropdown-btn');
             const menu = item.querySelector('.dropdown-menu');
             if (!btn || !menu) return;
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                // close all others first
                 document.querySelectorAll('.dropdown-menu').forEach(m => {
                     if (m !== menu) m.classList.remove('open');
                 });
