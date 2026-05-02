@@ -29,23 +29,48 @@ include('../includes/header.php');
             <?php
             $categories = [
                     '🍎 Produce' => [
-                            'apple' => 'Apple', 'corn' => 'Corn', 'lettuce' => 'Lettuce', 'tiny' => 'Baby Carrots',
-                            'red' => 'Red Onion', 'onion' => 'Onions', 'bell' => 'Bell Peppers', 'berry' => 'Mixed Berries',
-                            'lemon' => 'Lemons'
+                            'apple' => ['name' => 'Apple', 'img' => 'apple.jpg'],
+                            'corn' => ['name' => 'Corn', 'img' => 'corn.jpg'],
+                            'lettuce' => ['name' => 'Lettuce', 'img' => 'lettuce.jpg'],
+                            'tiny' => ['name' => 'Baby Carrots', 'img' => 'carrot.jpg'],
+                            'red' => ['name' => 'Red Onion', 'img' => 'redonion.jpg'],
+                            'onion' => ['name' => 'Onions', 'img' => 'onion.jpg'],
+                            'bell' => ['name' => 'Bell Peppers', 'img' => 'bellpepper.jpg'],
+                            'berry' => ['name' => 'Mixed Berries', 'img' => 'mixedberries.jpg'],
+                            'lemon' => ['name' => 'Lemons', 'img' => 'lemon.jpg']
                     ],
                     '🍗 Proteins' => [
-                            'breast' => 'Chicken Breast', 'herb' => 'Herb Chicken', 'egg' => 'Eggs', 'fish' => 'White Fish'
+                            'breast' => 'Chicken Breast',
+                            'herb' => 'Herb Chicken',
+                            'egg' => 'Eggs',
+                            'fish' => 'White Fish'
                     ],
                     '🧀 Dairy & Refrigerated' => [
-                            'parmesan' => 'Parmesan', 'cheddar' => 'Cheddar Cheese', 'gouda' => 'Gouda Cheese',
-                            'ricotta' => 'Ricotta', 'cheese' => 'Mexican Cheese', 'batter' => 'Buttermilk Batter'
+                            'parmesan' => 'Parmesan',
+                            'cheddar' => 'Cheddar Cheese',
+                            'gouda' => 'Gouda Cheese',
+                            'ricotta' => 'Ricotta',
+                            'cheese' => 'Mexican Cheese',
+                            'batter' => 'Buttermilk Batter'
                     ],
                     '🧂 Pantry & Grains' => [
-                            'cinnamon' => 'Cinnamon', 'sauce' => 'BBQ Sauce', 'crouton' => 'Croutons', 'honey' => 'Honey',
-                            'parsley' => 'Parsley', 'cracker' => 'Whole Wheat Crackers', 'quinoa' => 'Quinoa',
-                            'pepper' => 'Black Peppers', 'marinara' => 'Marinara Sauce', 'lasagna' => 'Lasagna Sheets',
-                            'dill' => 'Dill', 'syrup' => 'Maple Syrup', 'salsa' => 'Salsa', 'tortilla' => 'Flour Tortillas',
-                            'rice' => 'White Rice', 'soy' => 'Soy Sauce', 'sesame' => 'Sesame Seeds'
+                            'cinnamon' => 'Cinnamon',
+                            'sauce' => 'BBQ Sauce',
+                            'crouton' => 'Croutons',
+                            'honey' => 'Honey',
+                            'parsley' => 'Parsley',
+                            'cracker' => 'Whole Wheat Crackers',
+                            'quinoa' => 'Quinoa',
+                            'pepper' => 'Black Peppers',
+                            'marinara' => 'Marinara Sauce',
+                            'lasagna' => 'Lasagna Sheets',
+                            'dill' => 'Dill',
+                            'syrup' => 'Maple Syrup',
+                            'salsa' => 'Salsa',
+                            'tortilla' => 'Flour Tortillas',
+                            'rice' => 'White Rice',
+                            'soy' => 'Soy Sauce',
+                            'sesame' => 'Sesame Seeds'
                     ]
             ];
 
