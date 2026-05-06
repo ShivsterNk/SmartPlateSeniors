@@ -1,13 +1,10 @@
 <?php
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
 $isLoggedIn = isset($_SESSION['user_id']);
 $username   = $_SESSION['user_name'] ?? '';
 $initial    = strtoupper(substr($username, 0, 1) ?: 'U');
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,7 +95,7 @@ $initial    = strtoupper(substr($username, 0, 1) ?: 'U');
                             <a href="/SmartPlateSeniors/PHP/recipe_generator.php">
                                 <span>📖</span> Recipe Generator
                             </a>
-                            <a href="/SmartPlateSeniors/Pages/shopping_list.php">
+                            <a href="/SmartPlateSeniors/PHP/shopping-list.php">
                                 <span>🛒</span> Shopping List
                             </a>
                             <a href="/SmartPlateSeniors/PHP/favorites.php">

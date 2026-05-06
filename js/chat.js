@@ -94,7 +94,7 @@ function addMessage(content, role) {
     messageDiv.appendChild(contentDiv);
     chatMessages.appendChild(messageDiv);
 
-    scrollToBottom(); // ✅ updated
+    scrollToBottom();
 
     return messageDiv;
 }
@@ -111,7 +111,7 @@ function addTypingIndicator() {
         </div>
     `;
     chatMessages.appendChild(messageDiv);
-    scrollToBottom(); // ✅ updated
+    scrollToBottom();
     return messageDiv;
 }
 
@@ -121,6 +121,7 @@ messageInput.addEventListener('keydown', (e) => {
         e.preventDefault();
         chatForm.dispatchEvent(new Event('submit'));
     }
+}); // ✅ Fixed: missing closing }); was causing "Unexpected end of input"
 
 // Focus input on load
 messageInput.focus();

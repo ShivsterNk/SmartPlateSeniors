@@ -392,25 +392,26 @@ $favorites = $stmtFavs->fetchAll();
     }
 
     function addToShoppingList(mealId, mealName) {
-        // TODO: Implement shopping list functionality
-        // For now, just show a toast
-        showToast(`Added "${mealName}" to shopping list! 🛒`);
+        const formData = new FormData();
+        formData.append('meal_id', mealId);
+        formData.append('meal_name', mealName);
 
-        // When you have a shopping list API endpoint, you can do:
-        // fetch('/SmartPlateSeniors/api/shopping-list.php', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({ meal_id: mealId })
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //     if (data.success) {
-        //         showToast(`Added "${mealName}" to shopping list! 🛒`);
-        //     } else {
-        //         showToast("Could not add to shopping list", true);
-        //     }
-        // })
-        // .catch(() => showToast("Error adding to shopping list", true));
+        fetch('add_to_shopping_list.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    showToast(`Added "${mealName}" to shopping list! 🛒`);
+                    setTimeout(() => {
+                        window.location.href = 'shopping-list.php';
+                    }, 1000); // short delay so user sees the toast first
+                } else {
+                    showToast('Could not add to shopping list', true);
+                }
+            })
+            .catch(() => showToast('Error adding to shopping list', true));
     }
 </script>
 
