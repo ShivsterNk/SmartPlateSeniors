@@ -96,7 +96,7 @@ $displayMonth = date('F Y');
 <nav>
 
     <a class="nav-logo" id="navLogo" href="#" title="Toggle sidebar">
-        <img src="../js/New Smartplate logo.png" alt="SmartPlate" class="nav-logo-img">
+        <img src="../assets/Images/New%20Smartplate%20logo.png" alt="SmartPlate" class="nav-logo-img">
     </a>
     <ul class="nav-links">
         <li><a href="dashboard.php" class="active">Dashboard</a></li>

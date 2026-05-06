@@ -44,7 +44,7 @@ $totalFat      = array_sum(array_column($logs, 'fat_g'));
         .page-banner {
             background: linear-gradient(135deg, #1a2e10, #3a5220);
             color: white;
-            padding: 14px 0; /*  reduce from 28px */
+            padding: 14px 0;
             margin-top: 70px;
             margin-bottom: 0;
             border-bottom: 3px solid #a7c957;
@@ -60,7 +60,7 @@ $totalFat      = array_sum(array_column($logs, 'fat_g'));
 
         .tracker-wrap { max-width: 900px; margin: 0 auto; padding: 32px 16px 60px; }
 
-        /* Summary cards */
+        /* summary cards */
         .summary-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -86,7 +86,7 @@ $totalFat      = array_sum(array_column($logs, 'fat_g'));
         }
         .summary-label { font-size: 0.78rem; color: #7a8a7a; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
 
-        /* Search section */
+        /* search */
         .section-card {
             background: white;
             border-radius: 14px;
@@ -100,7 +100,7 @@ $totalFat      = array_sum(array_column($logs, 'fat_g'));
             display: flex; align-items: center; gap: 8px;
         }
 
-        /* Logged meals */
+        /* log items */
         .log-item {
             display: flex; align-items: center;
             justify-content: space-between;
@@ -136,7 +136,7 @@ $totalFat      = array_sum(array_column($logs, 'fat_g'));
         }
         .empty-log .empty-icon { font-size: 2.5rem; margin-bottom: 10px; }
 
-        /* Loading */
+        /* loading */
         .search-loading {
             text-align: center; padding: 20px;
             color: #7a8a7a; font-size: 0.9rem;
@@ -163,7 +163,7 @@ $totalFat      = array_sum(array_column($logs, 'fat_g'));
 
 <div class="tracker-wrap">
 
-    <!-- Summary Cards -->
+    <!-- summary cards -->
     <div class="summary-grid">
         <div class="summary-card calories">
             <div class="summary-value" id="totalCalories"><?= round($totalCalories) ?></div>
@@ -183,7 +183,7 @@ $totalFat      = array_sum(array_column($logs, 'fat_g'));
         </div>
     </div>
 
-    <!-- Today's Log -->
+    <!-- today's log -->
     <div class="section-card">
         <div class="section-title">📋 Today's Log — <?= date('F j, Y') ?></div>
         <div id="todayLog">
@@ -220,7 +220,7 @@ $totalFat      = array_sum(array_column($logs, 'fat_g'));
         </div>
     </div>
 
-    <!-- Weekly History -->
+    <!-- weekly history -->
     <div class="section-card">
         <div class="section-title">📅 This Week</div>
         <div id="weeklyHistory">

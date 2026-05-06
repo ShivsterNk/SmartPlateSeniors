@@ -3,7 +3,7 @@ $extraStyles = '
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 
    <style>
-            /* ── PAGE HEADER ── */
+            /* page header */
             .meals-banner {
                 background: #283618;
                 padding: 36px 0 36px;
@@ -32,13 +32,13 @@ $extraStyles = '
                 margin: 0;
             }
 
-            /* ── CAROUSEL WRAPPER ── */
+            /* carousel wrapper */
             .carousel-section {
                 background: #FEFAE0;
                 padding: 48px 0 60px;
             }
 
-            /* ── CAROUSEL CONTROLS ── */
+            /* carousel controls */
             .carousel-control-prev,
             .carousel-control-next {
                 width: 48px;
@@ -57,7 +57,7 @@ $extraStyles = '
             .carousel-control-prev-icon,
             .carousel-control-next-icon { width: 18px; height: 18px; }
 
-            /* ── INDICATORS ── */
+            /* indicators */
             .carousel-indicators {
                 bottom: -40px;
             }
@@ -71,7 +71,7 @@ $extraStyles = '
             }
             .carousel-indicators .active { opacity: 1; }
 
-            /* ── SLIDE LABEL ── */
+            /* slide label */
             .slide-label {
                 font-size: 0.75rem;
                 font-weight: 700;
@@ -82,7 +82,7 @@ $extraStyles = '
                 text-align: center;
             }
 
-            /* ── MEAL CARDS ── */
+            /* meal cards */
             .meal-card {
                 background: white;
                 border-radius: 14px;
@@ -154,7 +154,7 @@ $extraStyles = '
                 border-color: #283618;
             }
 
-            /* ── EMPTY STATE ── */
+            /* empty state */
             .empty-meals {
                 text-align: center;
                 padding: 80px 20px;
@@ -163,7 +163,7 @@ $extraStyles = '
             .empty-meals .empty-icon { font-size: 3.5rem; margin-bottom: 16px; }
             .empty-meals h4 { color: #283618; font-weight: 700; margin-bottom: 8px; }
 
-            /* ── RESPONSIVE ── */
+            /* responsive */
             @media (max-width: 768px) {
                 .carousel-control-prev { left: 0; }
                 .carousel-control-next { right: 0; }
@@ -180,7 +180,7 @@ if ($conn->connect_error) {
     die("Connection Failed: " . $conn->connect_error);
 }
 
-// Fetch all ready meals
+// Fetch all smart meals
 $meals = [];
 $result = $conn->query("SELECT * FROM ready_meals");
 if ($result) {
@@ -199,7 +199,7 @@ $slides = array_chunk($meals, 6);
         <div class="meals-banner">
             <div class="meals-banner-inner">
                 <h1>&#127859; Smart Meals</h1>
-                <p>Check out some of our curated ready-to-eat meals</p>
+                <p>Check out some of our Smart Plate curated meals</p>
             </div>
         </div>
 
@@ -292,16 +292,16 @@ $slides = array_chunk($meals, 6);
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <script>
             function viewIngredients(mealId, btn) {
-                // Set the modal title to the meal name
+
                 const mealName = btn.closest('.meal-card').querySelector('.meal-card-name').textContent;
                 document.getElementById('ingredientsModalTitle').textContent = mealName + ' — Ingredients';
 
                 const modalBody = document.getElementById('ingredientsModalBody');
 
-                // Show a loading spinner
+
                 modalBody.innerHTML = '<div class="text-center py-3"><div class="spinner-border text-success" role="status"></div><p class="mt-2">Loading ingredients...</p></div>';
 
-                // Fetch data from ingredients.php
+
                 fetch('ingredients.php?meal_id=' + mealId)
                     .then(response => {
                         if (!response.ok) throw new Error('Network response was not ok');
@@ -315,7 +315,7 @@ $slides = array_chunk($meals, 6);
                         console.error('Fetch error:', error);
                     });
 
-                // Open the modal
+
                 const modal = new bootstrap.Modal(document.getElementById('ingredientsModal'));
                 modal.show();
             }

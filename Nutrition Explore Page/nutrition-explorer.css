@@ -1,34 +1,18 @@
-/* ── Reset ── */
-*, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* ── Brand Tokens ── */
 :root {
-    --green-dark:   #283618;
-    --green-mid:    #3a4f22;
-    --green-light:  #606c38;
-    --green-pale:   #d8e8d4;
-    --green-bg:     #edf3eb;
-    --cream:        #FEFAE0;
-    --cream-dark:   #f5f0cc;
-    --white:        #ffffff;
-    --text-body:    #2c2c2c;
-    --text-muted:   #6b7060;
-    --border:       #dde3cc;
-    --shadow-sm:    0 2px 8px rgba(40,54,24,0.08);
-    --shadow-md:    0 6px 24px rgba(40,54,24,0.12);
-    --radius:       12px;
-
-    /* Nutrient colors */
+    --cream:         #FEFAE0;
+    --cream-dark:    #f5f0cc;
+    --text-body:     #2c2c2c;
+    --text-muted:    #6b7060;
+    --border:        #dde3cc;
+    --shadow-sm:     0 2px 8px rgba(40,54,24,0.08);
+    --shadow-md:     0 6px 24px rgba(40,54,24,0.12);
     --cal-color:     #e63946;
     --protein-color: #2196f3;
     --fat-color:     #ff9800;
     --carb-color:    #4a7c4a;
     --fiber-color:   #8bc34a;
 }
+
 
 body {
     background-color: var(--cream);
@@ -37,43 +21,17 @@ body {
     min-height: 100vh;
 }
 
-/* ── Navbar ── */
-
-
-.logo {
-    color: var(--white);
-    font-family: 'Lora', serif;
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-}
-
-.nav-links a {
-    color: rgba(255,255,255,0.8);
-    text-decoration: none;
-    margin-left: 28px;
-    font-size: 15px;
-    font-weight: 500;
-    transition: color 0.2s;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-    color: var(--white);
-    text-decoration: underline;
-}
-
-/* ── HERO BANNER ── */
+/* hero banner */
 .page-hero-banner {
     background: var(--green-dark);
     position: relative;
     overflow: hidden;
-    padding:  60px 20px 40px; /* remove side padding */
+    padding: 60px 20px 40px;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 160px;
-    margin-top: 70px; /* pushes content below the fixed navbar */
+    margin-top: 0;
 }
 
 .page-hero-banner::before {
@@ -108,7 +66,7 @@ body {
     line-height: 1.6;
 }
 
-/* ── Main Layout ── */
+/* main layout */
 .nutrition-main {
     max-width: 820px;
     margin: 0 auto;
@@ -117,7 +75,7 @@ body {
     display: block;
 }
 
-/* ── Search Card ── */
+/* search card */
 .search-card {
     background: var(--white);
     border: 1px solid var(--border);
@@ -187,7 +145,7 @@ body {
     cursor: not-allowed;
 }
 
-/* ── Recent Searches ── */
+/* recent searches */
 .recent-wrap {
     margin-top: 14px;
     display: none;
@@ -232,7 +190,7 @@ body {
     color: #b91c1c;
 }
 
-/* ── Status ── */
+/* status */
 .status {
     margin-top: 10px;
     font-size: 13px;
@@ -242,7 +200,7 @@ body {
 }
 .status.error { color: #c0392b; }
 
-/* ── Results Header ── */
+/* results header */
 .results-header {
     display: flex;
     align-items: center;
@@ -265,7 +223,7 @@ body {
     font-family: 'DM Mono', monospace;
 }
 
-/* ── Result Cards ── */
+/* result cards */
 .results-list {
     display: flex;
     flex-direction: column;
@@ -331,7 +289,7 @@ body {
     transform: translateX(3px);
 }
 
-/* ── Skeleton Loader ── */
+/* skeleton loader */
 .skeleton-list {
     display: flex;
     flex-direction: column;
@@ -363,7 +321,7 @@ body {
     100% { background-position: -200% 0; }
 }
 
-/* ── Detail Panel ── */
+/* detail panel */
 .detail-panel {
     background: var(--white);
     border: 1.5px solid var(--border);
@@ -426,7 +384,7 @@ body {
     margin-bottom: 16px;
 }
 
-/* ── Nutrient Grid ── */
+/* nutrient grid */
 .nutrients-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -446,7 +404,7 @@ body {
     box-shadow: var(--shadow-sm);
 }
 
-/* Color code key nutrients */
+
 .nutrient-card.cal   { border-top-color: var(--cal-color); }
 .nutrient-card.prot  { border-top-color: var(--protein-color); }
 .nutrient-card.fat   { border-top-color: var(--fat-color); }
@@ -473,7 +431,7 @@ body {
     margin-left: 3px;
 }
 
-/* ── Empty State ── */
+/* empty state */
 .empty-state {
     text-align: center;
     padding: 60px 20px;
@@ -489,13 +447,13 @@ body {
     opacity: 0.5;
 }
 
-/* ── Animations ── */
+/* animations */
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(14px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Spinner ── */
+/* spinner */
 .spinner {
     display: inline-block;
     width: 11px;
@@ -509,7 +467,7 @@ body {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ── Responsive ── */
+/* responsive */
 @media (max-width: 768px) {
     .page-hero-banner { padding: 40px 24px 36px; }
     .page-title { font-size: 2rem; }
@@ -529,7 +487,7 @@ body {
     width: auto;
     object-fit: contain;
 }
-/* ── Hide empty result containers ── */
+/* hide empty containers */
 #resultsSection:empty,
 #detailPanel:empty {
     display: none;
