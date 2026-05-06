@@ -66,9 +66,9 @@ $ch = curl_init('https://api.anthropic.com/v1/messages');
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_POST           => true,
-    CURLOPT_SSL_VERIFYPEER => false, // ✅ ADD THIS - fixes SSL issues on local
-    CURLOPT_SSL_VERIFYHOST => false, // ✅ ADD THIS
-    CURLOPT_TIMEOUT        => 30,    // ✅ ADD THIS - timeout
+    CURLOPT_SSL_VERIFYPEER => false,
+    CURLOPT_SSL_VERIFYHOST => false,
+    CURLOPT_TIMEOUT        => 30,
     CURLOPT_HTTPHEADER     => [
         'Content-Type: application/json',
         'x-api-key: ' . AI_API_KEY,

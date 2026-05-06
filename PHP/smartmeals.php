@@ -323,4 +323,3 @@ $slides = array_chunk($meals, 6);
 
     </main>
 
-<?php include('../includes/footer.php'); ?>
