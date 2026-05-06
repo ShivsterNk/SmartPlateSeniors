@@ -15,9 +15,7 @@ include('../includes/header.php');
 
         main section { margin: 0 !important; }
 
-        /* ══════════════════════════════
-           HERO
-        ══════════════════════════════ */
+        /* hero */
         .hero {
             position: relative;
             height: 90vh;
@@ -111,7 +109,7 @@ include('../includes/header.php');
 
 
 
-        /* scroll cue — chevron only */
+        /* scroll cue */
         .scroll-cue {
             position: absolute; bottom: 32px; left: 50%;
             transform: translateX(-50%);
@@ -133,9 +131,7 @@ include('../includes/header.php');
             50%      { transform: rotate(45deg) translateY(6px); opacity: 1; }
         }
 
-        /* ══════════════════════════════
-           SHARED
-        ══════════════════════════════ */
+        /* shared */
         .sp { padding: 96px 24px; }
         .sp-inner { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
         .sp-label {
@@ -157,9 +153,7 @@ include('../includes/header.php');
             margin-left: auto; margin-right: auto;
         }
 
-        /* ══════════════════════════════
-           FEATURE BENTO GRID
-        ══════════════════════════════ */
+        /* bento grid */
         .bento-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -198,7 +192,7 @@ include('../includes/header.php');
         }
         .bento-desc { font-size: 0.9rem; color: var(--text-light); line-height: 1.7; }
 
-        /* accent corner */
+
         .bento-card::after {
             content: '';
             position: absolute;
@@ -211,7 +205,7 @@ include('../includes/header.php');
         }
         .bento-card:hover::after { opacity: 0.12; transform: scale(1.3); }
 
-        /* PlateBot card special */
+
         .bento-card.platebot {
             background: linear-gradient(145deg, var(--green-dark), #2d4a1a);
             color: white;
@@ -238,9 +232,7 @@ include('../includes/header.php');
             align-self: flex-end; color: var(--green-light);
         }
 
-        /* ══════════════════════════════
-           HOW IT WORKS
-        ══════════════════════════════ */
+        /* how it works */
         .how-section { background: var(--green-dark); }
         .how-section .sp-label { color: var(--green-light); }
         .how-section .sp-heading { color: #fff; }
@@ -254,7 +246,7 @@ include('../includes/header.php');
             position: relative;
         }
 
-        /* connecting line */
+
         .steps-grid::before {
             content: '';
             position: absolute;
@@ -295,9 +287,7 @@ include('../includes/header.php');
         }
         .step-desc { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
 
-        /* ══════════════════════════════
-           TESTIMONIAL / QUOTE BAND
-        ══════════════════════════════ */
+        /* quote band */
         .quote-band {
             background: #FEFAE0;
             padding: 72px 24px;
@@ -326,15 +316,13 @@ include('../includes/header.php');
             text-transform: uppercase;
         }
 
-        /* ══════════════════════════════
-           SIGN-UP CTA
-        ══════════════════════════════ */
+        /* cta */
         .cta-final {
             background: linear-gradient(140deg, var(--green-dark) 0%, #2a4a18 100%);
             padding: 110px 24px;
             text-align: center; position: relative; overflow: hidden;
         }
-        /* big leaf deco */
+
         .cta-final::before {
             content: '🌿';
             position: absolute; font-size: 22rem;
@@ -356,9 +344,7 @@ include('../includes/header.php');
         }
         .cta-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; position: relative; }
 
-        /* ══════════════════════════════
-           SCROLL REVEAL
-        ══════════════════════════════ */
+        /* scroll reveal */
         .reveal {
             opacity: 0; transform: translateY(36px);
             transition: opacity 0.7s ease, transform 0.7s ease;
@@ -370,9 +356,7 @@ include('../includes/header.php');
         .reveal-delay-4 { transition-delay: 0.4s; }
         .reveal-delay-5 { transition-delay: 0.5s; }
 
-        /* ══════════════════════════════
-           ANIMATIONS
-        ══════════════════════════════ */
+        /* animations */
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(28px); }
             to   { opacity: 1; transform: translateY(0); }
@@ -381,9 +365,9 @@ include('../includes/header.php');
             from { opacity: 0; } to { opacity: 1; }
         }
 
-        /* ══════════════════════════════
-           RESPONSIVE
-        ══════════════════════════════ */
+        .cta-ghost { color: #fff; border-color: rgba(255,255,255,0.35); }
+
+        /* responsive */
         @media (max-width: 900px) {
             .bento-grid { grid-template-columns: 1fr 1fr; }
             .bento-card.wide { grid-column: span 2; }
@@ -401,7 +385,7 @@ include('../includes/header.php');
 
     <main>
 
-        <!-- ══ HERO ══ -->
+        <!-- hero -->
         <section class="hero" id="heroSection">
             <div class="hero-content">
                 <div class="hero-eyebrow">🌿 Your nutrition, simplified</div>
@@ -411,8 +395,7 @@ include('../includes/header.php');
                 </h1>
 
                 <p class="hero-desc">
-                    Plan nutritious meals, discover recipes, and track your nutrition
-                    — all in one beautifully simple place.
+                    Plan nutritious meals, discover recipes, and track your nutrition. All in one beautifully simple place.
                 </p>
 
                 <div class="hero-actions">
@@ -427,7 +410,7 @@ include('../includes/header.php');
             </div>
         </section>
 
-        <!-- ══ FEATURES BENTO ══ -->
+        <!-- features bento -->
         <section class="sp">
             <div class="sp-inner">
                 <div class="sp-label reveal">Everything you need</div>
@@ -439,7 +422,7 @@ include('../includes/header.php');
 
                 <div class="bento-grid">
 
-                    <!-- Row 1: PlateBot wide (spans 2) + Recipe Generator -->
+
                     <div class="bento-card platebot wide reveal reveal-delay-1">
                         <span class="bento-card-tag">AI-Powered</span>
                         <span class="bento-icon">🤖</span>
@@ -458,7 +441,7 @@ include('../includes/header.php');
                         <div class="bento-desc">Tell us your ingredients or dietary goals and we'll find the perfect recipe.</div>
                     </div>
 
-                    <!-- Row 2: Nutrition Tracker + Smart Meals + Shopping List -->
+
                     <div class="bento-card reveal reveal-delay-1">
                         <span class="bento-card-tag">Track</span>
                         <span class="bento-icon">📊</span>
@@ -484,7 +467,7 @@ include('../includes/header.php');
             </div>
         </section>
 
-        <!-- ══ HOW IT WORKS ══ -->
+        <!-- how it works -->
         <section class="sp how-section">
             <div class="sp-inner">
                 <div class="sp-label reveal">Simple by design</div>
@@ -516,15 +499,14 @@ include('../includes/header.php');
             </div>
         </section>
 
-        <!-- ══ QUOTE BAND ══ -->
+        <!-- quote band -->
         <div class="quote-band">
             <p class="quote-text reveal">
                 "Healthy eating doesn't have to be complicated. It just needs the right tools."
             </p>
-            <p class="quote-attr reveal reveal-delay-1">The SmartPlate Team</p>
         </div>
 
-        <!-- ══ FINAL CTA ══ -->
+        <!-- cta -->
         <section class="cta-final">
             <h2 class="reveal">Ready to eat <em>smarter?</em></h2>
             <p class="reveal reveal-delay-1">
@@ -533,21 +515,21 @@ include('../includes/header.php');
             </p>
             <div class="cta-btns reveal reveal-delay-2">
                 <a href="signup.php" class="btn-primary">Get Started — It's Free</a>
-                <a href="login.php" class="btn-ghost" style="color:#fff;border-color:rgba(255,255,255,0.35);">Sign In</a>
+                <a href="login.php" class="btn-ghost cta-ghost">Sign In</a>
             </div>
         </section>
 
     </main>
 
     <script>
-        // ── Hero subtle parallax on background ──
+        // hero parallax
         window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
             const hero = document.getElementById('heroSection');
             if (hero) hero.style.backgroundPositionY = `calc(50% + ${scrolled * 0.3}px)`;
         });
 
-        // ── Scroll reveal ──
+        // scroll reveal
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
