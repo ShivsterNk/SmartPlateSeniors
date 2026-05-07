@@ -13,7 +13,7 @@ $initial    = strtoupper(substr($username, 0, 1) ?: 'U');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Plate</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/SmartPlateSeniors/assets/spstyle.css">
+    <link rel="stylesheet" href="../css/spstyle.css">
     <?php if (!empty($extraStyles)) echo $extraStyles; ?>
 
     <style>
@@ -21,6 +21,7 @@ $initial    = strtoupper(substr($username, 0, 1) ?: 'U');
             padding-bottom: 0px !important;
         }
         /* profile avatar button */
+
         .nav-profile-btn {
             display: flex;
             align-items: center;
@@ -65,7 +66,7 @@ $initial    = strtoupper(substr($username, 0, 1) ?: 'U');
 <nav class="navbar">
     <div class="nav-container">
         <div class="logo">
-            <img src="/SmartPlateSeniors/js/New Smartplate logo.png" alt="SmartPlate Logo" class="logo-img">
+            <img src="../assets/Images/New Smartplate logo.png" alt="SmartPlate Logo" class="logo-img">
         </div>
 
         <button class="hamburger" id="hamburger" aria-label="Toggle menu">

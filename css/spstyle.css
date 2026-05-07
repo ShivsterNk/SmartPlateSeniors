@@ -56,6 +56,7 @@ section {
 }
 
 .nav-container {
+    border: #374bff 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -219,7 +220,7 @@ section {
 .hero-bg {
     position: relative;
     height: 80vh;
-    background: url('./Images/healthyplatter.jpg') no-repeat center center/cover;
+    background: url('../assets/Images/healthyplatter.jpg') no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -466,7 +467,7 @@ footer {
 /* hero updates */
 .hero-bg {
     height: 75vh !important;
-    background: url('./Images/healthyplatter.jpg') no-repeat center center/cover;
+    background: url('../assets/Images/healthyplatter.jpg') no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
