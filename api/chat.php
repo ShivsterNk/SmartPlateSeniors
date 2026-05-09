@@ -85,14 +85,15 @@ try {
     $stmt->execute([$conversationId]);
     $history = array_reverse($stmt->fetchAll(PDO::FETCH_ASSOC));
 
+
     // Get user profile data
     $stmt = $pdo->prepare("
-        SELECT u.name, s.dietary_restrictions, s.foods_to_avoid,
-               s.meal_preference, s.meals_per_day, s.cooking_level, s.flexibility
-        FROM users u
-        LEFT JOIN survey s ON u.user_id = s.user_id
-        WHERE u.user_id = ?
-    ");
+    SELECT u.name, p.dietary_restrictions, p.foods_to_avoid,
+           p.meal_preference, p.meals_per_day, p.cooking_level, p.flexibility
+    FROM users u
+    LEFT JOIN user_preferences p ON u.user_id = p.user_id
+    WHERE u.user_id = ?
+");
     $stmt->execute([$userId]);
     $userData = $stmt->fetch(PDO::FETCH_ASSOC);
 
