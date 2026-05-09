@@ -65,7 +65,7 @@ $initial    = strtoupper(substr($username, 0, 1) ?: 'U');
 <nav class="navbar">
     <div class="nav-container">
         <div class="logo">
-            <img src="/SmartPlateSeniors/js/New Smartplate logo.png" alt="SmartPlate Logo" class="logo-img">
+            <img src="/SmartPlateSeniors/assets/Images/New Smartplate logo.png" alt="SmartPlate Logo" class="logo-img">
         </div>
 
         <button class="hamburger" id="hamburger" aria-label="Toggle menu">

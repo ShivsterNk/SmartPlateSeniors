@@ -44,4 +44,3 @@ include('../includes/header.php');
     </script>
     <script src="nutrition-explorer.js"></script>
 
-<?php include('../includes/footer.php'); ?>

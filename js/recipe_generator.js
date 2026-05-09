@@ -1,5 +1,5 @@
 // js/recipe_generator.js
-console.log("✅ recipe_generator.js loaded");
+console.log(" recipe_generator.js loaded");
 
 // ── Elements ──────────────────────────────────
 const ingredientInput  = document.getElementById('ingredient');
@@ -83,35 +83,83 @@ function filterMeals(meals) {
         return activeFilters.every(filter => {
             switch (filter) {
                 case 'Vegetarian':
-                    return category === 'vegetarian' ||
-                        !name.includes('chicken') && !name.includes('beef') &&
-                        !name.includes('pork') && !name.includes('lamb') &&
-                        !name.includes('fish') && !name.includes('prawn') &&
-                        !name.includes('shrimp') && !name.includes('salmon') &&
-                        !name.includes('tuna') && !name.includes('bacon');
+                    return !name.includes('chicken') &&
+                        !name.includes('beef') &&
+                        !name.includes('pork') &&
+                        !name.includes('lamb') &&
+                        !name.includes('fish') &&
+                        !name.includes('prawn') &&
+                        !name.includes('shrimp') &&
+                        !name.includes('salmon') &&
+                        !name.includes('tuna') &&
+                        !name.includes('bacon') &&
+                        !name.includes('meat') &&
+                        !name.includes('turkey') &&
+                        (category === '' || category === 'vegetarian' || category === 'vegan');
+
                 case 'Vegan':
-                    return category === 'vegan' || category === 'vegetarian' &&
-                        !name.includes('egg') && !name.includes('cheese') &&
-                        !name.includes('milk') && !name.includes('butter') &&
-                        !name.includes('cream') && !name.includes('honey');
+                    return !name.includes('chicken') &&
+                        !name.includes('beef') &&
+                        !name.includes('pork') &&
+                        !name.includes('lamb') &&
+                        !name.includes('fish') &&
+                        !name.includes('prawn') &&
+                        !name.includes('shrimp') &&
+                        !name.includes('salmon') &&
+                        !name.includes('tuna') &&
+                        !name.includes('bacon') &&
+                        !name.includes('meat') &&
+                        !name.includes('turkey') &&
+                        !name.includes('egg') &&
+                        !name.includes('cheese') &&
+                        !name.includes('milk') &&
+                        !name.includes('butter') &&
+                        !name.includes('cream') &&
+                        !name.includes('honey') &&
+                        !name.includes('yogurt') &&
+                        (category === '' || category === 'vegetarian' || category === 'vegan');
+
                 case 'Gluten-Free':
-                    return !name.includes('pasta') && !name.includes('bread') &&
-                        !name.includes('flour') && !name.includes('noodle') &&
-                        !name.includes('wheat') && !name.includes('ramen') &&
-                        !name.includes('dumpling') && !name.includes('pancake');
+                    return !name.includes('pasta') &&
+                        !name.includes('bread') &&
+                        !name.includes('flour') &&
+                        !name.includes('noodle') &&
+                        !name.includes('wheat') &&
+                        !name.includes('ramen') &&
+                        !name.includes('dumpling') &&
+                        !name.includes('pancake') &&
+                        !name.includes('pastry') &&
+                        !name.includes('pie') &&
+                        !name.includes('cake') &&
+                        !name.includes('biscuit');
+
                 case 'Dairy-Free':
-                    return !name.includes('cheese') && !name.includes('cream') &&
-                        !name.includes('milk') && !name.includes('butter') &&
-                        !name.includes('yogurt') && !name.includes('parmesan');
+                    return !name.includes('cheese') &&
+                        !name.includes('cream') &&
+                        !name.includes('milk') &&
+                        !name.includes('butter') &&
+                        !name.includes('yogurt') &&
+                        !name.includes('parmesan') &&
+                        !name.includes('mozzarella') &&
+                        !name.includes('cheddar');
+
                 case 'Halal':
-                    return !name.includes('pork') && !name.includes('bacon') &&
-                        !name.includes('ham') && !name.includes('lard') &&
+                    return !name.includes('pork') &&
+                        !name.includes('bacon') &&
+                        !name.includes('ham') &&
+                        !name.includes('lard') &&
                         category !== 'pork';
+
                 case 'Kosher':
-                    return !name.includes('pork') && !name.includes('bacon') &&
-                        !name.includes('ham') && !name.includes('shellfish') &&
-                        !name.includes('prawn') && !name.includes('shrimp') &&
-                        !name.includes('lobster') && !name.includes('crab');
+                    return !name.includes('pork') &&
+                        !name.includes('bacon') &&
+                        !name.includes('ham') &&
+                        !name.includes('shellfish') &&
+                        !name.includes('prawn') &&
+                        !name.includes('shrimp') &&
+                        !name.includes('lobster') &&
+                        !name.includes('crab');
+
                 default:
                     return true;
             }
@@ -204,8 +252,8 @@ function searchByIngredient(ingredient) {
     axios.post('api_recipe_generator.php', formData)
         .then(response => {
             hideLoading();
-            lastMeals = response.data.meals || []; // ✅ save
-            renderMeals(filterMeals(lastMeals));   // ✅ filter before render
+            lastMeals = response.data.meals || []; //  save
+            renderMeals(filterMeals(lastMeals));   //  filter before render
         })
         .catch(error => {
             hideLoading();
@@ -215,11 +263,14 @@ function searchByIngredient(ingredient) {
 
 // ── Load categories on page load ──────────────
 function loadCategories() {
+    const EXCLUDE = ['Vegan', 'Vegetarian', 'Goat', 'Miscellaneous', 'Side'];
     axios.get('https://www.themealdb.com/api/json/v1/1/categories.php')
         .then(response => {
             const categories = response.data.categories || [];
             categoryPills.innerHTML = '';
-            categories.forEach(cat => {
+            categories
+                .filter(cat => !EXCLUDE.includes(cat.strCategory))
+                .forEach(cat => {
                 const pill = document.createElement('div');
                 pill.className = 'cat-pill';
                 pill.dataset.category = cat.strCategory;
@@ -243,8 +294,8 @@ function searchByCategory(category, pillEl) {
     axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${encodeURIComponent(category)}`)
         .then(response => {
             hideLoading();
-            lastMeals = response.data.meals || []; // ✅ save
-            renderMeals(filterMeals(lastMeals));   // ✅ filter before render
+            lastMeals = response.data.meals || []; //  save
+            renderMeals(filterMeals(lastMeals));   // filter before render
         })
         .catch(() => {
             hideLoading();
@@ -406,6 +457,8 @@ function showError(msg) {
 }
 
 // ── Init ──────────────────────────────────────
+// ── Category toggle ───────────────────────────
+
 loadCategories();
 renderRecentSearches();
 initFilters();
