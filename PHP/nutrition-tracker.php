@@ -156,7 +156,7 @@ $totalFat      = array_sum(array_column($logs, 'fat_g'));
 <div class="page-banner">
     <div class="container text-center">
         <div class="banner-icon">📊</div>
-        <h1>Nutrition Tracker</h1>
+        <h1>Nutrition Log</h1>
         <p>Track your daily nutrition and log your meals</p>
     </div>
 </div>

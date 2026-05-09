@@ -121,12 +121,12 @@ messageInput.addEventListener('keydown', (e) => {
         e.preventDefault();
         chatForm.dispatchEvent(new Event('submit'));
     }
-}); // ✅ Fixed: missing closing }); was causing "Unexpected end of input"
+}); // Fixed: missing closing }); was causing "Unexpected end of input"
 
 // Focus input on load
 messageInput.focus();
 
-// ✅ Scroll to bottom on initial load
+//  Scroll to bottom on initial load
 window.addEventListener('load', () => {
     window.scrollTo(0, 0);
     scrollToBottom();
