@@ -10,20 +10,9 @@ include('../includes/header.php');
 ?>
 
     <style>
-        :root {
-            --forest: #1a2e10;
-            --green:  #283618;
-            --mid:    #4a7c4a;
-            --lime:   #a7c957;
-            --cream:  #f5f2ec;
-            --muted:  #7a8a7a;
-        }
+        body { background: cornsilk; overflow-x: hidden; }
 
-        *, *::before, *::after { box-sizing: border-box; }
 
-        body { background: var(--cream); overflow-x: hidden; }
-
-        /* kill the global section margin from spstyle.css on THIS page */
         main section { margin: 0 !important; }
 
         /* ══════════════════════════════
@@ -38,11 +27,7 @@ include('../includes/header.php');
             align-items: center;
             text-align: center;
             color: white;
-            /* same technique as .hero-bg in spstyle.css */
-            margin-left: -16px;
-            margin-right: -16px;
-            width: calc(100% + 32px);
-            /* on desktop body has no padding so this is fine */
+
         }
 
         .hero::after {
@@ -67,7 +52,7 @@ include('../includes/header.php');
             border-radius: 999px;
             padding: 6px 18px;
             font-size: 0.78rem; font-weight: 700;
-            color: var(--lime); letter-spacing: 0.1em;
+            color: var(--green-light); letter-spacing: 0.1em;
             text-transform: uppercase; margin-bottom: 28px;
             opacity: 0; animation: slideUp 0.6s 0.2s ease forwards;
         }
@@ -80,7 +65,7 @@ include('../includes/header.php');
             max-width: 640px;
             opacity: 0; animation: slideUp 0.7s 0.35s ease forwards;
         }
-        .hero-title span { color: var(--lime); font-style: italic; }
+        .hero-title span { color: var(--green-light); font-style: italic; }
 
         .hero-desc {
             font-size: clamp(1rem, 1.6vw, 1.2rem);
@@ -97,7 +82,7 @@ include('../includes/header.php');
         }
 
         .btn-primary {
-            background: var(--lime); color: var(--forest);
+            background: var(--green-light); color: var(--green-dark);
             font-weight: 700; font-size: 0.95rem;
             padding: 15px 34px; border-radius: 999px;
             text-decoration: none;
@@ -107,7 +92,7 @@ include('../includes/header.php');
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 14px 36px rgba(167,201,87,0.45);
-            color: var(--forest);
+            color: var(--green-dark);
         }
         .btn-ghost {
             background: transparent;
@@ -156,17 +141,17 @@ include('../includes/header.php');
         .sp-label {
             font-size: 0.73rem; font-weight: 700;
             letter-spacing: 0.12em; text-transform: uppercase;
-            color: var(--mid); margin-bottom: 10px;
+            color: var(--text-mid); margin-bottom: 10px;
             text-align: center;
         }
         .sp-heading {
             font-family: 'DM Serif Display', serif;
             font-size: clamp(2rem, 4vw, 3rem);
-            color: var(--forest); line-height: 1.15; margin-bottom: 14px;
+            color: var(--green-dark); line-height: 1.15; margin-bottom: 14px;
             text-align: center;
         }
         .sp-sub {
-            font-size: 1rem; color: var(--muted);
+            font-size: 1rem; color: var(--text-light);
             line-height: 1.75; max-width: 520px;
             text-align: center;
             margin-left: auto; margin-right: auto;
@@ -199,8 +184,8 @@ include('../includes/header.php');
 
         .bento-card-tag {
             display: inline-block;
-            background: var(--cream);
-            color: var(--mid); font-size: 0.72rem;
+            background: cornsilk;
+            color: var(--text-mid); font-size: 0.72rem;
             font-weight: 700; letter-spacing: 0.07em;
             text-transform: uppercase; border-radius: 6px;
             padding: 4px 10px; margin-bottom: 16px;
@@ -208,10 +193,10 @@ include('../includes/header.php');
         .bento-icon { font-size: 2.4rem; margin-bottom: 14px; display: block; }
         .bento-title {
             font-family: 'DM Serif Display', serif;
-            font-size: 1.35rem; color: var(--forest);
+            font-size: 1.35rem; color: var(--green-dark);
             margin-bottom: 10px; line-height: 1.2;
         }
-        .bento-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+        .bento-desc { font-size: 0.9rem; color: var(--text-light); line-height: 1.7; }
 
         /* accent corner */
         .bento-card::after {
@@ -219,7 +204,7 @@ include('../includes/header.php');
             position: absolute;
             width: 120px; height: 120px;
             border-radius: 50%;
-            background: var(--lime);
+            background: var(--green-light);
             opacity: 0.06;
             bottom: -30px; right: -30px;
             transition: opacity 0.3s, transform 0.3s;
@@ -228,13 +213,13 @@ include('../includes/header.php');
 
         /* PlateBot card special */
         .bento-card.platebot {
-            background: linear-gradient(145deg, var(--forest), #2d4a1a);
+            background: linear-gradient(145deg, var(--green-dark), #2d4a1a);
             color: white;
         }
         .bento-card.platebot .bento-title { color: white; }
         .bento-card.platebot .bento-desc  { color: rgba(255,255,255,0.65); }
-        .bento-card.platebot .bento-card-tag { background: rgba(167,201,87,0.2); color: var(--lime); }
-        .bento-card.platebot::after { background: var(--lime); opacity: 0.08; }
+        .bento-card.platebot .bento-card-tag { background: rgba(167,201,87,0.2); color: var(--green-light); }
+        .bento-card.platebot::after { background: var(--green-light); opacity: 0.08; }
 
         .platebot-chat {
             margin-top: 20px;
@@ -250,14 +235,14 @@ include('../includes/header.php');
         .pb-bubble.user {
             background: rgba(167,201,87,0.2);
             border-radius: 12px 12px 3px 12px;
-            align-self: flex-end; color: var(--lime);
+            align-self: flex-end; color: var(--green-light);
         }
 
         /* ══════════════════════════════
            HOW IT WORKS
         ══════════════════════════════ */
-        .how-section { background: var(--forest); }
-        .how-section .sp-label { color: var(--lime); }
+        .how-section { background: var(--green-dark); }
+        .how-section .sp-label { color: var(--green-light); }
         .how-section .sp-heading { color: #fff; }
         .how-section .sp-sub { color: rgba(255,255,255,0.55); }
 
@@ -276,7 +261,7 @@ include('../includes/header.php');
             top: 52px; left: calc(100%/6);
             width: calc(100% - 100%/3);
             height: 2px;
-            background: linear-gradient(to right, var(--lime), var(--mid));
+            background: linear-gradient(to right, var(--green-light), var(--text-mid));
             opacity: 0.3;
             z-index: 0;
         }
@@ -291,8 +276,8 @@ include('../includes/header.php');
         .step-num-badge {
             width: 52px; height: 52px;
             border-radius: 50%;
-            background: var(--lime);
-            color: var(--forest);
+            background: var(--green-light);
+            color: var(--green-dark);
             font-family: 'DM Serif Display', serif;
             font-size: 1.3rem; font-weight: 700;
             display: flex; align-items: center; justify-content: center;
@@ -331,7 +316,7 @@ include('../includes/header.php');
         .quote-text {
             font-family: 'DM Serif Display', serif;
             font-size: clamp(1.5rem, 3.5vw, 2.4rem);
-            color: var(--forest); max-width: 720px;
+            color: var(--green-dark); max-width: 720px;
             margin: 0 auto 16px; line-height: 1.3;
             position: relative;
         }
@@ -345,7 +330,7 @@ include('../includes/header.php');
            SIGN-UP CTA
         ══════════════════════════════ */
         .cta-final {
-            background: linear-gradient(140deg, var(--forest) 0%, #2a4a18 100%);
+            background: linear-gradient(140deg, var(--green-dark) 0%, #2a4a18 100%);
             padding: 110px 24px;
             text-align: center; position: relative; overflow: hidden;
         }
@@ -363,7 +348,7 @@ include('../includes/header.php');
             color: #fff; margin-bottom: 16px;
             position: relative;
         }
-        .cta-final h2 em { color: var(--lime); font-style: italic; }
+        .cta-final h2 em { color: var(--green-light); font-style: italic; }
         .cta-final p {
             font-size: 1.05rem; color: rgba(255,255,255,0.6);
             max-width: 460px; margin: 0 auto 40px;
@@ -399,14 +384,6 @@ include('../includes/header.php');
         /* ══════════════════════════════
            RESPONSIVE
         ══════════════════════════════ */
-        /* On desktop: body has no padding so reset the negative margins */
-        @media (min-width: 769px) {
-            .hero {
-                margin-left: 0;
-                margin-right: 0;
-                width: 100%;
-            }
-        }
         @media (max-width: 900px) {
             .bento-grid { grid-template-columns: 1fr 1fr; }
             .bento-card.wide { grid-column: span 2; }
@@ -542,7 +519,7 @@ include('../includes/header.php');
         <!-- ══ QUOTE BAND ══ -->
         <div class="quote-band">
             <p class="quote-text reveal">
-                "Healthy eating doesn't have to be complicated — it just needs the right tools."
+                "Healthy eating doesn't have to be complicated. It just needs the right tools."
             </p>
             <p class="quote-attr reveal reveal-delay-1">The SmartPlate Team</p>
         </div>

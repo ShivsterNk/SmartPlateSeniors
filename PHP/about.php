@@ -40,7 +40,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
             justify-content: center;
             position: relative;
             overflow: hidden;
-            margin-top: 70px;
+            margin-top: 0;
             padding: 80px 24px;
         }
 
@@ -719,12 +719,6 @@ $isLoggedIn = isset($_SESSION['user_id']);
     </div>
 </section>
 
-<!-- ── MISSION STRIPE ── -->
-<div class="mission-stripe">
-    <h2 class="reveal">"Your health deserves a tool that actually works for you."</h2>
-    <p class="reveal reveal-delay-1">That's the idea behind everything we built. Simple, accessible, and genuinely useful for everyone.</p>
-</div>
-
 <!-- ── TEAM ── -->
 <section style="padding-bottom: 48px;">
     <div class="section-inner" style="text-align:center;">
@@ -739,9 +733,9 @@ $isLoggedIn = isset($_SESSION['user_id']);
             <?php
             $team = [
                     ['name' => 'Eunice',      'role' => 'Database, Backend & Frontend Design', 'color' => '#283618', 'initial' => 'E'],
+                    ['name' => 'Derek',       'role' => 'AI Integration & Backend Development', 'color' => '#3a6a2a', 'initial' => 'D'],
                     ['name' => 'Marvin',      'role' => 'Frontend Development',                'color' => '#4a7c4a', 'initial' => 'M'],
                     ['name' => 'James',       'role' => 'Frontend Development',                'color' => '#6a9e3a', 'initial' => 'J'],
-                    ['name' => 'Derek',       'role' => 'API & Security',                      'color' => '#3a6a2a', 'initial' => 'D'],
                     ['name' => 'Sivakumar',   'role' => 'Database & Testing',                  'color' => '#2a5a1a', 'initial' => 'S'],
             ];
             foreach ($team as $i => $member): ?>
