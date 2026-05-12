@@ -1,6 +1,6 @@
 <?php
 ini_set('log_errors', 1);
-ini_set('error_log', __DIR__ . '/debug.log');
+//ini_set('error_log', __DIR__ . '/debug.log');
 error_log("=== get_meal_plan.php called ===");
 session_start();
 require_once __DIR__ . '/../config/db.php';
