@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         try {
             $stmt = $pdo->prepare("
-                INSERT INTO survey
+                INSERT INTO user_preferences
                     (user_id, meal_preference, meals_per_day, cooking_level,
                      flexibility, dietary_restrictions, foods_to_avoid)
                 VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -47,12 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     flexibility          = VALUES(flexibility),
                     dietary_restrictions = VALUES(dietary_restrictions),
                     foods_to_avoid       = VALUES(foods_to_avoid),
-                    submitted_at         = CURRENT_TIMESTAMP
+                    updated_at           = CURRENT_TIMESTAMP
             ");
 
             $stmt->execute([
-                $userId, $mealPreference, $mealsPerDay,
-                $cookingLevel, $flexibility, $restrictionsStr, $foodsToAvoid
+                    $userId, $mealPreference, $mealsPerDay,
+                    $cookingLevel, $flexibility, $restrictionsStr, $foodsToAvoid
             ]);
 
             $success = 'Your preferences have been saved!';
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // ── Load existing answers ────────────────────
 $existing = [];
 try {
-    $stmtLoad = $pdo->prepare("SELECT * FROM survey WHERE user_id = ?");
+    $stmtLoad = $pdo->prepare("SELECT * FROM user_preferences WHERE user_id = ?");
     $stmtLoad->execute([$userId]);
     $existing = $stmtLoad->fetch() ?: [];
 } catch (PDOException $e) {
@@ -219,7 +219,7 @@ function checkedRestriction($value, $existing) {
             <div class="pill-group">
                 <input type="radio" name="meal_preference" id="pref_premade"
                        value="Mostly Pre-Made"
-                    <?= selected('meal_preference', 'Mostly Pre-Made', $existing) ?> required>
+                        <?= selected('meal_preference', 'Mostly Pre-Made', $existing) ?> required>
                 <label for="pref_premade">Mostly pre-made</label>
 
                 <input type="radio" name="meal_preference" id="pref_mix"
@@ -314,7 +314,7 @@ function checkedRestriction($value, $existing) {
                     ?>
                     <input type="checkbox" name="restrictions[]"
                            id="<?= $id ?>" value="<?= $opt ?>"
-                        <?= checkedRestriction($opt, $existing) ?>>
+                            <?= checkedRestriction($opt, $existing) ?>>
                     <label for="<?= $id ?>"><?= $opt ?></label>
                 <?php endforeach; ?>
             </div>
@@ -336,9 +336,7 @@ function checkedRestriction($value, $existing) {
     </form>
 </div>
 
+<?php include('../includes/footer.php'); ?>
+
 </body>
 </html>
-
-
-include('../includes/footer.php');
-?>

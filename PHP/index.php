@@ -412,7 +412,7 @@ include('../includes/header.php');
 
                 <p class="hero-desc">
                     Plan nutritious meals, discover recipes, and track your nutrition
-                    — all in one beautifully simple place.
+                    ,all in one beautifully simple place.
                 </p>
 
                 <div class="hero-actions">
@@ -532,8 +532,7 @@ include('../includes/header.php');
                 It's free, it's simple, and it actually works.
             </p>
             <div class="cta-btns reveal reveal-delay-2">
-                <a href="signup.php" class="btn-primary">Get Started — It's Free</a>
-                <a href="login.php" class="btn-ghost" style="color:#fff;border-color:rgba(255,255,255,0.35);">Sign In</a>
+                <a href="signup.php" class="btn-primary">Get Started | It's Free</a>
             </div>
         </section>
 

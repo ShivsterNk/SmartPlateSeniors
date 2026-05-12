@@ -1,7 +1,7 @@
 <?php
-include('../includes/header.php');
-?>
+if (session_status() === PHP_SESSION_NONE) session_start();
 
+<<<<<<< HEAD
 
         <!-- Stats -->
         <!--<div class="stats-section">
@@ -15,6 +15,30 @@ include('../includes/header.php');
         </div>-->
 
 
+=======
+// ── Auth guard ──
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
+
+// ── DB connection ──
+require_once __DIR__ . '/../config/db.php';
+
+$userId = (int) $_SESSION['user_id'];
+
+// ── Fetch user from DB ──
+$pdo  = getPDO();
+$stmt = $pdo->prepare("SELECT name, email FROM users WHERE user_id = ?");
+$stmt->execute([$userId]);
+$user = $stmt->fetch() ?? [];
+
+// ── Flash messages from update handlers ──
+$successMsg = $_SESSION['success_msg'] ?? '';
+$errorMsg   = $_SESSION['error_msg']   ?? '';
+unset($_SESSION['success_msg'], $_SESSION['error_msg']);
+?>
+>>>>>>> origin/main
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,7 +71,7 @@ include('../includes/header.php');
         }
         .page-banner p { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin: 0; }
 
-        /* ── Wrapper — wider on desktop ── */
+        /* ── Wrapper ── */
         .profile-wrap {
             max-width: 960px;
             margin: 0 auto;
@@ -97,7 +121,7 @@ include('../includes/header.php');
         }
         .avatar-info p { margin: 0; color: #7a8a7a; font-size: 0.85rem; }
 
-        /* ── Side-by-side cards on desktop, stacked on mobile ── */
+        /* ── Side-by-side cards ── */
         .cards-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -105,16 +129,9 @@ include('../includes/header.php');
             align-items: start;
         }
         @media (max-width: 768px) {
-            .cards-row {
-                grid-template-columns: 1fr;
-            }
-            .profile-wrap {
-                padding: 24px 16px 48px;
-            }
-            .avatar-block {
-                flex-direction: column;
-                text-align: center;
-            }
+            .cards-row { grid-template-columns: 1fr; }
+            .profile-wrap { padding: 24px 16px 48px; }
+            .avatar-block { flex-direction: column; text-align: center; }
             .avatar-info { text-align: center; }
         }
 
@@ -210,17 +227,17 @@ include('../includes/header.php');
 
 <div class="profile-wrap">
 
-    <?php if ($successMsg): ?>
+    <?php if (!empty($successMsg)): ?>
         <div class="alert-success-sp">✅ <?= htmlspecialchars($successMsg) ?></div>
     <?php endif; ?>
-    <?php if ($errorMsg): ?>
+    <?php if (!empty($errorMsg)): ?>
         <div class="alert-error-sp">⚠️ <?= htmlspecialchars($errorMsg) ?></div>
     <?php endif; ?>
 
     <!-- Avatar / Identity Block -->
     <div class="avatar-block">
         <div class="avatar-circle" id="avatarInitials">
-            <?= strtoupper(substr($user['name'] ?? 'U', 0, 1)) ?>
+            <?= htmlspecialchars(strtoupper(substr($user['name'] ?? 'U', 0, 1))) ?>
         </div>
         <div class="avatar-info">
             <h2 id="displayName"><?= htmlspecialchars($user['name'] ?? '') ?></h2>
@@ -231,70 +248,44 @@ include('../includes/header.php');
     <!-- Side-by-side cards -->
     <div class="cards-row">
 
-        <!-- ── Account Information ── -->
+        <!-- Account Information -->
         <div class="section-card">
             <div class="section-title">✏️ Account Information</div>
             <form action="update_profile.php" method="POST" id="profileForm">
                 <div class="mb-3">
                     <label class="form-label" for="name">Full Name</label>
-                    <input
-                            type="text"
-                            class="form-control"
-                            id="name"
-                            name="name"
-                            value="<?= htmlspecialchars($user['name'] ?? '') ?>"
-                            required
-                            autocomplete="name"
-                    >
+                    <input type="text" class="form-control" id="name" name="name"
+                           value="<?= htmlspecialchars($user['name'] ?? '') ?>"
+                           required autocomplete="name">
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="email">Email Address</label>
-                    <input
-                            type="email"
-                            class="form-control"
-                            id="email"
-                            name="email"
-                            value="<?= htmlspecialchars($user['email'] ?? '') ?>"
-                            required
-                            autocomplete="email"
-                    >
+                    <input type="email" class="form-control" id="email" name="email"
+                           value="<?= htmlspecialchars($user['email'] ?? '') ?>"
+                           required autocomplete="email">
                 </div>
                 <button type="submit" class="btn-save">Save Changes</button>
             </form>
         </div>
 
-        <!-- ── Change Password ── -->
+        <!-- Change Password -->
         <div class="section-card">
             <div class="section-title">🔒 Change Password</div>
             <form action="update_password.php" method="POST" id="passwordForm">
-
                 <div class="mb-3">
                     <label class="form-label" for="current_password">Current Password</label>
                     <div class="pw-wrapper">
-                        <input
-                                type="password"
-                                class="form-control"
-                                id="current_password"
-                                name="current_password"
-                                required
-                                autocomplete="current-password"
-                        >
+                        <input type="password" class="form-control" id="current_password"
+                               name="current_password" required autocomplete="current-password">
                         <button type="button" class="pw-toggle" onclick="togglePw('current_password', this)">👁️</button>
                     </div>
                 </div>
-
                 <div class="mb-3">
                     <label class="form-label" for="new_password">New Password</label>
                     <div class="pw-wrapper">
-                        <input
-                                type="password"
-                                class="form-control"
-                                id="new_password"
-                                name="new_password"
-                                required
-                                autocomplete="new-password"
-                                oninput="checkStrength(this.value)"
-                        >
+                        <input type="password" class="form-control" id="new_password"
+                               name="new_password" required autocomplete="new-password"
+                               oninput="checkStrength(this.value)">
                         <button type="button" class="pw-toggle" onclick="togglePw('new_password', this)">👁️</button>
                     </div>
                     <div class="strength-bar-wrap">
@@ -302,22 +293,14 @@ include('../includes/header.php');
                     </div>
                     <div class="strength-label" id="strengthLabel"></div>
                 </div>
-
                 <div class="mb-3">
                     <label class="form-label" for="confirm_password">Confirm New Password</label>
                     <div class="pw-wrapper">
-                        <input
-                                type="password"
-                                class="form-control"
-                                id="confirm_password"
-                                name="confirm_password"
-                                required
-                                autocomplete="new-password"
-                        >
+                        <input type="password" class="form-control" id="confirm_password"
+                               name="confirm_password" required autocomplete="new-password">
                         <button type="button" class="pw-toggle" onclick="togglePw('confirm_password', this)">👁️</button>
                     </div>
                 </div>
-
                 <button type="submit" class="btn-save">Update Password</button>
             </form>
         </div>
@@ -327,7 +310,6 @@ include('../includes/header.php');
 </div><!-- /.profile-wrap -->
 
 <script>
-    // ── Toggle password visibility ──
     function togglePw(fieldId, btn) {
         const field = document.getElementById(fieldId);
         if (field.type === 'password') {
@@ -339,7 +321,6 @@ include('../includes/header.php');
         }
     }
 
-    // ── Password strength meter ──
     function checkStrength(val) {
         const bar   = document.getElementById('strengthBar');
         const label = document.getElementById('strengthLabel');
@@ -362,19 +343,16 @@ include('../includes/header.php');
         label.style.color    = levels[score].color;
     }
 
-    // ── Live avatar + name update as user types ──
     document.getElementById('name')?.addEventListener('input', function () {
         const initial = this.value.trim().charAt(0).toUpperCase() || 'U';
         document.getElementById('avatarInitials').textContent = initial;
         document.getElementById('displayName').textContent    = this.value;
     });
 
-    // ── Live email preview update ──
     document.getElementById('email')?.addEventListener('input', function () {
         document.getElementById('displayEmail').textContent = this.value;
     });
 
-    // ── Client-side password match check before submit ──
     document.getElementById('passwordForm')?.addEventListener('submit', function (e) {
         const np = document.getElementById('new_password').value;
         const cp = document.getElementById('confirm_password').value;

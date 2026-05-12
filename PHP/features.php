@@ -9,8 +9,6 @@ if (isset($_SESSION['user_id'])) {
     exit;
 }
 
-//$extraStyles = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">';
-
 include('../includes/header.php');
 ?>
 
@@ -196,7 +194,7 @@ include('../includes/header.php');
                 <div class="feature-card">
                     <span class="feature-tag">⚡ Try it now</span>
                     <div class="feature-icon">🍽️</div>
-                    <div class="feature-title">Ready-Made Meals</div>
+                    <div class="feature-title">Smart Meals</div>
 
                     <p class="feature-text">
                         Browse curated meal ideas that are simple, senior-friendly, and easy
@@ -209,8 +207,8 @@ include('../includes/header.php');
                         <li>Great starting point for users</li>
                     </ul>
 
-                    <a href="readymeals.php" class="btn-primary-custom mt-2">
-                        Browse Ready Meals
+                    <a href="smartmeals.php" class="btn-primary-custom mt-2">
+                        Browse Smart Meals
                     </a>
                 </div>
 
@@ -245,7 +243,7 @@ include('../includes/header.php');
                 <h3>🔒 Want the full SmartPlate experience?</h3>
                 <p>
                     Sign in to unlock AI-powered daily meal plans tailored to your dietary
-                    preferences, save favorite recipes, and track your nutrition — all in one place.
+                    preferences, save favorite recipes, and track your nutrition. All in one place.
                 </p>
             </div>
             <a href="login.php" class="btn-primary-custom">

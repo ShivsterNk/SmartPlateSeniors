@@ -28,47 +28,45 @@ $stmt = $pdo->prepare("
 $stmt->execute([$userId, $requestedDate]);
 $existing = $stmt->fetchAll();
 
-
-// ORDER BY FIELD
-    if (count($existing) >= 4) {
+if (count($existing) >= 4) {
     header('Content-Type: application/json');
     echo json_encode(['meals' => $existing, 'source' => 'db']);
     exit;
 }
 
-// ── Fetch survey preferences ──
-$stmtSurvey = $pdo->prepare("SELECT * FROM survey WHERE user_id = ?");
-$stmtSurvey->execute([$userId]);
-$survey = $stmtSurvey->fetch() ?: [];
+// ── Fetch user preferences ──
+$stmtPrefs = $pdo->prepare("SELECT * FROM user_preferences WHERE user_id = ?");
+$stmtPrefs->execute([$userId]);
+$prefs = $stmtPrefs->fetch() ?: [];
 
 $name = $_SESSION['user_name'] ?? 'there';
 $dateLabel = date('l, F j, Y', strtotime($requestedDate));
 
 // ── Build prompt ──
-// ── Build prompt ──
-$prefs = '';
-if (!empty($survey['meal_preference']))      $prefs .= "\n- Meal preference: {$survey['meal_preference']}";
-if (!empty($survey['meals_per_day']))        $prefs .= "\n- Meals per day: {$survey['meals_per_day']}";
-if (!empty($survey['cooking_level']))        $prefs .= "\n- Cooking level: {$survey['cooking_level']}";
-if (!empty($survey['flexibility']))          $prefs .= "\n- Flexibility: {$survey['flexibility']}";
-if (!empty($survey['dietary_restrictions'])) $prefs .= "\n- Dietary restrictions: {$survey['dietary_restrictions']}";
-if (!empty($survey['foods_to_avoid']))       $prefs .= "\n- Foods to avoid: {$survey['foods_to_avoid']}";
+$prefsStr = '';
+if (!empty($prefs['dietary_restrictions'])) $prefsStr .= "\n- Dietary restrictions: {$prefs['dietary_restrictions']}";
+if (!empty($prefs['allergies']))            $prefsStr .= "\n- Allergies: {$prefs['allergies']}";
+if (!empty($prefs['calorie_goal']))         $prefsStr .= "\n- Daily calorie goal: {$prefs['calorie_goal']} kcal";
+if (!empty($prefs['protein_goal']))         $prefsStr .= "\n- Protein goal: {$prefs['protein_goal']}g";
+if (!empty($prefs['carbs_goal']))           $prefsStr .= "\n- Carbs goal: {$prefs['carbs_goal']}g";
+if (!empty($prefs['fat_goal']))             $prefsStr .= "\n- Fat goal: {$prefs['fat_goal']}g";
 
 $systemPrompt = "You are a nutrition assistant. Generate a meal plan for {$dateLabel} for {$name}.\n"
-    . (!empty($prefs) ? "User preferences:{$prefs}\n" : "No preferences set, generate a balanced plan.\n")
+    . (!empty($prefsStr) ? "User preferences:{$prefsStr}\n" : "No preferences set, generate a balanced plan.\n")
     . "IMPORTANT: You MUST include exactly 4 meals: Breakfast, Snack, Lunch, and Dinner. Do not skip Snack even if the user's preference says 3 meals.\n"
     . "You MUST respond with ONLY a valid JSON object. No markdown, no backticks, no explanation, no extra text whatsoever. The response must start with { and end with }\n"
     . "Use exactly this format with ALL 4 meals:\n"
     . "{\"meals\":[{\"meal_type\":\"Breakfast\",\"meal_name\":\"Name\",\"description\":\"One sentence max\",\"emoji\":\"🍳\"},{\"meal_type\":\"Snack\",\"meal_name\":\"Name\",\"description\":\"One sentence max\",\"emoji\":\"🍎\"},{\"meal_type\":\"Lunch\",\"meal_name\":\"Name\",\"description\":\"One sentence max\",\"emoji\":\"🥗\"},{\"meal_type\":\"Dinner\",\"meal_name\":\"Name\",\"description\":\"One sentence max\",\"emoji\":\"🍽️\"}]}";
+
 // ── Call Claude API ──
 $ch = curl_init('https://api.anthropic.com/v1/messages');
 
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_POST           => true,
-    CURLOPT_SSL_VERIFYPEER => false, // ✅ ADD THIS - fixes SSL issues on local
-    CURLOPT_SSL_VERIFYHOST => false, // ✅ ADD THIS
-    CURLOPT_TIMEOUT        => 30,    // ✅ ADD THIS - timeout
+    CURLOPT_SSL_VERIFYPEER => false,
+    CURLOPT_SSL_VERIFYHOST => false,
+    CURLOPT_TIMEOUT        => 30,
     CURLOPT_HTTPHEADER     => [
         'Content-Type: application/json',
         'x-api-key: ' . AI_API_KEY,
@@ -82,28 +80,23 @@ curl_setopt_array($ch, [
     ])
 ]);
 
-$response = curl_exec($ch);
+$response  = curl_exec($ch);
 $curlError = curl_error($ch);
 curl_close($ch);
 
-// ADD THIS - temporary debug
 if ($curlError) {
     error_log("CURL ERROR: " . $curlError);
     echo json_encode(['error' => 'Curl failed: ' . $curlError]);
     exit;
 }
-error_log("RAW RESPONSE: " . $response); // see what Claude returned
+error_log("RAW RESPONSE: " . $response);
 
-// ADD THESE 4 lines
-$data = json_decode($response, true);
+$data    = json_decode($response, true);
 error_log("DECODED DATA: " . print_r($data, true));
 $rawText = $data['content'][0]['text'] ?? '';
 error_log("RAW TEXT: " . $rawText);
 
-
-
 if (empty($rawText)) {
-    // Log full response to see what went wrong
     http_response_code(500);
     echo json_encode(['error' => 'Could not generate meal plan']);
     exit;
@@ -138,8 +131,7 @@ foreach ($mealData['meals'] as $meal) {
     }
 }
 
-
-// ✅ Always return from DB after saving so we get consistent ordering
+// ── Always return from DB after saving so we get consistent ordering ──
 $stmtFinal = $pdo->prepare("
     SELECT meal_type, meal_name, description, emoji 
     FROM meal_plans 
@@ -149,7 +141,5 @@ $stmtFinal = $pdo->prepare("
 $stmtFinal->execute([$userId, $requestedDate]);
 $saved = $stmtFinal->fetchAll();
 
-
 header('Content-Type: application/json');
-// To this
 echo json_encode(['meals' => $saved, 'source' => 'ai']);

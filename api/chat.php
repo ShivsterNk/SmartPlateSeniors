@@ -6,7 +6,7 @@
 
 // Enable error reporting for debugging
 error_reporting(E_ALL);
-ini_set('display_errors', 0); // Don't display, we'll return JSON errors
+ini_set('display_errors', 1); // Don't display, we'll return JSON errors
 ini_set('log_errors', 1);
 
 session_start();
@@ -85,12 +85,13 @@ try {
     $stmt->execute([$conversationId]);
     $history = array_reverse($stmt->fetchAll(PDO::FETCH_ASSOC));
 
+
     // Get user profile data
     $stmt = $pdo->prepare("
-    SELECT u.name, s.dietary_restrictions, s.foods_to_avoid,
-           s.meal_preference, s.meals_per_day, s.cooking_level
+    SELECT u.name, p.dietary_restrictions, p.foods_to_avoid,
+           p.meal_preference, p.meals_per_day, p.cooking_level, p.flexibility
     FROM users u
-    LEFT JOIN survey s ON u.user_id = s.user_id
+    LEFT JOIN user_preferences p ON u.user_id = p.user_id
     WHERE u.user_id = ?
 ");
     $stmt->execute([$userId]);
@@ -100,23 +101,23 @@ try {
     $userContext = [];
     if ($userData) {
         $userContext['name'] = $userData['name'] ?? '';
-        if ($userData['dietary_restrictions']) {
+        if (!empty($userData['dietary_restrictions'])) {
             $userContext['dietary_restrictions'] = $userData['dietary_restrictions'];
         }
-        if ($userData['allergies']) {
-            $userContext['allergies'] = $userData['allergies'];
+        if (!empty($userData['foods_to_avoid'])) {
+            $userContext['foods_to_avoid'] = $userData['foods_to_avoid'];
         }
-        if ($userData['calorie_goal']) {
-            $userContext['calorie_goal'] = $userData['calorie_goal'];
+        if (!empty($userData['meal_preference'])) {
+            $userContext['meal_preference'] = $userData['meal_preference'];
         }
-        if ($userData['protein_goal']) {
-            $userContext['protein_goal'] = $userData['protein_goal'];
+        if (!empty($userData['meals_per_day'])) {
+            $userContext['meals_per_day'] = $userData['meals_per_day'];
         }
-        if ($userData['carbs_goal']) {
-            $userContext['carbs_goal'] = $userData['carbs_goal'];
+        if (!empty($userData['cooking_level'])) {
+            $userContext['cooking_level'] = $userData['cooking_level'];
         }
-        if ($userData['fat_goal']) {
-            $userContext['fat_goal'] = $userData['fat_goal'];
+        if (!empty($userData['flexibility'])) {
+            $userContext['flexibility'] = $userData['flexibility'];
         }
     }
 

@@ -32,16 +32,19 @@ $isLoggedIn = isset($_SESSION['user_id']);
         }
 
         /* ── HERO ── */
-        .hero {
-            min-height: 92vh;
+        section.hero {
             background: linear-gradient(160deg, var(--forest) 0%, #2d4a1a 55%, #3d6b2a 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
-            margin-top: 0;
-            padding: 80px 24px;
+            height: calc(100vh - 70px);
+            min-height: 600px;
+            padding: 60px 24px 80px;
+            margin-top: 70px;
+            margin-bottom: 0;
+
         }
 
         /* floating food emojis */
@@ -67,7 +70,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
         /* big decorative ring */
         .hero-ring {
             position: absolute;
-            width: 700px; height: 700px;
+            width: min(700px, 90vw); height: min(700px, 90vw);
             border-radius: 50%;
             border: 2px solid rgba(167,201,87,0.15);
             top: 50%; left: 50%;
@@ -75,7 +78,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
             animation: spin 40s linear infinite;
         }
         .hero-ring-2 {
-            width: 500px; height: 500px;
+            width: min(500px, 65vw); height: min(500px, 65vw);
             border-color: rgba(167,201,87,0.1);
             animation-duration: 28s;
             animation-direction: reverse;
@@ -128,6 +131,9 @@ $isLoggedIn = isset($_SESSION['user_id']);
             text-decoration: none;
             transition: transform 0.2s, box-shadow 0.2s;
             animation: fadeDown 0.6s 0.45s ease both;
+            position: relative; z-index: 2;
+            text-align: center; max-width: 780px;
+            margin-top: auto;
         }
         .hero-cta:hover {
             transform: translateY(-3px);
@@ -137,7 +143,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
 
         /* scroll indicator */
         .scroll-hint {
-            position: absolute; bottom: 32px; left: 50%;
+            position: absolute; bottom: 8px; left: 50%;
             transform: translateX(-50%);
             display: flex; flex-direction: column; align-items: center; gap: 8px;
             color: rgba(255,255,255,0.4); font-size: 0.75rem; letter-spacing: 0.1em;
@@ -471,7 +477,14 @@ $isLoggedIn = isset($_SESSION['user_id']);
 </head>
 <body>
 
-<?php include('../includes/header.php'); ?>
+<?php
+ob_start();
+include('../includes/header.php');
+$headerOutput = ob_get_clean();
+$headerOutput = preg_replace('/^.*?(<nav)/s', '$1', $headerOutput);
+$headerOutput = preg_replace('/<\/body>.*$/s', '', $headerOutput);
+echo $headerOutput;
+?>
 
 <!-- ── HERO ── -->
 <section class="hero">
@@ -490,15 +503,15 @@ $isLoggedIn = isset($_SESSION['user_id']);
             Whether you're tracking macros, discovering new recipes, or just
             trying to be a little healthier,we've got you.
         </p>
-        <a href="#why" class="hero-cta">
+        <a class="hero-cta">
             See our story
-            <span>↓</span>
+
         </a>
     </div>
 
-    <div class="scroll-hint">
+    <a href="#why" class="scroll-hint">
         <div class="scroll-arrow"></div>
-    </div>
+    </a>
 </section>
 
 <!-- ── WHY WE BUILT IT ── -->
@@ -732,24 +745,234 @@ $isLoggedIn = isset($_SESSION['user_id']);
         <div class="team-grid">
             <?php
             $team = [
-                    ['name' => 'Eunice',      'role' => 'Database, Backend & Frontend Design', 'color' => '#283618', 'initial' => 'E'],
-                    ['name' => 'Derek',       'role' => 'AI Integration & Backend Development', 'color' => '#3a6a2a', 'initial' => 'D'],
-                    ['name' => 'Marvin',      'role' => 'Frontend Development',                'color' => '#4a7c4a', 'initial' => 'M'],
-                    ['name' => 'James',       'role' => 'Frontend Development',                'color' => '#6a9e3a', 'initial' => 'J'],
-                    ['name' => 'Sivakumar',   'role' => 'Database & Testing',                  'color' => '#2a5a1a', 'initial' => 'S'],
+                    ['name' => 'Eunice A.',     'role' => 'Full Stack Lead', 'subrole' => 'Database · Security · UI',  'color' => '#283618', 'initial' => 'E'],
+                    ['name' => 'Derek M.',      'role' => 'API Integration & Frontend',         'color' => '#3a6a2a', 'initial' => 'D'],
+                    ['name' => 'Marvin C.',     'role' => 'Frontend Development',               'color' => '#4a7c4a', 'initial' => 'M'],
+                    ['name' => 'James K.',      'role' => 'Frontend Development',               'color' => '#6a9e3a', 'initial' => 'J'],
+                    ['name' => 'Sivakumar N.',  'role' => 'Backend & Debugging',                'color' => '#2a5a1a', 'initial' => 'S'],
             ];
-            foreach ($team as $i => $member): ?>
+            foreach ($team as $i => $member):
+                $slug = strtolower(preg_replace('/\s+/', '-', $member['name']));
+                ?>
                 <div class="team-card reveal" style="transition-delay: <?= $i * 0.1 ?>s">
-                    <div class="team-avatar" style="background: <?= $member['color'] ?>;">
-                        <?= $member['initial'] ?>
+
+                    <!-- Avatar (clickable to upload photo) -->
+                    <div class="team-avatar-wrap" title="Click to upload a photo">
+                        <div class="team-avatar" id="avatar-<?= $slug ?>"
+                             style="background: <?= $member['color'] ?>;"
+                             data-initial="<?= $member['initial'] ?>"
+                             data-slug="<?= $slug ?>">
+                            <?= $member['initial'] ?>
+                        </div>
+                        <div class="avatar-overlay">📷</div>
+                        <input type="file" accept="image/*" class="avatar-file-input"
+                               data-slug="<?= $slug ?>" hidden>
                     </div>
+
                     <div class="team-name"><?= $member['name'] ?></div>
                     <div class="team-role"><?= $member['role'] ?></div>
+                    <?php if (!empty($member['subrole'])): ?>
+                        <div class="team-subrole"><?= $member['subrole'] ?></div>
+                    <?php endif; ?>
+
+                    <!-- LinkedIn -->
+                    <div class="linkedin-wrap" data-slug="<?= $slug ?>">
+                        <a class="linkedin-link" id="li-link-<?= $slug ?>" href="#" target="_blank"
+                           style="display:none;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.58 0 4.24 2.36 4.24 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.22 0z"/>
+                            </svg>
+                            LinkedIn
+                        </a>
+                        <button class="linkedin-add-btn" id="li-btn-<?= $slug ?>">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.58 0 4.24 2.36 4.24 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.22 0z"/>
+                            </svg>
+                            Add LinkedIn
+                        </button>
+                        <div class="linkedin-input-wrap" id="li-input-<?= $slug ?>" style="display:none;">
+                            <input type="url" placeholder="linkedin.com/in/yourname"
+                                   class="linkedin-url-input" data-slug="<?= $slug ?>">
+                            <button class="linkedin-save-btn" data-slug="<?= $slug ?>">Save</button>
+                        </div>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>
     </div>
 </section>
+
+<style>
+    /* ── Avatar upload ── */
+    .team-card:first-child {
+        border-left: 4px solid var(--lime);
+    }
+    .team-avatar-wrap {
+        position: relative;
+        width: 72px; height: 72px;
+        margin: 0 auto 14px;
+        cursor: pointer;
+    }
+    .team-avatar-wrap .team-avatar {
+        width: 100%; height: 100%;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.8rem; font-weight: 700;
+        color: white;
+        overflow: hidden;
+        transition: filter 0.2s;
+    }
+    .team-avatar-wrap:hover .team-avatar { filter: brightness(0.75); }
+    .avatar-overlay {
+        position: absolute; inset: 0;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.3rem;
+        opacity: 0;
+        transition: opacity 0.2s;
+        pointer-events: none;
+    }
+    .team-avatar-wrap:hover .avatar-overlay { opacity: 1; }
+
+    .team-avatar img {
+        width: 100%; height: 100%;
+        object-fit: cover; border-radius: 50%;
+    }
+    .team-subrole {
+        font-size: 0.72rem;
+        color: var(--lime);
+        font-weight: 600;
+        margin-top: 4px;
+        letter-spacing: 0.04em;
+    }
+
+    /* ── LinkedIn ── */
+    .linkedin-wrap { margin-top: 12px; }
+
+    .linkedin-link {
+        display: inline-flex; align-items: center; gap: 5px;
+        color: #0a66c2; font-size: 0.78rem; font-weight: 600;
+        text-decoration: none;
+        padding: 4px 10px; border-radius: 6px;
+        border: 1px solid #0a66c2;
+        transition: background 0.2s, color 0.2s;
+    }
+    .linkedin-link:hover { background: #0a66c2; color: white; }
+
+    .linkedin-add-btn {
+        display: inline-flex; align-items: center; gap: 5px;
+        background: none; border: 1px solid #ccc;
+        border-radius: 6px; padding: 4px 10px;
+        font-size: 0.78rem; font-weight: 600; color: var(--muted);
+        cursor: pointer; font-family: 'DM Sans', sans-serif;
+        transition: border-color 0.2s, color 0.2s;
+    }
+    .linkedin-add-btn:hover { border-color: #0a66c2; color: #0a66c2; }
+
+    .linkedin-input-wrap {
+        display: flex; gap: 6px; margin-top: 8px;
+        justify-content: center; flex-wrap: wrap;
+    }
+    .linkedin-url-input {
+        border: 1px solid #ccc; border-radius: 6px;
+        padding: 5px 10px; font-size: 0.78rem;
+        font-family: 'DM Sans', sans-serif;
+        width: 160px; outline: none;
+        transition: border-color 0.2s;
+    }
+    .linkedin-url-input:focus { border-color: #0a66c2; }
+    .linkedin-save-btn {
+        background: #0a66c2; color: white;
+        border: none; border-radius: 6px;
+        padding: 5px 12px; font-size: 0.78rem;
+        font-weight: 700; cursor: pointer;
+        font-family: 'DM Sans', sans-serif;
+        transition: background 0.2s;
+    }
+    .linkedin-save-btn:hover { background: #084e96; }
+</style>
+
+<script>
+    // ── Restore saved photos & LinkedIn from localStorage ──
+    document.querySelectorAll('.team-avatar-wrap').forEach(wrap => {
+        const avatar = wrap.querySelector('.team-avatar');
+        const slug   = avatar.dataset.slug;
+
+        // Restore photo
+        const savedPhoto = localStorage.getItem('sp-photo-' + slug);
+        if (savedPhoto) {
+            avatar.innerHTML = `<img src="${savedPhoto}" alt="">`;
+        }
+
+        // File input click
+        wrap.addEventListener('click', () => {
+            wrap.querySelector('.avatar-file-input').click();
+        });
+
+        // File chosen
+        wrap.querySelector('.avatar-file-input').addEventListener('change', function() {
+            const file = this.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                const dataUrl = e.target.result;
+                avatar.innerHTML = `<img src="${dataUrl}" alt="">`;
+                localStorage.setItem('sp-photo-' + slug, dataUrl);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+
+    // ── Restore & wire LinkedIn ──
+    document.querySelectorAll('.linkedin-wrap').forEach(wrap => {
+        const slug    = wrap.dataset.slug;
+        const addBtn  = document.getElementById('li-btn-'   + slug);
+        const inputWr = document.getElementById('li-input-' + slug);
+        const link    = document.getElementById('li-link-'  + slug);
+        const urlInput= inputWr.querySelector('.linkedin-url-input');
+        const saveBtn = inputWr.querySelector('.linkedin-save-btn');
+
+        // Restore saved URL
+        const saved = localStorage.getItem('sp-li-' + slug);
+        if (saved) {
+            applyLinkedIn(slug, saved, link, addBtn, inputWr);
+        }
+
+        addBtn.addEventListener('click', () => {
+            addBtn.style.display = 'none';
+            inputWr.style.display = 'flex';
+            urlInput.focus();
+        });
+
+        saveBtn.addEventListener('click', () => {
+            let val = urlInput.value.trim();
+            if (!val) return;
+            if (!val.startsWith('http')) val = 'https://' + val;
+            localStorage.setItem('sp-li-' + slug, val);
+            applyLinkedIn(slug, val, link, addBtn, inputWr);
+        });
+
+        // Allow Enter key
+        urlInput.addEventListener('keydown', e => {
+            if (e.key === 'Enter') saveBtn.click();
+        });
+    });
+
+    function applyLinkedIn(slug, url, link, addBtn, inputWr) {
+        link.href = url;
+        link.style.display = 'inline-flex';
+        addBtn.style.display = 'none';
+        inputWr.style.display = 'none';
+
+        // Allow clicking the link to re-edit
+        link.addEventListener('contextmenu', e => {
+            e.preventDefault();
+            link.style.display = 'none';
+            inputWr.style.display = 'flex';
+            inputWr.querySelector('.linkedin-url-input').value = url;
+        });
+    }
+</script>
 
 
 

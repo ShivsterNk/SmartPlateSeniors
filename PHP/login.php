@@ -39,7 +39,7 @@ include('../includes/header.php');
 <?php include('../includes/header.php'); ?>
 
     <style>
-        /* ── Page layout ── */
+        /* page layout */
         .login-page {
             flex: 1;
             margin-top: 70px;
@@ -48,7 +48,7 @@ include('../includes/header.php');
             font-family: 'DM Sans', sans-serif;
         }
 
-        /* ── Left panel — decorative green side ── */
+        /* left panel */
         .login-left {
             flex: 1;
             background: linear-gradient(160deg, #1a2e10 0%, #283618 50%, #3a5a20 100%);
@@ -61,7 +61,7 @@ include('../includes/header.php');
             overflow: hidden;
         }
 
-        /* decorative circles */
+
         .login-left::before,
         .login-left::after {
             content: '';
@@ -97,7 +97,7 @@ include('../includes/header.php');
             margin: 0 auto 40px;
         }
 
-        /* feature pill list */
+
         .login-features {
             display: flex; flex-direction: column; gap: 12px;
             text-align: left;
@@ -113,7 +113,7 @@ include('../includes/header.php');
         }
         .login-feature-item span:first-child { font-size: 1.2rem; }
 
-        /* ── Right panel — form ── */
+        /* right panel */
         .login-right {
             flex: 1;
             background: #f5f2ec;
@@ -138,7 +138,7 @@ include('../includes/header.php');
             margin-bottom: 32px;
         }
 
-        /* error */
+
         .error-message {
             background: #fff0f0;
             border: 1px solid #fca5a5;
@@ -152,7 +152,7 @@ include('../includes/header.php');
         }
         .error-message::before { content: '⚠️'; }
 
-        /* form fields */
+
         .lf-group { margin-bottom: 20px; }
         .lf-label {
             display: block;
@@ -179,7 +179,7 @@ include('../includes/header.php');
         }
         .lf-input::placeholder { color: #b0bfb0; }
 
-        /* password wrapper */
+
         .lf-pw-wrap { position: relative; }
         .lf-pw-toggle {
             position: absolute; right: 14px; top: 50%;
@@ -191,7 +191,7 @@ include('../includes/header.php');
         }
         .lf-pw-toggle:hover { color: #283618; }
 
-        /* forgot link */
+
         .lf-forgot {
             text-align: right; margin-bottom: 24px; margin-top: -12px;
         }
@@ -201,7 +201,7 @@ include('../includes/header.php');
         }
         .lf-forgot a:hover { text-decoration: underline; }
 
-        /* submit button */
+
         .lf-btn {
             width: 100%;
             background: #283618; color: white;
@@ -217,7 +217,7 @@ include('../includes/header.php');
             transform: translateY(-2px);
         }
 
-        /* divider */
+
         .lf-divider {
             display: flex; align-items: center; gap: 12px;
             margin-bottom: 20px; color: #b0bfb0; font-size: 0.8rem;
@@ -228,7 +228,7 @@ include('../includes/header.php');
             height: 1px; background: #e0e8d8;
         }
 
-        /* signup link */
+
         .lf-signup {
             text-align: center;
             font-size: 0.88rem; color: #7a8a7a;
@@ -239,7 +239,7 @@ include('../includes/header.php');
         }
         .lf-signup a:hover { text-decoration: underline; }
 
-        /* ── Responsive: stack on mobile ── */
+        /* mobile */
         @media (max-width: 768px) {
             .login-page { flex-direction: column; }
             .login-left { padding: 48px 24px; flex: none; }
@@ -248,10 +248,10 @@ include('../includes/header.php');
         }
     </style>
 
-    <main style="margin-top:0; flex:1; display:flex; flex-direction:column;">
+    <main style="margin-top:0;">
         <div class="login-page">
 
-            <!-- ── Left decorative panel ── -->
+            <!-- left panel -->
             <div class="login-left">
                 <div class="login-left-content">
                     <span class="login-brand-icon">🥗</span>
@@ -282,7 +282,7 @@ include('../includes/header.php');
                 </div>
             </div>
 
-            <!-- ── Right form panel ── -->
+            <!-- right panel -->
             <div class="login-right">
                 <div class="login-card">
 

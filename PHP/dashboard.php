@@ -32,17 +32,23 @@ $name    = htmlspecialchars($userData['name']);
 $email   = htmlspecialchars($userData['email']);
 $initial = strtoupper(mb_substr($userData['name'], 0, 1));
 
-// ── Fetch dietary preferences from survey table ──
+// ── Fetch dietary preferences from user_preferences table ──
 $dietaryPrefs = [];
 try {
-    $stmtSurvey = $pdo->prepare("
-        SELECT preference_name
-        FROM survey
+    $stmtPrefs = $pdo->prepare("
+        SELECT dietary_restrictions
+        FROM user_preferences
         WHERE user_id = ?
-        ORDER BY preference_name ASC
     ");
-    $stmtSurvey->execute([$userId]);
-    $dietaryPrefs = $stmtSurvey->fetchAll();
+    $stmtPrefs->execute([$userId]);
+    $prefsRow = $stmtPrefs->fetch();
+
+    if ($prefsRow && !empty($prefsRow['dietary_restrictions'])) {
+        $prefItems = array_filter(array_map('trim', explode(',', $prefsRow['dietary_restrictions'])));
+        foreach ($prefItems as $item) {
+            $dietaryPrefs[] = ['preference_name' => $item];
+        }
+    }
 } catch (PDOException $e) {
     $dietaryPrefs = [];
 }
@@ -96,7 +102,7 @@ $displayMonth = date('F Y');
 <nav>
 
     <a class="nav-logo" id="navLogo" href="#" title="Toggle sidebar">
-        <img src="../js/New Smartplate logo.png" alt="SmartPlate" class="nav-logo-img">
+        <img src="../assets/Images/New%20Smartplate%20logo.png" alt="SmartPlate" class="nav-logo-img">
     </a>
     <ul class="nav-links">
         <li><a href="dashboard.php" class="active">Dashboard</a></li>
@@ -171,7 +177,7 @@ $displayMonth = date('F Y');
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
             </svg>
-            Nutrition Tracker
+            Nutrition Log
         </a>
         <a class="sidebar-item" href="list.php">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
